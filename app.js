@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
     iban: 'SA4905000068206067557000'
   };
 
+  // رابط سكربت جوجل الذي يستقبل بيانات التسجيل ويرسلها إلى تيليجرام.
+  // يجب على مالك الموقع إنشاء هذا السكربت في Google Apps Script واستبدال الرابط هنا.
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec';
+
   // عناصر DOM المهمة
   const modal = document.getElementById('registrationModal');
   const modalTitle = document.getElementById('modalTitle');
@@ -89,7 +93,36 @@ document.addEventListener('DOMContentLoaded', function() {
       if (step === 1) {
         updateInvoice();
       }
-      // إذا كنا في الخطوة الثالثة، لا حاجة لفعل شيء آخر (إرسال)
+      // إذا كنا في الخطوة الثالثة قبل الانتقال للخطوة الرابعة، أرسل بيانات التسجيل إلى سكربت جوجل
+      if (step === 3) {
+        try {
+          const fullName = document.getElementById('fullName').value.trim();
+          const contactInfo = document.getElementById('contactInfo').value.trim();
+          const participants = parseInt(document.getElementById('participants').value) || 1;
+          const source = document.getElementById('source').value;
+          const courseName = selectedCourse ? selectedCourse.name : '';
+          const totalPrice = selectedCourse ? (selectedCourse.price * participants) : 0;
+          const payload = {
+            fullName: fullName,
+            contactInfo: contactInfo,
+            participants: participants,
+            source: source,
+            courseName: courseName,
+            totalPrice: totalPrice
+          };
+          // إرسال البيانات إلى سكربت جوجل عبر طلب POST
+          fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          }).catch((err) => {
+            console.error('فشل إرسال البيانات إلى سكربت جوجل:', err);
+          });
+        } catch (e) {
+          console.error('خطأ أثناء تحضير بيانات التسجيل:', e);
+        }
+      }
+      // انتقل إلى الخطوة التالية
       goToStep(step + 1);
     });
   });
