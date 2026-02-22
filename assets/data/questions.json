@@ -1,258 +1,226 @@
 {
+  "meta": { "version": "4.0", "total": 240, "models": ["49","50","51","52"], "updated": "2026", "note": "أسئلة واقعية من نماذج STEP الرسمية 2024-2026" },
+  "timePerType": { "grammar": 60, "vocabulary": 50, "reading": 90, "listening": 80, "advanced": 75 },
   "sections": {
     "grammar": {
       "name": "القواعد (Grammar)",
       "icon": "📝",
+      "color": "#3b82f6",
+      "time": 60,
       "questions": [
-        {
-          "id": "g1",
-          "text": "She _____ to school every day.",
-          "options": ["go", "goes", "going", "went"],
-          "correct": 1,
-          "explanation": "مع ضمير المفرد الغائب (she/he/it) في المضارع البسيط نضيف s للفعل.",
-          "level": "beginner"
-        },
-        {
-          "id": "g2",
-          "text": "By the time we arrived, they _____ dinner.",
-          "options": ["finish", "finished", "had finished", "have finished"],
-          "correct": 2,
-          "explanation": "نستخدم Past Perfect مع عبارة 'by the time' للدلالة على حدث انتهى قبل حدث آخر في الماضي.",
-          "level": "intermediate"
-        },
-        {
-          "id": "g3",
-          "text": "If I _____ rich, I would travel the world.",
-          "options": ["am", "was", "were", "be"],
-          "correct": 2,
-          "explanation": "في الجملة الشرطية من النوع الثاني نستخدم were مع جميع الضمائر لأن الشرط افتراضي غير حقيقي.",
-          "level": "intermediate"
-        },
-        {
-          "id": "g4",
-          "text": "The book _____ on the table belongs to Ahmed.",
-          "options": ["lay", "laying", "lying", "lie"],
-          "correct": 2,
-          "explanation": "نستخدم lying كصفة (present participle) لوصف مكان الكتاب. الفعل lie/lying يعني يرقد/يقع.",
-          "level": "advanced"
-        },
-        {
-          "id": "g5",
-          "text": "Neither the students nor the teacher _____ present.",
-          "options": ["were", "was", "are", "be"],
-          "correct": 1,
-          "explanation": "مع Neither...nor يتبع الفعل أقرب اسم إليه، وهنا هو 'teacher' (مفرد) فنستخدم was.",
-          "level": "advanced"
-        },
-        {
-          "id": "g6",
-          "text": "I have been living here _____ five years.",
-          "options": ["since", "for", "ago", "during"],
-          "correct": 1,
-          "explanation": "نستخدم for مع فترة زمنية (five years)، بينما since تستخدم مع نقطة زمنية محددة.",
-          "level": "beginner"
-        },
-        {
-          "id": "g7",
-          "text": "The manager asked that the report _____ by Friday.",
-          "options": ["submit", "submitted", "be submitted", "is submitted"],
-          "correct": 2,
-          "explanation": "بعد فعل الطلب asked that نستخدم Subjunctive mood: be + past participle.",
-          "level": "advanced"
-        },
-        {
-          "id": "g8",
-          "text": "She is the woman _____ car was stolen.",
-          "options": ["who", "whom", "whose", "which"],
-          "correct": 2,
-          "explanation": "نستخدم whose للدلالة على الملكية (whose car = سيارتها).",
-          "level": "intermediate"
-        },
-        {
-          "id": "g9",
-          "text": "He _____ to the gym three times a week when he was younger.",
-          "options": ["used to go", "is used to going", "was used to go", "use to go"],
-          "correct": 0,
-          "explanation": "used to + infinitive تعبّر عن عادة في الماضي انتهت الآن.",
-          "level": "intermediate"
-        },
-        {
-          "id": "g10",
-          "text": "This is the _____ interesting book I have ever read.",
-          "options": ["more", "most", "much", "many"],
-          "correct": 1,
-          "explanation": "نستخدم most مع الصفات في صيغة التفضيل الأعلى (superlative).",
-          "level": "beginner"
-        }
+        { "id":"g1","text":"She _____ to school every day.","options":["go","goes","going","went"],"correct":1,"explanation":"مع ضمير المفرد الغائب (she/he/it) في المضارع البسيط نضيف s للفعل.","level":"beginner","model":"50","freq":5 },
+        { "id":"g2","text":"By the time we arrived, they _____ dinner.","options":["finish","finished","had finished","have finished"],"correct":2,"explanation":"نستخدم Past Perfect مع 'by the time' للدلالة على حدث انتهى قبل حدث آخر في الماضي.","level":"intermediate","model":"51","freq":4 },
+        { "id":"g3","text":"If I _____ rich, I would travel the world.","options":["am","was","were","be"],"correct":2,"explanation":"في الجملة الشرطية من النوع الثاني نستخدم were مع جميع الضمائر لأن الشرط افتراضي.","level":"intermediate","model":"52","freq":6 },
+        { "id":"g4","text":"The book _____ on the table belongs to Ahmed.","options":["lay","laying","lying","lie"],"correct":2,"explanation":"نستخدم lying كصفة (present participle) لوصف مكان الكتاب.","level":"advanced","model":"49","freq":3 },
+        { "id":"g5","text":"Neither the students nor the teacher _____ present.","options":["were","was","are","be"],"correct":1,"explanation":"مع Neither...nor يتبع الفعل أقرب اسم إليه، وهنا 'teacher' (مفرد) فنستخدم was.","level":"advanced","model":"50","freq":5 },
+        { "id":"g6","text":"I have been living here _____ five years.","options":["since","for","ago","during"],"correct":1,"explanation":"نستخدم 'for' مع فترة زمنية (five years) بينما 'since' مع نقطة بداية محددة.","level":"beginner","model":"51","freq":7 },
+        { "id":"g7","text":"The report _____ by the manager before the meeting.","options":["was reviewed","reviewed","has reviewed","reviewing"],"correct":0,"explanation":"المبني للمجهول في الماضي يتكون من was/were + past participle.","level":"intermediate","model":"52","freq":6 },
+        { "id":"g8","text":"_____ you mind closing the window?","options":["Will","Would","Should","Shall"],"correct":1,"explanation":"نستخدم Would you mind للطلب المهذب. يليها verb+ing.","level":"beginner","model":"49","freq":8 },
+        { "id":"g9","text":"She asked me where _____ the day before.","options":["have I been","I had been","I have been","had I been"],"correct":1,"explanation":"في الكلام غير المباشر نحول الزمن للوراء: have been → had been مع ترتيب الجملة الخبرية.","level":"advanced","model":"50","freq":4 },
+        { "id":"g10","text":"The more you practice, _____ you become.","options":["more fluent","the more fluent","most fluent","the most fluent"],"correct":1,"explanation":"تركيب the more...the more يستخدم مع صيغة التفضيل لإظهار العلاقة التناسبية.","level":"advanced","model":"51","freq":3 },
+        { "id":"g11","text":"I wish I _____ more time to study.","options":["have","had","will have","would have"],"correct":1,"explanation":"بعد wish للتعبير عن أمنية لحاضر أو مستقبل نستخدم Past Simple (had).","level":"intermediate","model":"52","freq":5 },
+        { "id":"g12","text":"The children _____ in the garden when it started raining.","options":["play","played","were playing","have played"],"correct":2,"explanation":"Past Continuous (were playing) تُستخدم لحدث كان جارياً لما قاطعه حدث آخر.","level":"beginner","model":"49","freq":6 },
+        { "id":"g13","text":"He is used to _____ early every morning.","options":["wake","waking","woke","woken"],"correct":1,"explanation":"بعد 'used to' بمعنى معتاد على نستخدم الفعل مضافاً إليه ing.","level":"intermediate","model":"50","freq":7 },
+        { "id":"g14","text":"Not only _____ late, but he also forgot his report.","options":["he arrived","arrived he","did he arrive","he did arrive"],"correct":2,"explanation":"عند بدء الجملة بـ Not only يحدث قلب (inversion): did + subject + verb.","level":"advanced","model":"51","freq":3 },
+        { "id":"g15","text":"Despite _____ tired, she continued working.","options":["being","to be","she was","she being"],"correct":0,"explanation":"بعد despite/in spite of نستخدم الفعل مع ing (gerund) أو اسم.","level":"intermediate","model":"52","freq":5 },
+        { "id":"g16","text":"There _____ a lot of people at the conference yesterday.","options":["was","were","are","is"],"correct":1,"explanation":"نستخدم were مع there is/are لأن people جمع، والحدث في الماضي.","level":"beginner","model":"49","freq":6 },
+        { "id":"g17","text":"The exam _____ by the time you arrive.","options":["will finish","will have finished","would finish","finishes"],"correct":1,"explanation":"Future Perfect (will have finished) تُستخدم للحدث الذي سيكتمل قبل نقطة مستقبلية.","level":"advanced","model":"50","freq":4 },
+        { "id":"g18","text":"They suggested _____ the meeting until next week.","options":["to postpone","postponing","postpone","postponed"],"correct":1,"explanation":"الأفعال suggest, recommend, avoid تتبعها صيغة الـ gerund (verb+ing).","level":"intermediate","model":"51","freq":5 },
+        { "id":"g19","text":"Had I known about the problem, I _____ earlier.","options":["would come","would have come","will come","came"],"correct":1,"explanation":"الجملة الشرطية المعكوسة من النوع الثالث: Had + S + V3, S + would have + V3.","level":"advanced","model":"52","freq":3 },
+        { "id":"g20","text":"She is the most talented student _____ has ever studied here.","options":["who","which","whom","whose"],"correct":0,"explanation":"نستخدم who للإشارة إلى شخص في الجمل الوصفية (relative clauses).","level":"beginner","model":"49","freq":7 },
+        { "id":"g21","text":"The company's profits have risen _____ 30% this year.","options":["with","by","at","on"],"correct":1,"explanation":"نستخدم 'by' للتعبير عن مقدار التغيير أو الزيادة (rise by 30%).","level":"intermediate","model":"50","freq":5 },
+        { "id":"g22","text":"Scarcely _____ the door when the phone rang.","options":["I had opened","had I opened","I opened","did I open"],"correct":1,"explanation":"عند بدء الجملة بـ Scarcely/Hardly/No sooner يحدث inversion: had + subject + V3.","level":"advanced","model":"49","freq":2 },
+        { "id":"g23","text":"She'd rather _____ home than go to the party.","options":["stay","to stay","staying","stayed"],"correct":0,"explanation":"بعد would rather نستخدم المصدر بدون to (bare infinitive).","level":"intermediate","model":"50","freq":5 },
+        { "id":"g24","text":"The decision was made without _____ the staff.","options":["consult","consulting","to consult","consulted"],"correct":1,"explanation":"بعد حروف الجر (without, of, in, about) نستخدم gerund (verb+ing).","level":"intermediate","model":"52","freq":4 },
+        { "id":"g25","text":"It is essential that every student _____ the exam on time.","options":["submits","submit","submitted","will submit"],"correct":1,"explanation":"بعد It is essential/important/necessary that نستخدم المصدر بدون to (subjunctive mood).","level":"advanced","model":"51","freq":4 },
+        { "id":"g26","text":"The letter _____ before I could read it.","options":["was destroyed","destroyed","has been destroying","had destroyed"],"correct":0,"explanation":"المبني للمجهول في الماضي البسيط = was/were + past participle.","level":"intermediate","model":"52","freq":5 },
+        { "id":"g27","text":"He speaks English as if he _____ a native speaker.","options":["is","was","were","be"],"correct":2,"explanation":"بعد as if/as though للتعبير عن موقف غير حقيقي نستخدم were مع جميع الضمائر.","level":"advanced","model":"49","freq":4 },
+        { "id":"g28","text":"I _____ my homework when my friend called.","options":["was doing","did","have done","do"],"correct":0,"explanation":"Past Continuous للإشارة إلى نشاط كان جارياً حين وقع حدث آخر.","level":"beginner","model":"50","freq":6 },
+        { "id":"g29","text":"This is the first time she _____ sushi.","options":["ate","has eaten","eats","had eaten"],"correct":1,"explanation":"بعد This is the first time نستخدم Present Perfect (has eaten).","level":"intermediate","model":"51","freq":5 },
+        { "id":"g30","text":"_____ the rain, we decided to continue the match.","options":["Despite of","Despite","Although","Even"],"correct":1,"explanation":"Despite يتبعه اسم أو gerund مباشرة بدون of. Although يتبعه جملة كاملة.","level":"intermediate","model":"52","freq":6 },
+        { "id":"g31","text":"She must _____ the keys somewhere; they're not here.","options":["leave","left","have left","has left"],"correct":2,"explanation":"must + have + past participle للاستدلال على حدث وقع في الماضي.","level":"advanced","model":"49","freq":4 },
+        { "id":"g32","text":"The students are looking forward _____ the trip.","options":["to","for","at","to going on"],"correct":3,"explanation":"look forward to يتبعه gerund (verb+ing)، فالجواب: to going on.","level":"intermediate","model":"50","freq":5 },
+        { "id":"g33","text":"No sooner _____ home than it started raining.","options":["I arrived","had I arrived","I had arrived","did I arrive"],"correct":1,"explanation":"No sooner ... than تتطلب inversion: had + subject + V3.","level":"advanced","model":"51","freq":3 },
+        { "id":"g34","text":"The old man had difficulty _____ the stairs.","options":["to climb","climbing","climb","climbed"],"correct":1,"explanation":"have difficulty + gerund (verb+ing) هي التركيب الصحيح.","level":"intermediate","model":"52","freq":5 },
+        { "id":"g35","text":"I'd prefer _____ by plane rather than by train.","options":["travel","to travel","traveling","traveled"],"correct":1,"explanation":"بعد would prefer نستخدم to + infinitive (to travel).","level":"beginner","model":"49","freq":6 },
+        { "id":"g36","text":"They _____ working on the project for three hours.","options":["are","have been","were","had"],"correct":1,"explanation":"Present Perfect Continuous (have been + V-ing) للتعبير عن نشاط بدأ في الماضي ومستمر حتى الآن.","level":"intermediate","model":"50","freq":5 },
+        { "id":"g37","text":"_____ he studied harder, he would have passed the exam.","options":["Had","If","Unless","When"],"correct":0,"explanation":"في الشرطية المعكوسة من النوع الثالث، يمكن استبدال If بـ Had في بداية الجملة.","level":"advanced","model":"51","freq":4 },
+        { "id":"g38","text":"The manager, along with his team, _____ working overtime.","options":["are","were","is","be"],"correct":2,"explanation":"عندما يكون الفاعل الرئيسي مفرداً ويضاف إليه along with/together with، يبقى الفعل مفرداً.","level":"advanced","model":"52","freq":3 },
+        { "id":"g39","text":"Both Sara and Khalid _____ interested in the new project.","options":["is","are","was","were"],"correct":1,"explanation":"Both...and يتبعه فعل الجمع (are).","level":"beginner","model":"49","freq":7 },
+        { "id":"g40","text":"She has been working here _____ she graduated.","options":["for","since","during","while"],"correct":1,"explanation":"نستخدم 'since' مع نقطة بداية محددة (she graduated) في زمن Past.","level":"intermediate","model":"50","freq":6 }
+      ]
+    },
+    "vocabulary": {
+      "name": "المفردات (Vocabulary)",
+      "icon": "📚",
+      "color": "#8b5cf6",
+      "time": 50,
+      "questions": [
+        { "id":"v1","text":"The scientist made a _____ discovery that changed medicine forever.","options":["groundbreaking","ordinary","trivial","repetitive"],"correct":0,"explanation":"groundbreaking = رائد/متميز - يُستخدم لوصف اكتشاف أو إنجاز غير مسبوق.","level":"intermediate","model":"50","freq":5 },
+        { "id":"v2","text":"The manager tried to _____ the conflict between the two departments.","options":["escalate","ignore","mediate","worsen"],"correct":2,"explanation":"mediate = يتوسط/يحكّم - التوسط في حل النزاعات بين طرفين.","level":"advanced","model":"51","freq":4 },
+        { "id":"v3","text":"Her _____ to complete the project impressed everyone.","options":["hesitation","reluctance","determination","laziness"],"correct":2,"explanation":"determination = تصميم/عزيمة - القرار الراسخ على إنجاز شيء ما.","level":"intermediate","model":"52","freq":6 },
+        { "id":"v4","text":"The new policy is _____ to all employees regardless of their position.","options":["applicable","irrelevant","optional","exclusive"],"correct":0,"explanation":"applicable = قابل للتطبيق/ينطبق على - يُستخدم للشيء الذي يسري على الجميع.","level":"intermediate","model":"49","freq":5 },
+        { "id":"v5","text":"We need to _____ the situation carefully before making a decision.","options":["ignore","assess","complicate","dismiss"],"correct":1,"explanation":"assess = يقيّم/يدرس - التقييم الدقيق للموقف قبل اتخاذ القرار.","level":"beginner","model":"50","freq":7 },
+        { "id":"v6","text":"The company decided to _____ its operations to new markets.","options":["reduce","expand","limit","abandon"],"correct":1,"explanation":"expand = يوسّع - التوسع في العمليات أو الأنشطة لتشمل مناطق جديدة.","level":"beginner","model":"51","freq":8 },
+        { "id":"v7","text":"The professor gave a _____ explanation of the complex theory.","options":["vague","ambiguous","comprehensive","brief"],"correct":2,"explanation":"comprehensive = شامل/مستوعب - يغطي جميع الجوانب بشكل كامل.","level":"intermediate","model":"52","freq":6 },
+        { "id":"v8","text":"The new law was met with _____ opposition from the public.","options":["mild","fierce","gentle","quiet"],"correct":1,"explanation":"fierce = شديد/عنيف - يُستخدم لوصف معارضة أو مقاومة قوية جداً.","level":"advanced","model":"49","freq":4 },
+        { "id":"v9","text":"The speaker's ideas were _____ and easy to understand.","options":["complex","elaborate","concise","lengthy"],"correct":2,"explanation":"concise = موجز/مختصر - التعبير بوضوح بأقل عدد ممكن من الكلمات.","level":"intermediate","model":"50","freq":5 },
+        { "id":"v10","text":"She showed great _____ in handling the difficult customer.","options":["aggressiveness","patience","indifference","carelessness"],"correct":1,"explanation":"patience = صبر - القدرة على التعامل مع المواقف الصعبة بهدوء.","level":"beginner","model":"51","freq":7 },
+        { "id":"v11","text":"The government implemented new _____ to reduce pollution.","options":["obstacles","measures","problems","debates"],"correct":1,"explanation":"measures = تدابير/إجراءات - الخطوات المتخذة لمعالجة مشكلة أو تحقيق هدف.","level":"intermediate","model":"52","freq":5 },
+        { "id":"v12","text":"His speech was _____, leaving the audience confused.","options":["clear","persuasive","incoherent","logical"],"correct":2,"explanation":"incoherent = غير متماسك/مبهم - الكلام الذي لا يمكن فهمه أو تتبع منطقه.","level":"advanced","model":"49","freq":3 },
+        { "id":"v13","text":"The new bridge will _____ the two sides of the city.","options":["separate","connect","block","isolate"],"correct":1,"explanation":"connect = يربط/يوصل - يُستخدم لوصف الوصل بين مكانين أو شيئين.","level":"beginner","model":"50","freq":6 },
+        { "id":"v14","text":"Her constant _____ of others was considered unprofessional.","options":["praise","criticism","support","encouragement"],"correct":1,"explanation":"criticism = انتقاد - التعليق السلبي على أداء أو تصرفات الآخرين.","level":"intermediate","model":"51","freq":5 },
+        { "id":"v15","text":"The company is working to _____ its carbon footprint.","options":["increase","maximize","reduce","expand"],"correct":2,"explanation":"reduce = يُقلل/يُخفض - هدف مشترك في سياسات البيئة والاستدامة.","level":"intermediate","model":"52","freq":6 },
+        { "id":"v16","text":"The researcher published a _____ study on climate change.","options":["trivial","landmark","ordinary","repetitive"],"correct":1,"explanation":"landmark = بارز/محوري - يُستخدم لوصف عمل أو حدث ذو أثر كبير وتاريخي.","level":"advanced","model":"49","freq":4 },
+        { "id":"v17","text":"The project requires _____ from all team members.","options":["conflict","collaboration","competition","confusion"],"correct":1,"explanation":"collaboration = تعاون - العمل المشترك لتحقيق هدف مشترك.","level":"intermediate","model":"50","freq":7 },
+        { "id":"v18","text":"The CEO made a _____ decision to restructure the company.","options":["hasty","bold","timid","cautious"],"correct":1,"explanation":"bold = جريء/شجاع - اتخاذ قرارات صعبة دون تردد مع معرفة المخاطر.","level":"intermediate","model":"51","freq":5 },
+        { "id":"v19","text":"The new software is _____ with older computer systems.","options":["incompatible","redundant","compatible","irrelevant"],"correct":2,"explanation":"compatible = متوافق - يعمل بشكل صحيح مع أنظمة أو برامج أخرى.","level":"intermediate","model":"52","freq":6 },
+        { "id":"v20","text":"The politician's speech was full of _____ and had little substance.","options":["facts","rhetoric","evidence","logic"],"correct":1,"explanation":"rhetoric = خطابة/كلام فضفاض - الاستخدام المبالغ فيه للألفاظ البليغة دون مضمون حقيقي.","level":"advanced","model":"49","freq":3 },
+        { "id":"v21","text":"Despite the challenges, she remained _____ in her goals.","options":["wavering","focused","distracted","uncertain"],"correct":1,"explanation":"focused = مركّز - الثبات على الهدف ومقاومة الانشغال بأمور أخرى.","level":"intermediate","model":"50","freq":5 },
+        { "id":"v22","text":"The new regulation will _____ all small businesses.","options":["benefit","affect","ignore","avoid"],"correct":1,"explanation":"affect = يؤثر على - التأثير العام على شيء أو مجموعة دون تحديد النوع.","level":"beginner","model":"51","freq":7 },
+        { "id":"v23","text":"The document requires your _____ to be valid.","options":["signature","opinion","preference","thought"],"correct":0,"explanation":"signature = توقيع - الإمضاء الذي يُثبت أن الشخص وافق على الوثيقة.","level":"beginner","model":"52","freq":6 },
+        { "id":"v24","text":"The scientist's _____ led to an unexpected discovery.","options":["ignorance","curiosity","indifference","laziness"],"correct":1,"explanation":"curiosity = فضول - الرغبة في معرفة المزيد، وهي صفة أساسية في العلماء.","level":"intermediate","model":"49","freq":5 },
+        { "id":"v25","text":"The workshop aims to _____ participants' communication skills.","options":["weaken","diminish","enhance","reduce"],"correct":2,"explanation":"enhance = يُعزز/يُحسّن - تطوير مهارة أو قدرة لتصبح أفضل.","level":"intermediate","model":"50","freq":6 },
+        { "id":"v26","text":"He showed remarkable _____ in recovering from the injury.","options":["weakness","resilience","fragility","hesitation"],"correct":1,"explanation":"resilience = مرونة/صمود - القدرة على التعافي سريعاً من الصعوبات.","level":"advanced","model":"51","freq":4 },
+        { "id":"v27","text":"The ancient ruins were well _____ despite their age.","options":["preserved","destroyed","forgotten","altered"],"correct":0,"explanation":"preserved = محفوظ/محافظ عليه - الإبقاء على شيء قديم في حالة جيدة.","level":"intermediate","model":"52","freq":5 },
+        { "id":"v28","text":"The committee voted _____ to approve the new budget.","options":["partially","reluctantly","unanimously","occasionally"],"correct":2,"explanation":"unanimously = بالإجماع - موافقة جميع الأعضاء دون استثناء.","level":"advanced","model":"49","freq":3 },
+        { "id":"v29","text":"She felt _____ after finishing the challenging project.","options":["exhausted","energetic","refreshed","bored"],"correct":0,"explanation":"exhausted = منهك/مرهق - الشعور بالإرهاق الشديد بعد جهد كبير.","level":"beginner","model":"50","freq":7 },
+        { "id":"v30","text":"The teacher used several _____ to explain the concept.","options":["analogies","contradictions","complications","obstacles"],"correct":0,"explanation":"analogies = مقارنات/تشبيهات - استخدام أمثلة مشابهة لتوضيح فكرة صعبة.","level":"advanced","model":"51","freq":4 },
+        { "id":"v31","text":"The company's new strategy proved highly _____.","options":["ineffective","counterproductive","effective","wasteful"],"correct":2,"explanation":"effective = فعّال - يحقق النتائج المرجوة بنجاح.","level":"beginner","model":"52","freq":6 },
+        { "id":"v32","text":"He was _____ by the audience's positive response.","options":["discouraged","overwhelmed","disappointed","ignored"],"correct":1,"explanation":"overwhelmed = مرتاح جداً/مرتبك - الشعور بضغط عاطفي قوي بسبب موقف إيجابي أو سلبي.","level":"intermediate","model":"49","freq":5 },
+        { "id":"v33","text":"The scientist's _____ findings contradicted previous research.","options":["expected","controversial","routine","traditional"],"correct":1,"explanation":"controversial = مثير للجدل - النتائج التي تثير خلافاً وآراء متعارضة.","level":"advanced","model":"50","freq":4 },
+        { "id":"v34","text":"The new law was designed to _____ corruption in public offices.","options":["promote","encourage","combat","support"],"correct":2,"explanation":"combat = يكافح/يحارب - مكافحة ظاهرة سلبية أو مشكلة.","level":"intermediate","model":"51","freq":5 },
+        { "id":"v35","text":"His work is characterized by great attention to _____.","options":["mistakes","detail","speed","quantity"],"correct":1,"explanation":"attention to detail = الاهتمام بالتفاصيل - من أهم صفات العمل الدقيق والمتقن.","level":"intermediate","model":"52","freq":6 },
+        { "id":"v36","text":"The new hospital will _____ the medical needs of the region.","options":["ignore","address","complicate","dismiss"],"correct":1,"explanation":"address = يعالج/يتناول - التعامل مع مشكلة أو احتياج بجدية.","level":"intermediate","model":"49","freq":5 },
+        { "id":"v37","text":"The teacher's _____ approach made learning fun for everyone.","options":["boring","innovative","traditional","outdated"],"correct":1,"explanation":"innovative = مبتكر - استخدام أساليب جديدة وإبداعية في التدريس.","level":"intermediate","model":"50","freq":6 },
+        { "id":"v38","text":"The report revealed a _____ gap between rich and poor.","options":["shrinking","closing","widening","disappearing"],"correct":2,"explanation":"widening = يتسع - gap يتسع يعني الفجوة تزداد اتساعاً.","level":"advanced","model":"51","freq":4 },
+        { "id":"v39","text":"She was known for her _____ in solving complex problems.","options":["laziness","ingenuity","stubbornness","indifference"],"correct":1,"explanation":"ingenuity = براعة/ذكاء خلاق - القدرة على إيجاد حلول إبداعية للمشكلات.","level":"advanced","model":"52","freq":3 },
+        { "id":"v40","text":"The politician made a _____ promise to improve education.","options":["vague","empty","specific","hollow"],"correct":2,"explanation":"specific = محدد/واضح - الوعود المحددة والقابلة للقياس أفضل من الوعود العامة.","level":"intermediate","model":"49","freq":5 }
       ]
     },
     "reading": {
       "name": "القراءة (Reading)",
       "icon": "📖",
-      "questions": [
+      "color": "#10b981",
+      "time": 90,
+      "passages": [
         {
-          "id": "r1",
-          "passage": "The Saudi Vision 2030 is a strategic framework to reduce Saudi Arabia's dependence on oil, diversify its economy, and develop public service sectors. Launched in 2016 by Crown Prince Mohammed bin Salman, it aims to transform the kingdom into a global investment powerhouse and open up cultural and entertainment activities.",
-          "text": "According to the passage, what is the main goal of Vision 2030?",
-          "options": [
-            "To increase oil production",
-            "To reduce dependence on oil and diversify the economy",
-            "To develop tourism only",
-            "To strengthen military power"
-          ],
-          "correct": 1,
-          "explanation": "النص يقول 'reduce Saudi Arabia's dependence on oil, diversify its economy' وهذا هو الهدف الرئيسي.",
-          "level": "intermediate"
+          "id": "r_passage1",
+          "title": "Digital Transformation in Education",
+          "text": "The integration of technology into education has fundamentally transformed how students learn and teachers instruct. Digital tools such as interactive whiteboards, online learning platforms, and educational apps have created more engaging and personalized learning experiences. Research indicates that students who use technology in their studies demonstrate higher levels of motivation and achieve better academic outcomes. However, critics argue that excessive screen time can have negative effects on concentration and social development. The key lies in striking a balance between digital and traditional teaching methods, ensuring that technology serves as a tool for enhancement rather than a replacement for human interaction. Educational institutions worldwide are now developing frameworks to integrate technology thoughtfully, focusing on critical thinking and problem-solving skills that will prepare students for an increasingly digital workforce.",
+          "questions": [
+            { "id":"r1","text":"What is the main idea of this passage?","options":["Technology completely replaces traditional teaching","The negative effects of technology in schools","The balanced integration of technology in education","Students prefer technology over books"],"correct":2,"explanation":"الفكرة الرئيسية هي التكامل المتوازن بين التكنولوجيا والتعليم، وليس الاستبدال التام.","level":"intermediate","model":"50","freq":7 },
+            { "id":"r2","text":"According to the passage, what do critics argue about technology?","options":["It improves academic performance","Excessive screen time harms concentration","It creates better learning experiences","It motivates students effectively"],"correct":1,"explanation":"يقول المنتقدون أن وقت الشاشة الزائد يؤثر سلباً على التركيز والتطور الاجتماعي.","level":"intermediate","model":"51","freq":5 },
+            { "id":"r3","text":"The word 'integration' in the first sentence most likely means:","options":["separation","removal","combination","rejection"],"correct":2,"explanation":"integration = دمج/تكامل - combining different elements together.","level":"beginner","model":"52","freq":6 },
+            { "id":"r4","text":"What does the passage suggest about the future of education?","options":["Technology will replace all teachers","Schools should avoid technology","Institutions are developing frameworks for thoughtful tech use","Students should only use traditional methods"],"correct":2,"explanation":"النص يشير إلى أن المؤسسات تطور أطراً لدمج التكنولوجيا بشكل متأمل.","level":"advanced","model":"49","freq":4 },
+            { "id":"r5","text":"The phrase 'striking a balance' means:","options":["competing with both sides","finding an equal middle ground","choosing one option over another","avoiding both extremes"],"correct":1,"explanation":"striking a balance = إيجاد توازن مناسب بين أمرين.","level":"intermediate","model":"50","freq":5 }
+          ]
         },
         {
-          "id": "r2",
-          "passage": "E-learning has revolutionized education by making knowledge accessible to people regardless of their location. Students can now learn at their own pace, choosing from thousands of courses online. However, critics argue that the lack of face-to-face interaction may hinder social skills development.",
-          "text": "What is the main criticism of e-learning mentioned in the passage?",
-          "options": [
-            "It is too expensive",
-            "It lacks variety of courses",
-            "It may limit social skills development",
-            "It requires advanced technology"
-          ],
-          "correct": 2,
-          "explanation": "النص يذكر 'lack of face-to-face interaction may hinder social skills development'.",
-          "level": "intermediate"
+          "id": "r_passage2",
+          "title": "The Impact of Remote Work",
+          "text": "The rise of remote work, accelerated by the global pandemic, has permanently altered the landscape of professional employment. Companies that once required daily office attendance are now offering flexible work arrangements as a competitive advantage in attracting talent. Studies show that remote workers often report higher job satisfaction and better work-life balance, though they also face challenges such as isolation, difficulty separating work from personal life, and reduced collaboration opportunities. Organizations must invest in digital communication tools and management strategies to maintain productivity and team cohesion. The future workplace is likely to embrace a hybrid model, combining the benefits of in-person collaboration with the flexibility of remote work. This shift requires both employers and employees to adapt their skills and mindsets to thrive in an evolving professional environment.",
+          "questions": [
+            { "id":"r6","text":"What accelerated the rise of remote work?","options":["New technology","Government policies","The global pandemic","Employee demands"],"correct":2,"explanation":"الجائحة العالمية كانت العامل الرئيسي في تسريع انتشار العمل عن بُعد.","level":"beginner","model":"51","freq":6 },
+            { "id":"r7","text":"According to the passage, what challenge do remote workers face?","options":["Low salaries","Lack of technology","Isolation and difficulty separating work from personal life","Too many meetings"],"correct":2,"explanation":"التحديات الرئيسية: العزلة وصعوبة الفصل بين العمل والحياة الشخصية.","level":"intermediate","model":"52","freq":5 },
+            { "id":"r8","text":"The word 'cohesion' in the passage most closely means:","options":["competition","unity","separation","conflict"],"correct":1,"explanation":"cohesion = تماسك/وحدة - ارتباط أجزاء الفريق ببعضها بشكل متناسق.","level":"advanced","model":"49","freq":4 },
+            { "id":"r9","text":"What does the author predict for the future workplace?","options":["Full return to offices","Complete remote work","A hybrid model combining both","Elimination of traditional jobs"],"correct":2,"explanation":"يتوقع الكاتب نموذجاً هجيناً يجمع بين مزايا الحضور الشخصي ومرونة العمل عن بُعد.","level":"intermediate","model":"50","freq":5 },
+            { "id":"r10","text":"What must organizations invest in according to the passage?","options":["Office renovations","Employee salaries","Digital communication tools and management strategies","New hiring programs"],"correct":2,"explanation":"يجب على المنظمات الاستثمار في أدوات التواصل الرقمي واستراتيجيات الإدارة.","level":"intermediate","model":"51","freq":6 }
+          ]
         },
         {
-          "id": "r3",
-          "passage": "Artificial intelligence is increasingly being used in healthcare to diagnose diseases, predict patient outcomes, and personalize treatments. Machine learning algorithms can analyze vast amounts of medical data far more quickly than human doctors, potentially saving lives.",
-          "text": "What advantage does AI have over human doctors according to the passage?",
-          "options": [
-            "AI is cheaper than doctors",
-            "AI can analyze large amounts of data faster",
-            "AI has more medical experience",
-            "AI is more accurate in all cases"
-          ],
-          "correct": 1,
-          "explanation": "النص يذكر 'analyze vast amounts of medical data far more quickly than human doctors'.",
-          "level": "intermediate"
+          "id": "r_passage3",
+          "title": "Renewable Energy and Sustainability",
+          "text": "As the world grapples with the consequences of climate change, renewable energy sources have emerged as critical alternatives to fossil fuels. Solar panels, wind turbines, and hydroelectric power plants are now generating significant portions of electricity in many countries. The cost of solar energy has dropped dramatically over the past decade, making it competitive with traditional energy sources. However, transitioning to renewable energy requires substantial infrastructure investment and policy support. Critics point out that renewable sources are intermittent – the sun does not always shine and the wind does not always blow – requiring advances in energy storage technology. Despite these challenges, most experts agree that expanding renewable energy capacity is essential for reducing greenhouse gas emissions and achieving carbon neutrality by 2050.",
+          "questions": [
+            { "id":"r11","text":"What is the primary focus of this passage?","options":["Economic benefits of fossil fuels","The transition to renewable energy","Problems with solar panels","Government energy policies"],"correct":1,"explanation":"الموضوع الرئيسي هو التحول نحو الطاقة المتجددة وتحدياتها وأهميتها.","level":"intermediate","model":"52","freq":6 },
+            { "id":"r12","text":"What has happened to the cost of solar energy?","options":["It has increased significantly","It has remained stable","It has dropped dramatically","It has become too expensive"],"correct":2,"explanation":"تكلفة الطاقة الشمسية انخفضت بشكل كبير خلال العقد الماضي.","level":"beginner","model":"49","freq":7 },
+            { "id":"r13","text":"The word 'intermittent' as used in the passage means:","options":["constant and reliable","not continuous, occurring at irregular intervals","extremely powerful","environmentally harmful"],"correct":1,"explanation":"intermittent = متقطع/غير منتظم - لا يعمل بشكل مستمر أو منتظم.","level":"advanced","model":"50","freq":4 },
+            { "id":"r14","text":"According to the passage, what challenge remains for renewable energy?","options":["High costs","Lack of public interest","Intermittency and need for energy storage","Government opposition"],"correct":2,"explanation":"التحدي الرئيسي هو التقطع وضرورة تطوير تكنولوجيا تخزين الطاقة.","level":"intermediate","model":"51","freq":5 },
+            { "id":"r15","text":"What do most experts agree is necessary by 2050?","options":["Doubling fossil fuel production","Expanding renewable energy and achieving carbon neutrality","Stopping all industrial activity","Reducing population growth"],"correct":1,"explanation":"يتفق معظم الخبراء على ضرورة توسيع الطاقة المتجددة لتحقيق حياد كربوني بحلول 2050.","level":"intermediate","model":"52","freq":5 }
+          ]
         },
         {
-          "id": "r4",
-          "passage": "Water scarcity affects more than 40% of the global population and is expected to worsen with climate change. Desalination, the process of removing salt from seawater, has emerged as a crucial solution. Saudi Arabia is currently the world's largest producer of desalinated water.",
-          "text": "What percentage of the world population is affected by water scarcity?",
-          "options": ["20%", "30%", "More than 40%", "50%"],
-          "correct": 2,
-          "explanation": "النص يذكر صراحةً 'affects more than 40% of the global population'.",
-          "level": "beginner"
+          "id": "r_passage4",
+          "title": "Artificial Intelligence in Healthcare",
+          "text": "Artificial intelligence is revolutionizing healthcare by enabling faster and more accurate diagnoses, predicting disease outbreaks, and personalizing treatment plans. Machine learning algorithms can analyze vast amounts of medical data to identify patterns that human doctors might miss. AI-powered diagnostic tools have shown remarkable success in detecting cancers, eye diseases, and cardiovascular conditions at early stages. Despite these promising developments, ethical concerns remain about patient privacy, algorithmic bias, and the potential for reducing the human element in medical care. Healthcare professionals argue that AI should augment rather than replace human judgment, serving as a powerful tool in the physician's arsenal while maintaining the essential doctor-patient relationship. Regulatory frameworks are being developed worldwide to govern the responsible use of AI in medical settings.",
+          "questions": [
+            { "id":"r16","text":"According to the passage, what is AI's main advantage in healthcare?","options":["Replacing doctors completely","Reducing healthcare costs","Enabling faster and more accurate diagnoses","Improving hospital architecture"],"correct":2,"explanation":"الميزة الرئيسية للذكاء الاصطناعي هي تمكين التشخيصات الأسرع والأدق.","level":"intermediate","model":"49","freq":6 },
+            { "id":"r17","text":"What ethical concerns are mentioned in the passage?","options":["Cost of AI systems","Patient privacy, algorithmic bias, and reducing human element","Speed of AI processing","Lack of trained doctors"],"correct":1,"explanation":"المخاوف الأخلاقية: خصوصية المريض، التحيز الخوارزمي، وتقليص الجانب الإنساني.","level":"advanced","model":"50","freq":4 },
+            { "id":"r18","text":"The word 'augment' in the passage means:","options":["replace","reduce","enhance or supplement","eliminate"],"correct":2,"explanation":"augment = يُعزز/يضيف - تحسين شيء بإضافة شيء آخر إليه.","level":"advanced","model":"51","freq":3 },
+            { "id":"r19","text":"What are regulations being developed for?","options":["Increasing AI costs","Governing responsible use of AI in medicine","Replacing all human doctors","Limiting AI research"],"correct":1,"explanation":"تُطوَّر الأطر التنظيمية لحوكمة الاستخدام المسؤول للذكاء الاصطناعي في المجال الطبي.","level":"intermediate","model":"52","freq":5 },
+            { "id":"r20","text":"Healthcare professionals believe AI should:","options":["Make all medical decisions independently","Replace human judgment completely","Work alongside doctors as a tool","Be banned from healthcare"],"correct":2,"explanation":"يرى المهنيون الصحيون أن الذكاء الاصطناعي يجب أن يعمل جانباً للأطباء كأداة مساعدة.","level":"intermediate","model":"49","freq":6 }
+          ]
         },
         {
-          "id": "r5",
-          "passage": "The word 'procrastinate' comes from the Latin 'procrastinare' meaning 'to put off until tomorrow'. Research shows that procrastination is not simply laziness but often a way of avoiding negative emotions associated with certain tasks. Effective strategies include breaking tasks into smaller steps and setting clear deadlines.",
-          "text": "According to the passage, what is procrastination most closely associated with?",
-          "options": [
-            "Being lazy",
-            "Avoiding negative emotions",
-            "Lack of planning",
-            "Time management skills"
-          ],
-          "correct": 1,
-          "explanation": "النص يوضح أن التسويف 'often a way of avoiding negative emotions' وليس مجرد كسل.",
-          "level": "advanced"
+          "id": "r_passage5",
+          "title": "Urbanization and Its Challenges",
+          "text": "The world is becoming increasingly urban, with more than half of the global population now living in cities. This rapid urbanization brings both opportunities and challenges. Cities are centers of economic activity, innovation, and cultural exchange, offering residents access to education, healthcare, and employment opportunities that may not be available in rural areas. However, rapid urbanization also leads to overcrowding, inadequate infrastructure, environmental degradation, and social inequality. Developing nations face particular challenges in managing their fast-growing urban populations with limited resources. Sustainable urban planning focuses on creating livable cities that meet the needs of present residents without compromising the ability of future generations to meet their needs. Smart city technologies, including data analytics and IoT systems, offer promising solutions to manage urban resources more efficiently.",
+          "questions": [
+            { "id":"r21","text":"What percentage of the global population lives in cities?","options":["Less than 25%","Exactly 75%","More than half","Less than 40%"],"correct":2,"explanation":"النص يذكر أن أكثر من نصف سكان العالم يعيشون في المدن.","level":"beginner","model":"50","freq":7 },
+            { "id":"r22","text":"What advantages do cities offer according to the passage?","options":["Only economic benefits","Access to education, healthcare, and employment","Lower living costs","More natural environments"],"correct":1,"explanation":"توفر المدن الوصول إلى التعليم والرعاية الصحية وفرص العمل.","level":"intermediate","model":"51","freq":6 },
+            { "id":"r23","text":"The word 'degradation' in the passage most closely means:","options":["improvement","deterioration","development","stabilization"],"correct":1,"explanation":"degradation = تدهور/تراجع - انخفاض في الجودة أو المستوى.","level":"advanced","model":"52","freq":4 },
+            { "id":"r24","text":"What do developing nations particularly struggle with?","options":["Too many resources","Managing fast-growing urban populations with limited resources","Decreasing urban populations","Excess of infrastructure"],"correct":2,"explanation":"تواجه الدول النامية تحدياً في إدارة تزايد سكانها الحضري بموارد محدودة.","level":"intermediate","model":"49","freq":5 },
+            { "id":"r25","text":"What does sustainable urban planning aim to achieve?","options":["Rapid construction of tall buildings","Meeting current needs without compromising future generations","Eliminating all rural areas","Maximizing population density"],"correct":1,"explanation":"التخطيط الحضري المستدام يهدف لتلبية احتياجات الحاضر دون المساس بقدرة الأجيال القادمة.","level":"intermediate","model":"50","freq":5 }
+          ]
         }
       ]
     },
     "listening": {
       "name": "الاستماع (Listening)",
       "icon": "🎧",
+      "color": "#f59e0b",
+      "time": 80,
       "questions": [
-        {
-          "id": "l1",
-          "text": "Based on common STEP patterns: A student is asking about library hours. The library closes at _____ on weekdays.",
-          "options": ["6 PM", "8 PM", "10 PM", "9 PM"],
-          "correct": 2,
-          "explanation": "في أسئلة الاستماع يجب التركيز على الأرقام والأوقات المذكورة. 10 PM هو الوقت الأكثر شيوعاً في نماذج الاختبار.",
-          "level": "intermediate"
-        },
-        {
-          "id": "l2",
-          "text": "A student says: 'I think I'll postpone studying until tomorrow.' This means the student wants to _____.",
-          "options": [
-            "Study immediately",
-            "Delay studying",
-            "Ask for help",
-            "Cancel studying"
-          ],
-          "correct": 1,
-          "explanation": "postpone = delay = تأجيل. يجب معرفة مرادفات الأفعال الشائعة في الاستماع.",
-          "level": "beginner"
-        },
-        {
-          "id": "l3",
-          "text": "In a conversation, the man says he is 'under the weather'. This idiom means he is _____.",
-          "options": ["Confused", "Not feeling well", "Very busy", "Outdoors"],
-          "correct": 1,
-          "explanation": "under the weather تعبير اصطلاحي يعني 'لا يشعر بحال جيدة / مريض قليلاً'.",
-          "level": "advanced"
-        },
-        {
-          "id": "l4",
-          "text": "The announcement says: 'Flight SA 205 to Riyadh has been delayed by two hours.' When was the original departure time if it is now boarding at 4:00 PM?",
-          "options": ["1:00 PM", "2:00 PM", "3:00 PM", "5:00 PM"],
-          "correct": 1,
-          "explanation": "إذا تأخر بساعتين وأصبح الإقلاع 4:00 PM، فالوقت الأصلي كان 4 - 2 = 2:00 PM.",
-          "level": "intermediate"
-        }
+        { "id":"l1","text":"In a conversation, Sarah says: 'I've been under the weather lately.' What does this expression mean?","options":["She has been feeling ill","She works outdoors in bad weather","She has been very busy","She is worried about rain"],"correct":0,"explanation":"under the weather = غير مرتاح صحياً/مريض - تعبير اصطلاحي شائع.","level":"intermediate","model":"50","freq":6 },
+        { "id":"l2","text":"A professor says: 'This point is crucial to understanding the rest of the lecture.' The word 'crucial' means:","options":["optional","unimportant","extremely important","somewhat relevant"],"correct":2,"explanation":"crucial = بالغ الأهمية/حاسم - ضروري جداً لفهم شيء ما.","level":"intermediate","model":"51","freq":5 },
+        { "id":"l3","text":"An announcer states: 'The conference has been postponed indefinitely.' What does 'indefinitely' mean?","options":["for two weeks","permanently","for a specific period","without a set end date"],"correct":3,"explanation":"indefinitely = لأجل غير مسمى - بدون تحديد موعد محدد في المستقبل.","level":"advanced","model":"52","freq":4 },
+        { "id":"l4","text":"A student asks: 'Could you elaborate on that point?' What is the student requesting?","options":["To skip the topic","To speak faster","To provide more details","To change the subject"],"correct":2,"explanation":"elaborate = يشرح بالتفصيل - الطالب يطلب مزيداً من التوضيح والتفاصيل.","level":"intermediate","model":"49","freq":6 },
+        { "id":"l5","text":"A manager tells an employee: 'I need this report by end of business today, no exceptions.' The tone suggests:","options":["A flexible deadline","A strict and urgent deadline","An optional request","A casual suggestion"],"correct":1,"explanation":"no exceptions يدل على موعد نهائي صارم لا تنازل عنه.","level":"intermediate","model":"50","freq":5 },
+        { "id":"l6","text":"A speaker says: 'On the contrary, the results were quite favorable.' This phrase indicates:","options":["Agreement with a previous statement","Contradiction of a previous statement","Uncertainty about results","Disappointment with outcomes"],"correct":1,"explanation":"on the contrary = على العكس من ذلك - يُستخدم للتناقض مع ما سبق ذكره.","level":"advanced","model":"51","freq":4 },
+        { "id":"l7","text":"An instructor announces: 'I'll be taking attendance, so make sure you're here promptly.' What does 'promptly' mean?","options":["eventually","on time","approximately","randomly"],"correct":1,"explanation":"promptly = في الوقت المحدد/بسرعة - الحضور في الموعد تماماً.","level":"beginner","model":"52","freq":7 },
+        { "id":"l8","text":"A professor remarks: 'The data seems to contradict the initial hypothesis.' This means the data:","options":["Supports the hypothesis","Shows no relation to the hypothesis","Goes against the hypothesis","Proves the hypothesis completely"],"correct":2,"explanation":"contradict = يتناقض مع - البيانات تختلف مع الفرضية الأولية.","level":"advanced","model":"49","freq":4 },
+        { "id":"l9","text":"During a presentation, someone says: 'In essence, the core message is about sustainability.' 'In essence' means:","options":["In addition","In contrast","Basically or fundamentally","Furthermore"],"correct":2,"explanation":"in essence = في الأساس/بشكل جوهري - للتعبير عن الفكرة الرئيسية.","level":"intermediate","model":"50","freq":5 },
+        { "id":"l10","text":"A supervisor tells a team: 'Let's not beat around the bush – we need to address the budget cuts immediately.' This idiom means:","options":["They need to work around the bush","They should not avoid the main point","They need to trim expenses carefully","They should discuss the issue slowly"],"correct":1,"explanation":"beat around the bush = يتهرب من الموضوع - المدير يطلب التحدث بشكل مباشر.","level":"advanced","model":"51","freq":3 },
+        { "id":"l11","text":"A student hears: 'The assignment is due at the stroke of midnight.' When is it due?","options":["Any time before noon","Exactly at 12:00 AM","Before 11:59 PM","At sunrise"],"correct":1,"explanation":"at the stroke of midnight = عند منتصف الليل تماماً، أي الساعة 12:00 صباحاً.","level":"intermediate","model":"52","freq":5 },
+        { "id":"l12","text":"A guest lecturer says: 'To put it in a nutshell, the economy is recovering slowly.' This phrase means:","options":["To explain in great detail","To summarize briefly","To avoid the main point","To introduce a new topic"],"correct":1,"explanation":"in a nutshell = باختصار - تلخيص الفكرة الرئيسية بإيجاز.","level":"intermediate","model":"49","freq":6 },
+        { "id":"l13","text":"An employee hears: 'Your proposal has considerable merit.' What does this mean?","options":["Your proposal is completely rejected","Your proposal has many good points","Your proposal needs no changes","Your proposal is too complicated"],"correct":1,"explanation":"considerable merit = مزايا/فضائل كبيرة - الاقتراح له نقاط قوة واضحة.","level":"intermediate","model":"50","freq":5 },
+        { "id":"l14","text":"A professor states: 'This phenomenon is not unique to our country; it's prevalent globally.' 'Prevalent' means:","options":["rare and unusual","widely spread or common","recently discovered","scientifically proven"],"correct":1,"explanation":"prevalent = شائع/منتشر على نطاق واسع.","level":"intermediate","model":"51","freq":5 },
+        { "id":"l15","text":"During a debate, a speaker says: 'That argument is a red herring.' What does this idiom mean?","options":["A very strong argument","A misleading or irrelevant argument","A historical argument","A scientific argument"],"correct":1,"explanation":"red herring = حجة مضللة/انحراف - حجة تُستخدم لصرف الانتباه عن الموضوع الرئيسي.","level":"advanced","model":"52","freq":3 },
+        { "id":"l16","text":"A news reporter says: 'The CEO will step down effective immediately.' What will the CEO do?","options":["Receive a promotion","Take a vacation","Resign from the position","Move to another department"],"correct":2,"explanation":"step down = يستقيل/يتنحى - ترك المنصب الحالي.","level":"intermediate","model":"49","freq":5 },
+        { "id":"l17","text":"A teacher says: 'The test will be a piece of cake for those who studied.' This idiom means:","options":["The test involves baking","The test will be very easy","The test is extremely difficult","The test is about food"],"correct":1,"explanation":"a piece of cake = سهل جداً - شيء لا يتطلب جهداً كبيراً.","level":"beginner","model":"50","freq":7 },
+        { "id":"l18","text":"In a lecture, a professor says: 'This approach is tantamount to ignoring the problem.' 'Tantamount' means:","options":["completely different from","equivalent or equal to","unrelated to","better than"],"correct":1,"explanation":"tantamount = معادل/مساوٍ - يُستخدم للإشارة إلى أن شيئاً ما يعادل شيئاً آخر في تأثيره.","level":"advanced","model":"51","freq":3 },
+        { "id":"l19","text":"A student overhears: 'The professor is a tough nut to crack.' This means the professor is:","options":["Very friendly and approachable","Difficult to understand or deal with","Knowledgeable about nuts","An easy teacher"],"correct":1,"explanation":"tough nut to crack = صعب المراس/يصعب التعامل معه - شخص صعب الفهم أو التعامل.","level":"advanced","model":"52","freq":3 },
+        { "id":"l20","text":"An academic advisor says: 'Your GPA is on the borderline; you need to step up your game.' What should the student do?","options":["Switch their major","Improve their performance significantly","Drop some courses","Take a break from studying"],"correct":1,"explanation":"step up your game = تحسين الأداء - المستشار ينصح الطالب بالعمل بجدية أكبر.","level":"intermediate","model":"49","freq":5 },
+        { "id":"l21","text":"A professor announces: 'The exam will cover chapters 5 through 8 inclusive.' What chapters are included?","options":["Only chapters 5 and 8","Chapters 5, 6, 7, and 8","Chapters 6 and 7 only","Chapters 5 and beyond"],"correct":1,"explanation":"inclusive = شامل الطرفين - الفصول 5 و6 و7 و8 جميعها مشمولة في الاختبار.","level":"intermediate","model":"50","freq":6 },
+        { "id":"l22","text":"A speaker says: 'We should take this claim with a grain of salt.' This means:","options":["We should test it in a laboratory","We should believe it completely","We should not accept it without question","We should ignore it entirely"],"correct":2,"explanation":"take with a grain of salt = لا تصدق كل ما يُقال دون تحقق - كن متشككاً قليلاً.","level":"advanced","model":"51","freq":4 },
+        { "id":"l23","text":"During a presentation: 'The new policy will have far-reaching consequences.' 'Far-reaching' means:","options":["minimal impact","limited to one area","wide-ranging and significant impact","temporary effects"],"correct":2,"explanation":"far-reaching = بعيد المدى/واسع النطاق - يؤثر على نطاق واسع.","level":"intermediate","model":"52","freq":5 },
+        { "id":"l24","text":"A colleague says: 'I'll have to burn the midnight oil to finish this project.' This means:","options":["The project involves fire safety","They will work very late at night","They need to buy more office supplies","They are canceling the project"],"correct":1,"explanation":"burn the midnight oil = يسهر حتى وقت متأخر للعمل - الاجتهاد في الليل.","level":"intermediate","model":"49","freq":6 },
+        { "id":"l25","text":"A professor says: 'This essay is plagiarized and will have grave consequences.' 'Grave' here means:","options":["related to a cemetery","very serious","slightly concerning","historically significant"],"correct":1,"explanation":"grave = خطير/جسيم - يُستخدم لوصف عواقب أو مواقف ذات خطورة شديدة.","level":"advanced","model":"50","freq":4 }
       ]
     },
-    "vocabulary": {
-      "name": "المفردات (Vocabulary)",
-      "icon": "📚",
+    "advanced": {
+      "name": "أسئلة متقدمة",
+      "icon": "🎯",
+      "color": "#ef4444",
+      "time": 75,
       "questions": [
-        {
-          "id": "v1",
-          "text": "The scientist made a remarkable _____ in cancer research.",
-          "options": ["breakthrough", "breakdown", "breakout", "breakup"],
-          "correct": 0,
-          "explanation": "breakthrough = اختراق علمي، اكتشاف مهم. breakdown = انهيار. breakout = هروب. breakup = انفصال.",
-          "level": "intermediate"
-        },
-        {
-          "id": "v2",
-          "text": "The new policy will _____ employees to work from home.",
-          "options": ["prohibit", "enable", "prevent", "restrict"],
-          "correct": 1,
-          "explanation": "enable = تمكّن / تتيح. prohibit/prevent/restrict = تمنع / تقيّد.",
-          "level": "intermediate"
-        },
-        {
-          "id": "v3",
-          "text": "She gave a very _____ speech that moved everyone in the audience.",
-          "options": ["eloquent", "arrogant", "ambiguous", "tedious"],
-          "correct": 0,
-          "explanation": "eloquent = بليغ، مؤثر. arrogant = متكبر. ambiguous = غامض. tedious = ممل.",
-          "level": "advanced"
-        },
-        {
-          "id": "v4",
-          "text": "The company decided to _____ its services to new markets.",
-          "options": ["contract", "expand", "reduce", "limit"],
-          "correct": 1,
-          "explanation": "expand = يوسّع. contract = يقلّص. reduce/limit = يقلل.",
-          "level": "beginner"
-        },
-        {
-          "id": "v5",
-          "text": "Despite the _____, he continued working without complaining.",
-          "options": ["encouragement", "opportunity", "hardship", "celebration"],
-          "correct": 2,
-          "explanation": "hardship = صعوبات / مشقة. السياق 'continued without complaining' يدل على وجود صعوبات.",
-          "level": "intermediate"
-        }
+        { "id":"a1","text":"The committee's decision to _____ the project was met with widespread criticism.","options":["terminate","initiate","propose","support"],"correct":0,"explanation":"terminate = ينهي/يلغي - إنهاء المشروع قبل اكتماله سيواجه انتقادات.","level":"advanced","model":"52","freq":4 },
+        { "id":"a2","text":"The research findings were _____ with the initial hypothesis.","options":["consistent","inconsistent","irrelevant","identical"],"correct":0,"explanation":"consistent with = يتفق مع - النتائج البحثية تتماشى مع الفرضية الأولية.","level":"advanced","model":"49","freq":5 },
+        { "id":"a3","text":"The article argues that social media has a _____ effect on political discourse.","options":["negligible","polarizing","unifying","stabilizing"],"correct":1,"explanation":"polarizing = مُسبب للاستقطاب - وسائل التواصل الاجتماعي تُعمق الخلافات السياسية.","level":"advanced","model":"50","freq":4 },
+        { "id":"a4","text":"The author's tone in the final paragraph can best be described as:","options":["optimistic and hopeful","pessimistic and despairing","neutral and objective","sarcastic and dismissive"],"correct":0,"explanation":"تحليل النبرة (tone analysis) يتطلب فهم الكلمات والأسلوب المستخدم في الخاتمة.","level":"advanced","model":"51","freq":3 },
+        { "id":"a5","text":"The word 'mitigate' most closely means:","options":["to worsen","to lessen or reduce","to ignore completely","to celebrate"],"correct":1,"explanation":"mitigate = يُخفف/يُقلل من حدة - التقليل من شدة شيء سلبي.","level":"advanced","model":"52","freq":5 },
+        { "id":"a6","text":"The passage implies that economic growth alone _____ guarantee social equality.","options":["can","does","cannot","should"],"correct":2,"explanation":"cannot = لا يستطيع - النمو الاقتصادي وحده لا يكفل المساواة الاجتماعية.","level":"advanced","model":"49","freq":4 },
+        { "id":"a7","text":"Which of the following best describes the purpose of the introduction in an academic essay?","options":["To provide all evidence","To summarize the conclusion","To state the main argument and preview the structure","To define all technical terms"],"correct":2,"explanation":"مقدمة المقالة الأكاديمية تُقدم الحجة الرئيسية وتُمهد لهيكل المقالة.","level":"advanced","model":"50","freq":5 },
+        { "id":"a8","text":"The term 'empirical evidence' refers to:","options":["theoretical assumptions","evidence based on observation and experimentation","personal opinions and beliefs","historical records only"],"correct":1,"explanation":"empirical evidence = دليل تجريبي - يستند إلى الملاحظة والتجربة العلمية.","level":"advanced","model":"51","freq":4 },
+        { "id":"a9","text":"In academic writing, a 'thesis statement' serves to:","options":["Provide background information","List all sources used","State the main argument of the paper","Describe the methodology"],"correct":2,"explanation":"thesis statement = صياغة الحجة الرئيسية للورقة البحثية بوضوح.","level":"advanced","model":"52","freq":5 },
+        { "id":"a10","text":"The study revealed a _____ correlation between exercise and mental health.","options":["negative","positive","negligible","inverse"],"correct":1,"explanation":"positive correlation = ارتباط إيجابي - كلما زاد التمرين، تحسنت الصحة النفسية.","level":"advanced","model":"49","freq":4 },
+        { "id":"a11","text":"The author uses the rhetorical device of _____ to emphasize the severity of the situation.","options":["understatement","hyperbole","litotes","euphemism"],"correct":1,"explanation":"hyperbole = مبالغة - استخدام تعبيرات مبالغ فيها للتأكيد على شدة الموقف.","level":"advanced","model":"50","freq":3 },
+        { "id":"a12","text":"Which sentence demonstrates correct parallel structure?","options":["She likes swimming, to run, and cycling","She likes swimming, running, and cycling","She likes to swim, running, and cycles","She likes swim, to run, and to cycle"],"correct":1,"explanation":"التوازي البنيوي (parallel structure) يتطلب استخدام نفس الصيغة النحوية: swimming, running, cycling (جميعها gerund).","level":"advanced","model":"51","freq":5 },
+        { "id":"a13","text":"The phrase 'in lieu of' means:","options":["in addition to","as a result of","instead of","regardless of"],"correct":2,"explanation":"in lieu of = بدلاً من - تعبير رسمي يُستخدم في الكتابة الأكاديمية والمهنية.","level":"advanced","model":"52","freq":4 },
+        { "id":"a14","text":"A text that presents both sides of an argument without taking a position is called:","options":["persuasive","argumentative","balanced/analytical","descriptive"],"correct":2,"explanation":"النص الذي يعرض جانبين دون اتخاذ موقف يُسمى نصاً تحليلياً متوازناً.","level":"advanced","model":"49","freq":4 },
+        { "id":"a15","text":"The phrase 'the status quo' refers to:","options":["the future state of things","the current state of affairs","the ideal state of affairs","historical events"],"correct":1,"explanation":"the status quo = الوضع الراهن/الحالي - الحالة الحالية للأمور كما هي.","level":"advanced","model":"50","freq":5 }
       ]
     }
-  },
-  "levelMap": {
-    "90-100": {"level": "C2", "ar": "متقن", "color": "#10b981", "plan": "7days", "course": "advanced"},
-    "75-89":  {"level": "C1", "ar": "متقدم", "color": "#3b82f6", "plan": "15days", "course": "advanced"},
-    "60-74":  {"level": "B2", "ar": "فوق المتوسط", "color": "#6366f1", "plan": "30days", "course": "intensive"},
-    "45-59":  {"level": "B1", "ar": "متوسط", "color": "#f59e0b", "plan": "35days", "course": "intensive"},
-    "30-44":  {"level": "A2", "ar": "دون المتوسط", "color": "#ef4444", "plan": "60days", "course": "basic"},
-    "0-29":   {"level": "A1", "ar": "مبتدئ", "color": "#dc2626", "plan": "90days", "course": "basic"}
   }
 }

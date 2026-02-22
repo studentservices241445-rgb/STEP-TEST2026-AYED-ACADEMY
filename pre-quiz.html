@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قبل الاختبار - أكاديمية عايد STEP 2026</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo-192.png">
+<style>
+.pre-quiz-page { min-height: 100vh; padding: 60px 16px; }
+.pre-quiz-container { max-width: 680px; margin: 0 auto; }
+.survey-progress { margin-bottom: 32px; }
+.survey-step { display: none; animation: fadeIn 0.4s ease; }
+.survey-step.active { display: block; }
+.question-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 32px; margin-bottom: 20px; }
+.question-number { font-size: 0.78rem; color: var(--text3); margin-bottom: 8px; }
+.question-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; }
+.question-subtitle { font-size: 0.88rem; color: var(--text2); margin-bottom: 24px; }
+.opts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.opt-btn {
+  padding: 16px 14px; background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.12); border-radius: 14px;
+  cursor: pointer; text-align: center; transition: all 0.3s;
+  color: var(--text); font-family: var(--font);
+}
+.opt-btn .opt-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.opt-btn .opt-label { font-size: 0.88rem; font-weight: 700; }
+.opt-btn .opt-sub { font-size: 0.72rem; color: var(--text2); margin-top: 2px; }
+.opt-btn:hover, .opt-btn.selected { background: rgba(26,107,82,0.2); border-color: var(--primary); }
+.opt-btn.selected .opt-icon { transform: scale(1.15); }
+.hours-display { font-size: 3rem; font-weight: 900; color: var(--accent); text-align: center; margin: 16px 0; }
+.range-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text3); margin-top: 6px; }
+.booking-promo { background: linear-gradient(135deg, rgba(26,107,82,0.2), rgba(250,204,21,0.1)); border: 1.5px solid rgba(250,204,21,0.3); border-radius: 18px; padding: 24px; text-align: center; }
+.nav-btns { display: flex; gap: 12px; justify-content: space-between; align-items: center; }
+.boost-msg { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 14px 18px; font-size: 0.85rem; color: #fca5a5; margin-bottom: 16px; display: none; }
+.boost-msg.show { display: block; }
+@media (max-width: 480px) { .opts-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="toastContainer"></div>
+
+<!-- Header بسيط -->
+<header style="background:rgba(10,22,40,0.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);padding:14px 0;position:sticky;top:0;z-index:100">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <div class="academy-logo-sm">ع</div>
+      <span style="font-size:0.95rem;font-weight:800;color:var(--accent)">أكاديمية عايد STEP 2026</span>
+    </a>
+    <div id="userPill" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);border-radius:30px;padding:6px 14px 6px 8px">
+      <div class="user-avatar"><span class="user-avatar-initial">ط</span></div>
+      <span class="user-name" style="font-size:0.82rem">طالب</span>
+    </div>
+  </div>
+</header>
+
+<div class="pre-quiz-page">
+  <div class="pre-quiz-container">
+
+    <!-- شريط التقدم -->
+    <div class="survey-progress">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:0.82rem;color:var(--text2)">السؤال <span id="stepNum">1</span> من 5</span>
+        <span style="font-size:0.82rem;color:var(--primary-light)" id="stepPct">20%</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="surveyProgress" style="width:20%"></div>
+      </div>
+    </div>
+
+    <!-- ===== السؤال 1: تاريخ الاختبار ===== -->
+    <div class="survey-step active" id="step1">
+      <div class="question-card">
+        <div class="question-number">السؤال 1/5</div>
+        <div class="question-title">📅 إيش واجهة اختبارك؟</div>
+        <div class="question-subtitle">هذا يساعدنا نحدد الخطة المناسبة لوقتك</div>
+        <div class="opts-grid">
+          <button class="opt-btn" onclick="selectOpt(this,'examPeriod','this_month')" data-val="this_month">
+            <div class="opt-icon">🔥</div>
+            <div class="opt-label">هذا الشهر</div>
+            <div class="opt-sub">عندي وقت محدود!</div>
+          </button>
+          <button class="opt-btn" onclick="selectOpt(this,'examPeriod','1to2months')" data-val="1to2months">
+            <div class="opt-icon">📆</div>
+            <div class="opt-label">شهر إلى شهرين</div>
+            <div class="opt-sub">وقت جيد للتحضير</div>
+          </button>
+          <button class="opt-btn" onclick="selectOpt(this,'examPeriod','3months')" data-val="3months">
+            <div class="opt-icon">🎯</div>
+            <div class="opt-label">3 أشهر أو أكثر</div>
+            <div class="opt-sub">عندي وقت كافٍ</div>
+          </button>
+          <button class="opt-btn" onclick="selectOpt(this,'examPeriod','not_set')" data-val="not_set">
+            <div class="opt-icon">❓</div>
+            <div class="opt-label">لم أحدد بعد</div>
+            <div class="opt-sub">سأحدد لاحقاً</div>
+          </button>
+        </div>
+      </div>
+      <div class="nav-btns">
+        <div></div>
+        <button class="btn btn-primary" onclick="nextStep(1)" id="next1" disabled>التالي ←</button>
+      </div>
+    </div>
+
+    <!-- ===== السؤال 2: ساعات المذاكرة ===== -->
+    <div class="survey-step" id="step2">
+      <div class="question-card">
+        <div class="question-number">السؤال 2/5</div>
+        <div class="question-title">⏰ كم ساعة تقدر تذاكر يومياً؟</div>
+        <div class="question-subtitle">سنبني جدولك الدراسي بناءً على وقتك المتاح</div>
+        <div class="hours-display"><span id="hoursVal">2</span> ساعة</div>
+        <input type="range" min="0.5" max="8" step="0.5" value="2" class="range-input" id="hoursRange"
+          oninput="document.getElementById('hoursVal').textContent=this.value">
+        <div class="range-labels">
+          <span>30 دقيقة</span>
+          <span>4 ساعات</span>
+          <span>8 ساعات</span>
+        </div>
+        <div style="margin-top:20px;padding:12px;background:rgba(250,204,21,0.08);border-radius:10px;font-size:0.82rem;color:var(--accent)">
+          💡 <strong>نصيحة عايد:</strong> ساعة إلى ساعتين يومياً منتظمة أفضل من ساعات كثيرة متقطعة!
+        </div>
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" onclick="prevStep(2)">← رجوع</button>
+        <button class="btn btn-primary" onclick="nextStep(2)">التالي ←</button>
+      </div>
+    </div>
+
+    <!-- ===== السؤال 3: مستوى اللغة الحالي ===== -->
+    <div class="survey-step" id="step3">
+      <div class="question-card">
+        <div class="question-number">السؤال 3/5</div>
+        <div class="question-title">📊 كيف تقيّم مستوى إنجليزيتك؟</div>
+        <div class="question-subtitle">كن صريحاً، هذا يساعدنا نخصص لك المحتوى المناسب</div>
+        <div class="opts-grid">
+          <button class="opt-btn" onclick="selectOpt(this,'selfLevel','beginner')" data-val="beginner">
+            <div class="opt-icon">🌱</div>
+            <div class="opt-label">مبتدئ</div>
+            <div class="opt-sub">أحتاج أساسيات قوية</div>
+          </button>
+          <button class="opt-btn" onclick="selectOpt(this,'selfLevel','elementary')" data-val="elementary">
+            <div class="opt-icon">📘</div>
+            <div class="opt-label">ابتدائي</div>
+            <div class="opt-sub">عندي قاعدة بسيطة</div>
+          </button>
+          <button class="opt-btn" onclick="selectOpt(this,'selfLevel','intermediate')" data-val="intermediate">
+            <div class="opt-icon">📗</div>
+            <div class="opt-label">متوسط</div>
+            <div class="opt-sub">أفهم معظم المواضيع</div>
+          </button>
+          <button class="opt-btn" onclick="selectOpt(this,'selfLevel','advanced')" data-val="advanced">
+            <div class="opt-icon">🏆</div>
+            <div class="opt-label">متقدم</div>
+            <div class="opt-sub">محتاج صقل فقط</div>
+          </button>
+        </div>
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" onclick="prevStep(3)">← رجوع</button>
+        <button class="btn btn-primary" onclick="nextStep(3)" id="next3" disabled>التالي ←</button>
+      </div>
+    </div>
+
+    <!-- ===== السؤال 4: نقاط الضعف ===== -->
+    <div class="survey-step" id="step4">
+      <div class="question-card">
+        <div class="question-number">السؤال 4/5</div>
+        <div class="question-title">🎯 إيش أصعب شيء عليك في STEP؟</div>
+        <div class="question-subtitle">اختر كل ما ينطبق عليك (يمكن اختيار أكثر من خيار)</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+          <label class="opt-btn" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer">
+            <input type="checkbox" name="weakness" value="grammar" class="weakness-cb" style="accent-color:var(--primary);width:18px;height:18px">
+            <span>📝 القواعد (Grammar) - الأزمنة والتراكيب</span>
+          </label>
+          <label class="opt-btn" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer">
+            <input type="checkbox" name="weakness" value="vocabulary" class="weakness-cb" style="accent-color:var(--primary);width:18px;height:18px">
+            <span>📚 المفردات - لا أعرف معنى كثير من الكلمات</span>
+          </label>
+          <label class="opt-btn" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer">
+            <input type="checkbox" name="weakness" value="reading" class="weakness-cb" style="accent-color:var(--primary);width:18px;height:18px">
+            <span>📖 القراءة - يأخذ مني وقتاً طويلاً</span>
+          </label>
+          <label class="opt-btn" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer">
+            <input type="checkbox" name="weakness" value="listening" class="weakness-cb" style="accent-color:var(--primary);width:18px;height:18px">
+            <span>🎧 الاستماع - صعب أفهم التعبيرات الاصطلاحية</span>
+          </label>
+          <label class="opt-btn" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer">
+            <input type="checkbox" name="weakness" value="time" class="weakness-cb" style="accent-color:var(--primary);width:18px;height:18px">
+            <span>⏱️ ضيق الوقت في الاختبار</span>
+          </label>
+          <label class="opt-btn" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer">
+            <input type="checkbox" name="weakness" value="anxiety" class="weakness-cb" style="accent-color:var(--primary);width:18px;height:18px">
+            <span>😰 الضغط النفسي أثناء الاختبار</span>
+          </label>
+        </div>
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" onclick="prevStep(4)">← رجوع</button>
+        <button class="btn btn-primary" onclick="nextStep(4)">التالي ←</button>
+      </div>
+    </div>
+
+    <!-- ===== السؤال 5: الهدف من الاختبار ===== -->
+    <div class="survey-step" id="step5">
+      <div class="question-card">
+        <div class="question-number">السؤال 5/5</div>
+        <div class="question-title">🎓 ما هدفك من اختبار STEP؟</div>
+        <div class="question-subtitle">نريد نفهم هدفك لنحقق أعلى نتيجة ممكنة</div>
+        <div class="opts-grid">
+          <button class="opt-btn" onclick="selectOpt(this,'goal','graduation')" data-val="graduation">
+            <div class="opt-icon">🎓</div>
+            <div class="opt-label">شرط التخرج</div>
+            <div class="opt-sub">لازم أنجح!</div>
+          </button>
+          <button class="opt-btn" onclick="selectOpt(this,'goal','scholarship')" data-val="scholarship">
+            <div class="opt-icon">✈️</div>
+            <div class="opt-label">ابتعاث أو دراسة خارج</div>
+            <div class="opt-sub">أحتاج درجة عالية</div>
+          </button>
+          <button class="opt-btn" onclick="selectOpt(this,'goal','job')" data-val="job">
+            <div class="opt-icon">💼</div>
+            <div class="opt-label">متطلب وظيفي</div>
+            <div class="opt-sub">للتقديم على وظيفة</div>
+          </button>
+          <button class="opt-btn" onclick="selectOpt(this,'goal','improve')" data-val="improve">
+            <div class="opt-icon">📈</div>
+            <div class="opt-label">تحسين مستواي</div>
+            <div class="opt-sub">لتطوير نفسي</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- إذا لم يحجز بعد: تشجيع على الحجز -->
+      <div class="boost-msg" id="bookingBoost">
+        <strong>💡 ملاحظة مهمة!</strong><br>
+        كثير من الطلاب يؤجلون الحجز ويندمون! مقاعد الكورس المكثف محدودة.
+        <a href="register.html" style="color:var(--accent);font-weight:700"> سجّل الحين بـ 199 ر. ←</a>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn btn-ghost" onclick="prevStep(5)">← رجوع</button>
+        <button class="btn btn-primary" onclick="nextStep(5)" id="next5" disabled>ابدأ الاختبار 🚀</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script>
+const surveyAnswers = {
+  examPeriod: null,
+  hoursPerDay: 2,
+  selfLevel: null,
+  weaknesses: [],
+  goal: null,
+};
+
+function selectOpt(btn, field, val) {
+  // إلغاء تحديد الباقين في نفس المجموعة
+  btn.closest('.opts-grid').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  surveyAnswers[field] = val;
+
+  // تفعيل زر التالي
+  const stepNum = parseInt(btn.closest('.survey-step').id.replace('step',''));
+  const nextBtn = document.getElementById('next' + stepNum);
+  if (nextBtn) nextBtn.disabled = false;
+
+  // إذا كان في الخطوة الأخيرة وإنهم لم يحجزوا بعد
+  if (field === 'goal') {
+    const booked = store.get('isRegistered');
+    if (!booked) {
+      document.getElementById('bookingBoost').classList.add('show');
+    }
+  }
+
+  // إذا اختار موعد قريب - إظهار رسالة عاجلة
+  if (field === 'examPeriod' && val === 'this_month') {
+    setTimeout(() => {
+      toast.warning('⚡ الوقت ضيق! الكورس المكثف مصمم لحالتك بالضبط - سجّل الحين');
+    }, 500);
+  }
+}
+
+function nextStep(current) {
+  // حفظ ساعات المذاكرة
+  if (current === 2) {
+    surveyAnswers.hoursPerDay = parseFloat(document.getElementById('hoursRange').value);
+  }
+  // جمع نقاط الضعف
+  if (current === 4) {
+    surveyAnswers.weaknesses = Array.from(document.querySelectorAll('.weakness-cb:checked')).map(cb => cb.value);
+    if (surveyAnswers.weaknesses.length === 0) {
+      toast.warning('اختر نقطة ضعف واحدة على الأقل');
+      return;
+    }
+  }
+
+  const next = current + 1;
+  if (next > 5) {
+    finishSurvey();
+    return;
+  }
+
+  document.getElementById('step' + current).classList.remove('active');
+  document.getElementById('step' + next).classList.add('active');
+  const pct = (next / 5) * 100;
+  document.getElementById('surveyProgress').style.width = pct + '%';
+  document.getElementById('stepNum').textContent = next;
+  document.getElementById('stepPct').textContent = Math.round(pct) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(current) {
+  const prev = current - 1;
+  if (prev < 1) return;
+  document.getElementById('step' + current).classList.remove('active');
+  document.getElementById('step' + prev).classList.add('active');
+  const pct = (prev / 5) * 100;
+  document.getElementById('surveyProgress').style.width = pct + '%';
+  document.getElementById('stepNum').textContent = prev;
+  document.getElementById('stepPct').textContent = Math.round(pct) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function finishSurvey() {
+  // حفظ بيانات الاستبيان
+  store.set('prequizSurvey', surveyAnswers);
+
+  // دمج مع بيانات المستخدم
+  const user = auth.getUser();
+  if (user) {
+    user.survey = surveyAnswers;
+    auth.login(user);
+  }
+
+  // إرسال للجوجل شيت
+  submitToGoogleScript({ type: 'pre_quiz_survey', ...surveyAnswers, userId: user?.phone });
+
+  toast.success('ممتاز! جاهز للاختبار 🎯');
+
+  // توجيه للاختبار بعد تحديد هل سيعاد أم أول مرة
+  const lastQuiz = store.get('lastQuizTime');
+  const cooldown = APP.QUIZ_COOLDOWN_HOURS * 3600000;
+  if (lastQuiz && (Date.now() - lastQuiz) < cooldown) {
+    const hoursLeft = Math.ceil((cooldown - (Date.now() - lastQuiz)) / 3600000);
+    toast.warning(`⏱️ آخر اختبار كان قبل أقل من 24 ساعة - باقي ${hoursLeft} ساعة للاختبار القادم`);
+    setTimeout(() => window.location.href = 'results.html', 2000);
+  } else {
+    setTimeout(() => window.location.href = 'quiz.html', 1000);
+  }
+}
+
+// تحديث عرض ساعات المذاكرة
+document.addEventListener('DOMContentLoaded', () => {
+  if (!auth.checkAll()) return;
+  const user = auth.getUser();
+  if (user) {
+    document.querySelectorAll('.user-name').forEach(el => el.textContent = user.name);
+    document.querySelectorAll('.user-avatar-initial').forEach(el => el.textContent = (user.name||'ط').charAt(0));
+  }
+});
+</script>
+</body>
+</html>
