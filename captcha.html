@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التحقق - أكاديمية عايد STEP</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+body { background: radial-gradient(ellipse at center, #0f3c2d 0%, #0a1628 70%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+.captcha-page { width: 92%; max-width: 440px; }
+.captcha-header { text-align: center; margin-bottom: 32px; }
+.captcha-header .shield { font-size: 4rem; animation: shieldPulse 2s ease infinite; }
+@keyframes shieldPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
+.captcha-header h1 { font-size: 1.8rem; font-weight: 900; color: #facc15; margin: 12px 0 6px; }
+.captcha-header p { color: #94a3b8; font-size: 0.9rem; }
+.captcha-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 32px; }
+.captcha-box { background: rgba(0,0,0,0.3); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; margin-bottom: 24px; text-align: center; }
+.captcha-question { font-size: 1.8rem; font-weight: 900; color: #f8fafc; margin-bottom: 20px; letter-spacing: 2px; }
+.captcha-input { width: 100%; text-align: center; font-size: 1.5rem; padding: 14px; background: rgba(255,255,255,0.07); border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; color: #f8fafc; font-family: 'Tajawal', sans-serif; transition: border-color 0.3s; }
+.captcha-input:focus { outline: none; border-color: #22c55e; background: rgba(34,197,94,0.08); }
+.captcha-input.error { border-color: #ef4444; }
+.captcha-input.success { border-color: #22c55e; background: rgba(34,197,94,0.1); }
+.hint-text { color: #64748b; font-size: 0.82rem; margin-top: 8px; }
+.attempts { display: flex; gap: 6px; justify-content: center; margin: 16px 0; }
+.attempt-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.3s; }
+.attempt-dot.used { background: #ef4444; }
+.verify-btn { width: 100%; padding: 16px; font-size: 1.05rem; background: linear-gradient(135deg, #1a6b52, #0f4a38); color: #fff; border: none; border-radius: 14px; font-family: 'Tajawal', sans-serif; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(26,107,82,0.4); }
+.verify-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(26,107,82,0.6); }
+.verify-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.refresh-btn { background: none; border: none; cursor: pointer; color: #94a3b8; font-size: 0.85rem; margin-top: 12px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; transition: color 0.3s; }
+.refresh-btn:hover { color: #22c55e; }
+.success-overlay { display: none; text-align: center; }
+.success-overlay .check { font-size: 4rem; animation: popIn 0.5s ease; }
+@keyframes popIn { 0%{transform:scale(0);opacity:0;} 70%{transform:scale(1.2);} 100%{transform:scale(1);opacity:1;} }
+.locked { opacity: 0.5; pointer-events: none; }
+.locked-msg { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); border-radius: 12px; padding: 14px; text-align: center; color: #fca5a5; font-size: 0.9rem; margin-bottom: 16px; display: none; }
+</style>
+</head>
+<body>
+<div class="captcha-page animate-fade-up">
+  <div class="captcha-header">
+    <div class="shield">🛡️</div>
+    <h1>التحقق من هويتك</h1>
+    <p>أثبت أنك إنسان وليس روبوت لحماية الموقع</p>
+  </div>
+
+  <div class="captcha-card">
+    <div class="locked-msg" id="lockedMsg">
+      🔒 تم قفل الوصول مؤقتاً بسبب محاولات متعددة. انتظر <span id="lockTimer">60</span> ثانية.
+    </div>
+
+    <div id="captchaContent">
+      <div class="captcha-box">
+        <div class="captcha-question" id="captchaQ">...</div>
+        <input type="number" class="captcha-input" id="captchaAns" placeholder="أدخل الإجابة" min="0" max="999" autocomplete="off">
+        <p class="hint-text">💡 احسب الناتج وأدخله بالأرقام</p>
+      </div>
+
+      <div class="attempts" id="attemptsDisplay">
+        <div class="attempt-dot" id="d1"></div>
+        <div class="attempt-dot" id="d2"></div>
+        <div class="attempt-dot" id="d3"></div>
+      </div>
+
+      <button class="verify-btn" id="verifyBtn" onclick="verifyCaptcha()">
+        ✅ تحقق وتابع
+      </button>
+      <button class="refresh-btn" onclick="generateCaptcha()">
+        🔄 سؤال جديد
+      </button>
+    </div>
+
+    <div class="success-overlay" id="successOverlay">
+      <div class="check">✅</div>
+      <h3 style="color:#6ee7b7;margin:12px 0 8px">تم التحقق بنجاح!</h3>
+      <p style="color:#94a3b8;font-size:0.9rem">جاري التحويل...</p>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer"></div>
+<script src="assets/js/app.js"></script>
+<script>
+  // Check if already passed
+  if (store.get('captchaPassed')) { window.location.href = 'login.html'; }
+
+  let captchaAnswer = 0;
+  let attempts = 0;
+  const MAX_ATTEMPTS = 3;
+  let lockTimeout = null;
+
+  const questions = [
+    { q: '٣ + ٥ = ؟', a: 8 },
+    { q: '٧ × ٢ = ؟', a: 14 },
+    { q: '١٥ - ٦ = ؟', a: 9 },
+    { q: '٤ + ٩ = ؟', a: 13 },
+    { q: '٢٠ ÷ ٤ = ؟', a: 5 },
+    { q: '٦ × ٣ = ؟', a: 18 },
+    { q: '١٠ + ٧ = ؟', a: 17 },
+    { q: '١٦ - ٨ = ؟', a: 8 },
+    { q: '٥ × ٥ = ؟', a: 25 },
+    { q: '٣٠ ÷ ٦ = ؟', a: 5 },
+    { q: '١٢ + ٨ = ؟', a: 20 },
+    { q: '٩ × ٤ = ؟', a: 36 },
+    { q: '٢٥ - ١٣ = ؟', a: 12 },
+    { q: '٧ + ٨ = ؟', a: 15 },
+    { q: '٤٨ ÷ ٨ = ؟', a: 6 },
+  ];
+
+  function generateCaptcha() {
+    const q = questions[Math.floor(Math.random() * questions.length)];
+    captchaAnswer = q.a;
+    document.getElementById('captchaQ').textContent = q.q;
+    document.getElementById('captchaAns').value = '';
+    document.getElementById('captchaAns').classList.remove('error', 'success');
+    document.getElementById('captchaAns').focus();
+  }
+
+  function updateAttemptDots() {
+    for (let i = 1; i <= 3; i++) {
+      document.getElementById(`d${i}`).classList.toggle('used', i <= attempts);
+    }
+  }
+
+  function verifyCaptcha() {
+    const input = document.getElementById('captchaAns');
+    const val = parseInt(input.value);
+    if (isNaN(val) || input.value === '') {
+      input.classList.add('error');
+      toast.warning('يرجى إدخال الإجابة!');
+      return;
+    }
+    if (val === captchaAnswer) {
+      input.classList.add('success');
+      document.getElementById('verifyBtn').disabled = true;
+      store.set('captchaPassed', true);
+      document.getElementById('captchaContent').style.display = 'none';
+      document.getElementById('successOverlay').style.display = 'block';
+      setTimeout(() => window.location.href = 'login.html', 1500);
+    } else {
+      attempts++;
+      updateAttemptDots();
+      input.classList.add('error');
+      input.value = '';
+      if (attempts >= MAX_ATTEMPTS) {
+        lockAccount();
+      } else {
+        toast.error(`إجابة خاطئة! تبقّى ${MAX_ATTEMPTS - attempts} محاولة`);
+        generateCaptcha();
+      }
+    }
+  }
+
+  function lockAccount() {
+    let seconds = 60;
+    document.getElementById('lockedMsg').style.display = 'block';
+    document.getElementById('captchaContent').classList.add('locked');
+    const timer = setInterval(() => {
+      seconds--;
+      document.getElementById('lockTimer').textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(timer);
+        attempts = 0;
+        updateAttemptDots();
+        document.getElementById('lockedMsg').style.display = 'none';
+        document.getElementById('captchaContent').classList.remove('locked');
+        generateCaptcha();
+      }
+    }, 1000);
+  }
+
+  // Enter key
+  document.addEventListener('DOMContentLoaded', () => {
+    generateCaptcha();
+    document.getElementById('captchaAns').addEventListener('keydown', e => { if (e.key === 'Enter') verifyCaptcha(); });
+  });
+</script>
+</body>
+</html>

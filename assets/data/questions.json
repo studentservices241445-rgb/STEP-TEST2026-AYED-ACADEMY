@@ -1,0 +1,258 @@
+{
+  "sections": {
+    "grammar": {
+      "name": "القواعد (Grammar)",
+      "icon": "📝",
+      "questions": [
+        {
+          "id": "g1",
+          "text": "She _____ to school every day.",
+          "options": ["go", "goes", "going", "went"],
+          "correct": 1,
+          "explanation": "مع ضمير المفرد الغائب (she/he/it) في المضارع البسيط نضيف s للفعل.",
+          "level": "beginner"
+        },
+        {
+          "id": "g2",
+          "text": "By the time we arrived, they _____ dinner.",
+          "options": ["finish", "finished", "had finished", "have finished"],
+          "correct": 2,
+          "explanation": "نستخدم Past Perfect مع عبارة 'by the time' للدلالة على حدث انتهى قبل حدث آخر في الماضي.",
+          "level": "intermediate"
+        },
+        {
+          "id": "g3",
+          "text": "If I _____ rich, I would travel the world.",
+          "options": ["am", "was", "were", "be"],
+          "correct": 2,
+          "explanation": "في الجملة الشرطية من النوع الثاني نستخدم were مع جميع الضمائر لأن الشرط افتراضي غير حقيقي.",
+          "level": "intermediate"
+        },
+        {
+          "id": "g4",
+          "text": "The book _____ on the table belongs to Ahmed.",
+          "options": ["lay", "laying", "lying", "lie"],
+          "correct": 2,
+          "explanation": "نستخدم lying كصفة (present participle) لوصف مكان الكتاب. الفعل lie/lying يعني يرقد/يقع.",
+          "level": "advanced"
+        },
+        {
+          "id": "g5",
+          "text": "Neither the students nor the teacher _____ present.",
+          "options": ["were", "was", "are", "be"],
+          "correct": 1,
+          "explanation": "مع Neither...nor يتبع الفعل أقرب اسم إليه، وهنا هو 'teacher' (مفرد) فنستخدم was.",
+          "level": "advanced"
+        },
+        {
+          "id": "g6",
+          "text": "I have been living here _____ five years.",
+          "options": ["since", "for", "ago", "during"],
+          "correct": 1,
+          "explanation": "نستخدم for مع فترة زمنية (five years)، بينما since تستخدم مع نقطة زمنية محددة.",
+          "level": "beginner"
+        },
+        {
+          "id": "g7",
+          "text": "The manager asked that the report _____ by Friday.",
+          "options": ["submit", "submitted", "be submitted", "is submitted"],
+          "correct": 2,
+          "explanation": "بعد فعل الطلب asked that نستخدم Subjunctive mood: be + past participle.",
+          "level": "advanced"
+        },
+        {
+          "id": "g8",
+          "text": "She is the woman _____ car was stolen.",
+          "options": ["who", "whom", "whose", "which"],
+          "correct": 2,
+          "explanation": "نستخدم whose للدلالة على الملكية (whose car = سيارتها).",
+          "level": "intermediate"
+        },
+        {
+          "id": "g9",
+          "text": "He _____ to the gym three times a week when he was younger.",
+          "options": ["used to go", "is used to going", "was used to go", "use to go"],
+          "correct": 0,
+          "explanation": "used to + infinitive تعبّر عن عادة في الماضي انتهت الآن.",
+          "level": "intermediate"
+        },
+        {
+          "id": "g10",
+          "text": "This is the _____ interesting book I have ever read.",
+          "options": ["more", "most", "much", "many"],
+          "correct": 1,
+          "explanation": "نستخدم most مع الصفات في صيغة التفضيل الأعلى (superlative).",
+          "level": "beginner"
+        }
+      ]
+    },
+    "reading": {
+      "name": "القراءة (Reading)",
+      "icon": "📖",
+      "questions": [
+        {
+          "id": "r1",
+          "passage": "The Saudi Vision 2030 is a strategic framework to reduce Saudi Arabia's dependence on oil, diversify its economy, and develop public service sectors. Launched in 2016 by Crown Prince Mohammed bin Salman, it aims to transform the kingdom into a global investment powerhouse and open up cultural and entertainment activities.",
+          "text": "According to the passage, what is the main goal of Vision 2030?",
+          "options": [
+            "To increase oil production",
+            "To reduce dependence on oil and diversify the economy",
+            "To develop tourism only",
+            "To strengthen military power"
+          ],
+          "correct": 1,
+          "explanation": "النص يقول 'reduce Saudi Arabia's dependence on oil, diversify its economy' وهذا هو الهدف الرئيسي.",
+          "level": "intermediate"
+        },
+        {
+          "id": "r2",
+          "passage": "E-learning has revolutionized education by making knowledge accessible to people regardless of their location. Students can now learn at their own pace, choosing from thousands of courses online. However, critics argue that the lack of face-to-face interaction may hinder social skills development.",
+          "text": "What is the main criticism of e-learning mentioned in the passage?",
+          "options": [
+            "It is too expensive",
+            "It lacks variety of courses",
+            "It may limit social skills development",
+            "It requires advanced technology"
+          ],
+          "correct": 2,
+          "explanation": "النص يذكر 'lack of face-to-face interaction may hinder social skills development'.",
+          "level": "intermediate"
+        },
+        {
+          "id": "r3",
+          "passage": "Artificial intelligence is increasingly being used in healthcare to diagnose diseases, predict patient outcomes, and personalize treatments. Machine learning algorithms can analyze vast amounts of medical data far more quickly than human doctors, potentially saving lives.",
+          "text": "What advantage does AI have over human doctors according to the passage?",
+          "options": [
+            "AI is cheaper than doctors",
+            "AI can analyze large amounts of data faster",
+            "AI has more medical experience",
+            "AI is more accurate in all cases"
+          ],
+          "correct": 1,
+          "explanation": "النص يذكر 'analyze vast amounts of medical data far more quickly than human doctors'.",
+          "level": "intermediate"
+        },
+        {
+          "id": "r4",
+          "passage": "Water scarcity affects more than 40% of the global population and is expected to worsen with climate change. Desalination, the process of removing salt from seawater, has emerged as a crucial solution. Saudi Arabia is currently the world's largest producer of desalinated water.",
+          "text": "What percentage of the world population is affected by water scarcity?",
+          "options": ["20%", "30%", "More than 40%", "50%"],
+          "correct": 2,
+          "explanation": "النص يذكر صراحةً 'affects more than 40% of the global population'.",
+          "level": "beginner"
+        },
+        {
+          "id": "r5",
+          "passage": "The word 'procrastinate' comes from the Latin 'procrastinare' meaning 'to put off until tomorrow'. Research shows that procrastination is not simply laziness but often a way of avoiding negative emotions associated with certain tasks. Effective strategies include breaking tasks into smaller steps and setting clear deadlines.",
+          "text": "According to the passage, what is procrastination most closely associated with?",
+          "options": [
+            "Being lazy",
+            "Avoiding negative emotions",
+            "Lack of planning",
+            "Time management skills"
+          ],
+          "correct": 1,
+          "explanation": "النص يوضح أن التسويف 'often a way of avoiding negative emotions' وليس مجرد كسل.",
+          "level": "advanced"
+        }
+      ]
+    },
+    "listening": {
+      "name": "الاستماع (Listening)",
+      "icon": "🎧",
+      "questions": [
+        {
+          "id": "l1",
+          "text": "Based on common STEP patterns: A student is asking about library hours. The library closes at _____ on weekdays.",
+          "options": ["6 PM", "8 PM", "10 PM", "9 PM"],
+          "correct": 2,
+          "explanation": "في أسئلة الاستماع يجب التركيز على الأرقام والأوقات المذكورة. 10 PM هو الوقت الأكثر شيوعاً في نماذج الاختبار.",
+          "level": "intermediate"
+        },
+        {
+          "id": "l2",
+          "text": "A student says: 'I think I'll postpone studying until tomorrow.' This means the student wants to _____.",
+          "options": [
+            "Study immediately",
+            "Delay studying",
+            "Ask for help",
+            "Cancel studying"
+          ],
+          "correct": 1,
+          "explanation": "postpone = delay = تأجيل. يجب معرفة مرادفات الأفعال الشائعة في الاستماع.",
+          "level": "beginner"
+        },
+        {
+          "id": "l3",
+          "text": "In a conversation, the man says he is 'under the weather'. This idiom means he is _____.",
+          "options": ["Confused", "Not feeling well", "Very busy", "Outdoors"],
+          "correct": 1,
+          "explanation": "under the weather تعبير اصطلاحي يعني 'لا يشعر بحال جيدة / مريض قليلاً'.",
+          "level": "advanced"
+        },
+        {
+          "id": "l4",
+          "text": "The announcement says: 'Flight SA 205 to Riyadh has been delayed by two hours.' When was the original departure time if it is now boarding at 4:00 PM?",
+          "options": ["1:00 PM", "2:00 PM", "3:00 PM", "5:00 PM"],
+          "correct": 1,
+          "explanation": "إذا تأخر بساعتين وأصبح الإقلاع 4:00 PM، فالوقت الأصلي كان 4 - 2 = 2:00 PM.",
+          "level": "intermediate"
+        }
+      ]
+    },
+    "vocabulary": {
+      "name": "المفردات (Vocabulary)",
+      "icon": "📚",
+      "questions": [
+        {
+          "id": "v1",
+          "text": "The scientist made a remarkable _____ in cancer research.",
+          "options": ["breakthrough", "breakdown", "breakout", "breakup"],
+          "correct": 0,
+          "explanation": "breakthrough = اختراق علمي، اكتشاف مهم. breakdown = انهيار. breakout = هروب. breakup = انفصال.",
+          "level": "intermediate"
+        },
+        {
+          "id": "v2",
+          "text": "The new policy will _____ employees to work from home.",
+          "options": ["prohibit", "enable", "prevent", "restrict"],
+          "correct": 1,
+          "explanation": "enable = تمكّن / تتيح. prohibit/prevent/restrict = تمنع / تقيّد.",
+          "level": "intermediate"
+        },
+        {
+          "id": "v3",
+          "text": "She gave a very _____ speech that moved everyone in the audience.",
+          "options": ["eloquent", "arrogant", "ambiguous", "tedious"],
+          "correct": 0,
+          "explanation": "eloquent = بليغ، مؤثر. arrogant = متكبر. ambiguous = غامض. tedious = ممل.",
+          "level": "advanced"
+        },
+        {
+          "id": "v4",
+          "text": "The company decided to _____ its services to new markets.",
+          "options": ["contract", "expand", "reduce", "limit"],
+          "correct": 1,
+          "explanation": "expand = يوسّع. contract = يقلّص. reduce/limit = يقلل.",
+          "level": "beginner"
+        },
+        {
+          "id": "v5",
+          "text": "Despite the _____, he continued working without complaining.",
+          "options": ["encouragement", "opportunity", "hardship", "celebration"],
+          "correct": 2,
+          "explanation": "hardship = صعوبات / مشقة. السياق 'continued without complaining' يدل على وجود صعوبات.",
+          "level": "intermediate"
+        }
+      ]
+    }
+  },
+  "levelMap": {
+    "90-100": {"level": "C2", "ar": "متقن", "color": "#10b981", "plan": "7days", "course": "advanced"},
+    "75-89":  {"level": "C1", "ar": "متقدم", "color": "#3b82f6", "plan": "15days", "course": "advanced"},
+    "60-74":  {"level": "B2", "ar": "فوق المتوسط", "color": "#6366f1", "plan": "30days", "course": "intensive"},
+    "45-59":  {"level": "B1", "ar": "متوسط", "color": "#f59e0b", "plan": "35days", "course": "intensive"},
+    "30-44":  {"level": "A2", "ar": "دون المتوسط", "color": "#ef4444", "plan": "60days", "course": "basic"},
+    "0-29":   {"level": "A1", "ar": "مبتدئ", "color": "#dc2626", "plan": "90days", "course": "basic"}
+  }
+}

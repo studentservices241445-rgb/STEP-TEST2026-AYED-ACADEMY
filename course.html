@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فهرس الدورة المكثفة - أكاديمية عايد STEP 2026</title>
+<meta name="description" content="استعرض فهرس الدورة المكثفة الكاملة لاختبار STEP 2026">
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1628">
+<style>
+.course-page { padding: 30px 0 80px; }
+.course-container { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+
+/* Overview */
+.course-overview { background: var(--bg2); border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 28px; position: relative; overflow: hidden; }
+.course-overview::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+.overview-grid { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+@media (max-width: 600px) { .overview-grid { grid-template-columns: 1fr; } }
+.overview-stats { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 20px; }
+.ov-stat { text-align: center; }
+.ov-stat-num { font-size: 1.6rem; font-weight: 900; color: var(--accent); display: block; }
+.ov-stat-lbl { font-size: 0.78rem; color: var(--text2); }
+.course-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+
+/* Section tabs */
+.section-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.sec-tab { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 20px; border: 1.5px solid var(--card-border); background: var(--card); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all var(--transition); color: var(--text2); }
+.sec-tab:hover, .sec-tab.active { color: #fff; }
+.sec-tab.active[data-sec="all"] { background: var(--primary); border-color: var(--primary); }
+.sec-tab.active[data-sec="grammar"] { background: #1a6b52; border-color: #1a6b52; }
+.sec-tab.active[data-sec="vocabulary"] { background: #ca8a04; border-color: #ca8a04; }
+.sec-tab.active[data-sec="reading"] { background: #1e40af; border-color: #1e40af; }
+.sec-tab.active[data-sec="listening"] { background: #991b1b; border-color: #991b1b; }
+.sec-tab.active[data-sec="tests"] { background: #7c3aed; border-color: #7c3aed; }
+.sec-tab.active[data-sec="files"] { background: #0e7490; border-color: #0e7490; }
+
+/* Course section accordion */
+.cs-block { background: var(--bg2); border: 1px solid var(--card-border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; transition: border-color var(--transition); }
+.cs-block.open { border-color: rgba(26,107,82,0.3); }
+.cs-header { display: flex; align-items: center; gap: 12px; padding: 16px 18px; cursor: pointer; transition: background var(--transition); }
+.cs-header:hover { background: rgba(255,255,255,0.03); }
+.cs-icon { font-size: 1.3rem; flex-shrink: 0; }
+.cs-info { flex: 1; }
+.cs-title { font-size: 0.95rem; font-weight: 800; color: var(--text); }
+.cs-sub { font-size: 0.78rem; color: var(--text2); margin-top: 3px; }
+.cs-count { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 2px 10px; font-size: 0.75rem; color: var(--text3); white-space: nowrap; }
+.cs-arrow { transition: transform var(--transition); color: var(--text3); font-size: 0.8rem; }
+.cs-block.open .cs-arrow { transform: rotate(180deg); }
+.cs-body { display: none; border-top: 1px solid rgba(255,255,255,0.06); }
+.cs-block.open .cs-body { display: block; }
+
+/* Lesson item */
+.lesson-li { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.04); transition: background var(--transition); }
+.lesson-li:last-child { border-bottom: none; }
+.lesson-li:hover { background: rgba(255,255,255,0.02); }
+.lesson-li-icon { font-size: 1rem; flex-shrink: 0; width: 24px; text-align: center; }
+.lesson-li-title { flex: 1; font-size: 0.88rem; color: var(--text2); }
+.lesson-li-tag { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+.tag-video { background: rgba(239,68,68,0.15); color: #fca5a5; }
+.tag-pdf { background: rgba(239,68,68,0.15); color: #f87171; }
+.tag-audio { background: rgba(139,92,246,0.15); color: #c4b5fd; }
+.tag-test { background: rgba(250,204,21,0.15); color: var(--accent); }
+.tag-summary { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+
+/* CTA sidebar */
+.sticky-sidebar { position: sticky; top: 80px; }
+.cta-sidebar { background: linear-gradient(135deg, rgba(26,107,82,0.2), rgba(250,204,21,0.08)); border: 1px solid rgba(26,107,82,0.3); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; }
+.cta-sidebar h4 { color: var(--accent); margin-bottom: 12px; font-size: 1rem; }
+.cta-price-big { text-align: center; padding: 16px 0; }
+
+/* Layout */
+.course-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; }
+@media (max-width: 900px) { .course-layout { grid-template-columns: 1fr; } .sticky-sidebar { position: static; } }
+
+/* Progress */
+.learn-progress { background: var(--bg2); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 20px; }
+.learn-progress h5 { font-size: 0.88rem; color: var(--text2); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header" id="mainHeader">
+  <div class="container">
+    <div class="header-inner">
+      <div class="header-logo" onclick="location.href='index.html'">
+        <div style="width:42px;height:42px;background:linear-gradient(135deg,#1a6b52,#0f4a38);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem">🎓</div>
+        <div class="logo-text-wrap">
+          <div class="logo-name">أكاديمية عايد</div>
+          <div class="logo-sub">STEP 2026</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a href="register.html" class="btn btn-accent btn-sm">سجّل الآن ←</a>
+        <button class="btn btn-ghost btn-sm" onclick="location.href='index.html'">← الرئيسية</button>
+        <button class="menu-toggle" id="menuToggle"><div class="hamburger"><span></span><span></span><span></span></div></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-panel">
+    <div class="mobile-menu-header">
+      <div style="font-weight:800;color:var(--accent)">القائمة</div>
+      <button style="background:none;border:none;color:var(--text2);font-size:1.4rem;cursor:pointer" id="mobileMenuClose">✕</button>
+    </div>
+    <a class="mobile-nav-link" href="index.html">🏠 الرئيسية</a>
+    <a class="mobile-nav-link" href="quiz.html">📝 اختبار المستوى</a>
+    <a class="mobile-nav-link" href="register.html">💳 التسجيل</a>
+    <a class="mobile-nav-link" href="https://t.me/stepp2024" target="_blank">✈️ تيليجرام</a>
+  </div>
+</div>
+
+<main class="course-page">
+  <div class="course-container">
+
+    <!-- Overview -->
+    <div class="course-overview" data-aos>
+      <div class="overview-grid">
+        <div>
+          <div class="section-badge">الدورة المكثفة 2026</div>
+          <h1 style="font-size:clamp(1.4rem,3vw,2rem);color:var(--accent);margin:10px 0 8px">فهرس دورة STEP الشاملة</h1>
+          <p style="color:var(--text2);font-size:0.95rem;line-height:1.8;max-width:580px">الدورة تغطي جميع أقسام STEP من الصفر حتى الاحتراف. المحتوى موزّع على قناة تيليجرام خاصة مع دعم مباشر من المدرب عايد السطوحي.</p>
+          <div class="course-tags">
+            <span class="badge badge-primary">Grammar</span>
+            <span class="badge badge-accent">Vocabulary</span>
+            <span class="badge badge-info">Reading</span>
+            <span class="badge badge-danger">Listening</span>
+            <span class="badge" style="background:rgba(139,92,246,0.15);color:#c4b5fd;border:1px solid rgba(139,92,246,0.3)">نماذج محلولة</span>
+          </div>
+          <div class="overview-stats">
+            <div class="ov-stat"><span class="ov-stat-num">30+</span><span class="ov-stat-lbl">نموذج STEP</span></div>
+            <div class="ov-stat"><span class="ov-stat-num">8+</span><span class="ov-stat-lbl">خطط مذاكرة</span></div>
+            <div class="ov-stat"><span class="ov-stat-num">4</span><span class="ov-stat-lbl">أقسام رئيسية</span></div>
+            <div class="ov-stat"><span class="ov-stat-num">500+</span><span class="ov-stat-lbl">طالب مستفيد</span></div>
+          </div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:6rem;margin-bottom:12px">📚</div>
+          <div style="font-size:0.8rem;color:var(--text3)">المدرب</div>
+          <div style="font-weight:900;color:var(--accent)">عايد السطوحي</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main layout -->
+    <div class="course-layout">
+
+      <!-- Left: Sections -->
+      <div>
+        <!-- Filter tabs -->
+        <div class="section-tabs">
+          <div class="sec-tab active" data-sec="all" onclick="filterSections('all')">📋 الكل</div>
+          <div class="sec-tab" data-sec="grammar" onclick="filterSections('grammar')">📝 Grammar</div>
+          <div class="sec-tab" data-sec="vocabulary" onclick="filterSections('vocabulary')">📖 Vocabulary</div>
+          <div class="sec-tab" data-sec="reading" onclick="filterSections('reading')">📚 Reading</div>
+          <div class="sec-tab" data-sec="listening" onclick="filterSections('listening')">🎧 Listening</div>
+          <div class="sec-tab" data-sec="tests" onclick="filterSections('tests')">📝 النماذج</div>
+          <div class="sec-tab" data-sec="files" onclick="filterSections('files')">📁 الملفات</div>
+        </div>
+
+        <!-- Sections list -->
+        <div id="courseContent"></div>
+      </div>
+
+      <!-- Right sidebar -->
+      <div class="sticky-sidebar">
+        <div class="cta-sidebar">
+          <h4>🚀 انضم للدورة الآن</h4>
+          <div class="cta-price-big">
+            <div style="text-decoration:line-through;color:var(--text3);font-size:0.9rem">299 ريال</div>
+            <div style="font-size:2.5rem;font-weight:900;color:var(--success)">199 <small style="font-size:0.9rem;color:var(--text2)">ريال</small></div>
+            <div class="save-badge" style="background:rgba(250,204,21,0.15);border:1px solid rgba(250,204,21,0.3);color:var(--accent);border-radius:20px;padding:4px 12px;font-size:0.78rem;font-weight:700;display:inline-block;margin-top:6px">وفّر 100 ريال 🎉</div>
+          </div>
+          <a href="register.html" class="btn btn-accent btn-full" style="margin-top:16px">سجّل الآن ←</a>
+          <a href="quiz.html" class="btn btn-ghost btn-full" style="margin-top:10px">ابدأ اختبار المستوى مجاناً</a>
+        </div>
+
+        <!-- Countdown -->
+        <div id="courseSideCountdown"></div>
+
+        <!-- Seats -->
+        <div style="margin-top:12px" id="courseSideSeats"></div>
+
+        <!-- Trainer -->
+        <div style="background:var(--bg2);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px;margin-top:16px">
+          <h5 style="color:var(--accent);margin-bottom:14px;font-size:0.9rem">👨‍🏫 المدرب</h5>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <div style="width:50px;height:50px;background:linear-gradient(135deg,#1a6b52,#0f4a38);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem">عايد</div>
+            <div>
+              <div style="font-weight:800;font-size:0.95rem">عايد السطوحي</div>
+              <div style="font-size:0.78rem;color:var(--text2)">خبير STEP | 3+ سنوات</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:0.82rem;color:var(--text2);display:flex;align-items:center;gap:6px">✅ دكتوراه في اللغويات</div>
+            <div style="font-size:0.82rem;color:var(--text2);display:flex;align-items:center;gap:6px">✅ درّب 500+ طالب</div>
+            <div style="font-size:0.82rem;color:var(--text2);display:flex;align-items:center;gap:6px">✅ نسبة نجاح 92%</div>
+          </div>
+          <a href="https://t.me/stepp2024" target="_blank" class="btn btn-ghost btn-full" style="margin-top:12px;font-size:0.85rem">✈️ تواصل مع المدرب</a>
+        </div>
+
+        <!-- Share -->
+        <div style="background:var(--bg2);border:1px solid var(--card-border);border-radius:var(--radius);padding:16px;margin-top:12px">
+          <p style="color:var(--text2);font-size:0.85rem;margin-bottom:10px;text-align:center">شارك الدورة مع أصدقائك 📤</p>
+          <div style="display:flex;gap:8px;justify-content:center">
+            <button class="share-btn share-whatsapp" onclick="share.whatsapp()">💬 واتساب</button>
+            <button class="share-btn share-telegram" onclick="share.telegram()">✈️ تيليجرام</button>
+            <button class="share-btn share-copy" onclick="share.copy()">🔗 نسخ</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- course-layout -->
+  </div>
+</main>
+
+<div id="toastContainer"></div>
+
+<script src="assets/js/app.js"></script>
+<script>
+
+// Complete course index data
+const COURSE_SECTIONS = [
+  {
+    id: 'intro', section: 'grammar', icon: '🎬', title: 'المقدمة والتمهيد', sub: 'قبل أن تبدأ',
+    lessons: [
+      { icon: '▶️', title: 'مقدمة أكاديمية عايد ومحتوى القناة', tag: 'video' },
+      { icon: '📄', title: 'نظرة عامة على اختبار STEP - البنية والدرجات', tag: 'pdf' },
+      { icon: '▶️', title: 'كيف تستفيد من الدورة إلى أقصى درجة', tag: 'video' },
+      { icon: '📄', title: 'خطة الدراسة المقترحة (7 | 15 | 30 يوم)', tag: 'pdf' },
+    ]
+  },
+  {
+    id: 'grammar1', section: 'grammar', icon: '📝', title: 'Grammar | الأزمنة الأساسية', sub: 'الزمن البسيط والمستمر',
+    lessons: [
+      { icon: '▶️', title: 'Simple Present - القواعد والاستخدامات', tag: 'video' },
+      { icon: '▶️', title: 'Present Continuous - الاستخدامات المتكررة', tag: 'video' },
+      { icon: '▶️', title: 'Simple Past - الأفعال المنتظمة وغير المنتظمة', tag: 'video' },
+      { icon: '▶️', title: 'Past Continuous - التزامن والانقطاع', tag: 'video' },
+      { icon: '▶️', title: 'Simple Future (will / going to) - الفرق بينهما', tag: 'video' },
+      { icon: '📄', title: 'ملخص PDF الأزمنة الأساسية مع جدول مقارنة', tag: 'pdf' },
+      { icon: '🧩', title: 'تمارين الأزمنة الأساسية (30 سؤال)', tag: 'test' },
+    ]
+  },
+  {
+    id: 'grammar2', section: 'grammar', icon: '📝', title: 'Grammar | الأزمنة التامة', sub: 'Present Perfect, Past Perfect',
+    lessons: [
+      { icon: '▶️', title: 'Present Perfect - الاستخدامات والكلمات المصاحبة', tag: 'video' },
+      { icon: '▶️', title: 'Past Perfect - تسلسل الأحداث في الماضي', tag: 'video' },
+      { icon: '▶️', title: 'Future Perfect - الأحداث المكتملة في المستقبل', tag: 'video' },
+      { icon: '📄', title: 'ملخص الأزمنة التامة مع أمثلة', tag: 'pdf' },
+      { icon: '🧩', title: 'تمارين الأزمنة التامة', tag: 'test' },
+    ]
+  },
+  {
+    id: 'grammar3', section: 'grammar', icon: '📝', title: 'Grammar | Conditionals', sub: 'جمل الشرط الأربعة',
+    lessons: [
+      { icon: '▶️', title: 'Zero Conditional - الحقائق العلمية والعامة', tag: 'video' },
+      { icon: '▶️', title: 'First Conditional - الشرط المحتمل', tag: 'video' },
+      { icon: '▶️', title: 'Second Conditional - الشرط غير المحتمل', tag: 'video' },
+      { icon: '▶️', title: 'Third Conditional - الأمنيات وتغيير الماضي', tag: 'video' },
+      { icon: '▶️', title: 'Mixed Conditionals - الجمع بين النوعين', tag: 'video' },
+      { icon: '📄', title: 'ملخص Conditionals - جدول شامل', tag: 'pdf' },
+      { icon: '🧩', title: 'اختبار Conditionals (20 سؤال)', tag: 'test' },
+    ]
+  },
+  {
+    id: 'grammar4', section: 'grammar', icon: '📝', title: 'Grammar | Relative Clauses', sub: 'ضمائر الوصل',
+    lessons: [
+      { icon: '▶️', title: 'Who, Which, That - الفرق والاستخدام', tag: 'video' },
+      { icon: '▶️', title: 'Whose, Whom, Where, When - الحالات المتقدمة', tag: 'video' },
+      { icon: '▶️', title: 'الجمل الوصفية التعريفية وغير التعريفية', tag: 'video' },
+      { icon: '📄', title: 'ملخص Relative Clauses', tag: 'pdf' },
+    ]
+  },
+  {
+    id: 'grammar5', section: 'grammar', icon: '📝', title: 'Grammar | استثناءات وقواعد متقدمة', sub: 'passive, reported, modals',
+    lessons: [
+      { icon: '▶️', title: 'Passive Voice - جميع الأزمنة', tag: 'video' },
+      { icon: '▶️', title: 'Reported Speech - النقل غير المباشر', tag: 'video' },
+      { icon: '▶️', title: 'Modal Verbs - can, could, should, must', tag: 'video' },
+      { icon: '▶️', title: 'Gerund vs Infinitive - اختيار الصيغة الصحيحة', tag: 'video' },
+      { icon: '▶️', title: 'Subject-Verb Agreement - تطابق الفاعل والفعل', tag: 'video' },
+      { icon: '📄', title: 'ملخص القواعد المتقدمة الشامل', tag: 'pdf' },
+      { icon: '🧩', title: 'اختبار تجريبي Grammar (40 سؤال)', tag: 'test' },
+    ]
+  },
+  {
+    id: 'vocab1', section: 'vocabulary', icon: '📖', title: 'Vocabulary | المفردات الأساسية', sub: 'أكثر 200 كلمة في STEP',
+    lessons: [
+      { icon: '▶️', title: 'استراتيجية تعلم المفردات في STEP', tag: 'video' },
+      { icon: '📄', title: 'قائمة الـ 200 كلمة الأكثر شيوعاً في STEP', tag: 'pdf' },
+      { icon: '📄', title: 'Word Families - عائلات الكلمات', tag: 'pdf' },
+      { icon: '🧩', title: 'تمارين Synonyms & Antonyms (40 سؤال)', tag: 'test' },
+    ]
+  },
+  {
+    id: 'vocab2', section: 'vocabulary', icon: '📖', title: 'Vocabulary | السياق والاستخدام', sub: 'vocab in context',
+    lessons: [
+      { icon: '▶️', title: 'استنتاج معنى الكلمة من السياق', tag: 'video' },
+      { icon: '📄', title: 'Collocations شائعة في STEP', tag: 'pdf' },
+      { icon: '📄', title: 'Academic Vocabulary قائمة المفردات الأكاديمية', tag: 'pdf' },
+      { icon: '🧩', title: 'اختبار Vocabulary في السياق (30 سؤال)', tag: 'test' },
+    ]
+  },
+  {
+    id: 'reading1', section: 'reading', icon: '📚', title: 'Reading | الاستراتيجيات', sub: 'كيف تحل أسئلة الفهم القرائي',
+    lessons: [
+      { icon: '▶️', title: 'نظرة عامة على قسم Reading في STEP', tag: 'video' },
+      { icon: '▶️', title: 'استراتيجية Skimming - المسح السريع', tag: 'video' },
+      { icon: '▶️', title: 'استراتيجية Scanning - البحث عن معلومة محددة', tag: 'video' },
+      { icon: '▶️', title: 'أنواع أسئلة Reading وكيف تجيب عليها', tag: 'video' },
+      { icon: '▶️', title: 'الأسئلة الخادعة في Reading وكيف تتجنبها', tag: 'video' },
+      { icon: '📄', title: 'ملخص استراتيجيات Reading', tag: 'pdf' },
+    ]
+  },
+  {
+    id: 'reading2', section: 'reading', icon: '📚', title: 'Reading | نصوص ونماذج محلولة', sub: 'passages with full solutions',
+    lessons: [
+      { icon: '📚', title: 'نص 1: موضوع علمي - مع الحل التفصيلي', tag: 'test' },
+      { icon: '📚', title: 'نص 2: موضوع اجتماعي - مع الحل', tag: 'test' },
+      { icon: '📚', title: 'نص 3: موضوع أكاديمي - مع الحل', tag: 'test' },
+      { icon: '📚', title: 'نص 4: موضوع اقتصادي - مع الحل', tag: 'test' },
+      { icon: '📚', title: 'نص 5: موضوع تقني - مع الحل', tag: 'test' },
+      { icon: '📄', title: 'نصوص Reading للتدريب الذاتي (غير محلولة)', tag: 'pdf' },
+    ]
+  },
+  {
+    id: 'listen1', section: 'listening', icon: '🎧', title: 'Listening | الاستراتيجيات', sub: 'أسرار قسم الاستماع',
+    lessons: [
+      { icon: '▶️', title: 'نظرة عامة على قسم Listening في STEP', tag: 'video' },
+      { icon: '▶️', title: 'أنواع نصوص الاستماع: محادثة، محاضرة، إعلان', tag: 'video' },
+      { icon: '▶️', title: 'كيف تكتب الإجابة أثناء الاستماع', tag: 'video' },
+      { icon: '▶️', title: 'التركيز على الكلمات المفتاحية والأرقام', tag: 'video' },
+      { icon: '📄', title: 'ملخص استراتيجيات Listening', tag: 'pdf' },
+    ]
+  },
+  {
+    id: 'listen2', section: 'listening', icon: '🎧', title: 'Listening | نماذج مسجلة محلولة', sub: 'audio recordings with solutions',
+    lessons: [
+      { icon: '🎵', title: 'محادثة 1: المطعم - مع الحل التفصيلي', tag: 'audio' },
+      { icon: '🎵', title: 'محادثة 2: المستشفى - مع الحل', tag: 'audio' },
+      { icon: '🎵', title: 'إعلان: تجاري + سياحي - مع الحل', tag: 'audio' },
+      { icon: '🎵', title: 'محاضرة أكاديمية - مع الحل', tag: 'audio' },
+      { icon: '🎵', title: 'نماذج Listening للتدريب الذاتي', tag: 'audio' },
+    ]
+  },
+  {
+    id: 'tests1', section: 'tests', icon: '📝', title: 'نماذج STEP كاملة محلولة', sub: 'full tests with detailed solutions',
+    lessons: [
+      { icon: '✅', title: 'نموذج STEP 1 كامل - محلول تفصيلي', tag: 'test' },
+      { icon: '✅', title: 'نموذج STEP 2 كامل - محلول', tag: 'test' },
+      { icon: '✅', title: 'نموذج STEP 3 كامل - محلول', tag: 'test' },
+      { icon: '✅', title: 'نموذج STEP 4 كامل - محلول', tag: 'test' },
+      { icon: '✅', title: 'نموذج STEP 5 كامل - محلول', tag: 'test' },
+      { icon: '✅', title: 'تجميعات 2025 وما قبلها - محلولة', tag: 'test' },
+    ]
+  },
+  {
+    id: 'tests2', section: 'tests', icon: '📝', title: 'نماذج STEP للتدريب (غير محلولة)', sub: 'practice tests for self-study',
+    lessons: [
+      { icon: '⭕', title: 'نموذج تدريب 1 - 160 دقيقة', tag: 'test' },
+      { icon: '⭕', title: 'نموذج تدريب 2 - 160 دقيقة', tag: 'test' },
+      { icon: '⭕', title: 'نموذج تدريب 3 - 160 دقيقة', tag: 'test' },
+      { icon: '⭕', title: 'نموذج تدريب 4 - 160 دقيقة', tag: 'test' },
+      { icon: '⭕', title: 'نموذج تدريب 5 - 160 دقيقة', tag: 'test' },
+    ]
+  },
+  {
+    id: 'files1', section: 'files', icon: '📁', title: 'الملفات والملخصات الشاملة', sub: 'study materials & resources',
+    lessons: [
+      { icon: '📄', title: 'خريطة مفاهيم Grammar الكاملة', tag: 'pdf' },
+      { icon: '📄', title: 'ملخص سريع لجميع الأقسام (Quick Reference)', tag: 'summary' },
+      { icon: '📄', title: 'قائمة المفردات الشاملة للطباعة', tag: 'pdf' },
+      { icon: '📄', title: 'خطة المذاكرة: 1 يوم | 3 | 7 | 15 | 30 | 60 | 90 يوم', tag: 'pdf' },
+      { icon: '📄', title: 'ملخص استراتيجيات STEP النهائي', tag: 'summary' },
+      { icon: '📄', title: 'نصائح يوم الاختبار - Exam Day Tips', tag: 'summary' },
+      { icon: '📄', title: 'Vocabulary Flashcards - بطاقات المراجعة', tag: 'pdf' },
+    ]
+  },
+];
+
+let currentFilter = 'all';
+
+function filterSections(sec) {
+  currentFilter = sec;
+  document.querySelectorAll('.sec-tab').forEach(el => el.classList.toggle('active', el.dataset.sec === sec));
+  renderCourse();
+}
+
+function renderCourse() {
+  const filtered = currentFilter === 'all' ? COURSE_SECTIONS : COURSE_SECTIONS.filter(s => s.section === currentFilter);
+  const el = document.getElementById('courseContent');
+  const tagLabels = { video: 'فيديو', pdf: 'PDF', audio: 'صوت', test: 'اختبار', summary: 'ملخص' };
+
+  el.innerHTML = filtered.map((cs, idx) => `
+    <div class="cs-block ${idx === 0 ? 'open' : ''}" id="cs_${cs.id}">
+      <div class="cs-header" onclick="toggleSection('cs_${cs.id}')">
+        <div class="cs-icon">${cs.icon}</div>
+        <div class="cs-info">
+          <div class="cs-title">${cs.title}</div>
+          <div class="cs-sub">${cs.sub}</div>
+        </div>
+        <div class="cs-count">${cs.lessons.length} عنصر</div>
+        <div class="cs-arrow">▼</div>
+      </div>
+      <div class="cs-body">
+        ${cs.lessons.map(l => `
+          <div class="lesson-li">
+            <div class="lesson-li-icon">${l.icon}</div>
+            <div class="lesson-li-title">${l.title}</div>
+            <span class="lesson-li-tag tag-${l.tag}">${tagLabels[l.tag] || l.tag}</span>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function toggleSection(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initHeader();
+  initAOS();
+  renderCourse();
+  renderCountdown(document.getElementById('courseSideCountdown'), 48);
+  seats.render(document.getElementById('courseSideSeats'));
+  startNotifications();
+});
+</script>
+</body>
+</html>
