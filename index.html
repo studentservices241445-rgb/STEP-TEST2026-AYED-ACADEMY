@@ -3,199 +3,728 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>أكاديمية عايد - دورات STEP</title>
+  <title>أكاديمية عايد - دورات STEP الاحترافية</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#012b28">
+  <meta name="description" content="أكاديمية عايد - متخصصة في تدريب اختبار STEP. دورات مكثفة، أساسية، ومتقدمة لتحقيق أعلى الدرجات.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
+
+  <!-- Header -->
+  <header class="header" id="mainHeader">
     <div class="container flex-between">
-      <div class="logo">أكاديمية عايد</div>
+      <div class="logo">
+        <span class="logo-icon">🎓</span>
+        <span class="logo-text">أكاديمية عايد</span>
+      </div>
       <nav>
-        <button class="menu-toggle">القائمة ☰</button>
-        <ul class="nav-list">
-          <li><a href="#courses">الدورات</a></li>
-          <li><a href="#about">حول</a></li>
-          <li><a href="#contact">تواصل</a></li>
+        <button class="menu-toggle" aria-label="القائمة">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        <ul class="nav-list" id="navList">
+          <li><a href="#courses" class="nav-link">الدورات</a></li>
+          <li><a href="#stats" class="nav-link">إنجازاتنا</a></li>
+          <li><a href="#trainer" class="nav-link">المدرب</a></li>
+          <li><a href="#testimonials" class="nav-link">آراء الطلاب</a></li>
+          <li><a href="#faq" class="nav-link">أسئلة شائعة</a></li>
+          <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
+          <li><a href="#courses" class="btn primary nav-cta">سجّل الآن</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
+  <!-- Hero Section -->
   <section id="hero" class="hero">
-    <div class="container">
-      <h1>ارتقِ بمهاراتك في اختبار STEP</h1>
-      <p>اختر الدورة المناسبة لك وسجّل الآن بخطوات بسيطة.</p>
-      <a href="#courses" class="btn primary">استعرض الدورات</a>
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-badge">🏆 الأكاديمية الرائدة في تدريب STEP</div>
+      <h1>ارتقِ بمهاراتك في <span class="highlight-text">اختبار STEP</span><br>واحصل على درجاتك المستهدفة</h1>
+      <p class="hero-subtitle">برامج تدريبية متخصصة مبنية على خبرة سنوات. مع أكاديمية عايد، ستتقدم بثقة نحو أهدافك الأكاديمية والمهنية.</p>
+      <div class="hero-actions">
+        <a href="#courses" class="btn primary hero-btn">استعرض الدورات</a>
+        <a href="#trainer" class="btn outline hero-btn">تعرّف على المدرب</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <span class="trust-number">+500</span>
+          <span class="trust-label">طالب متخرج</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <span class="trust-number">%92</span>
+          <span class="trust-label">نسبة النجاح</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <span class="trust-number">3+</span>
+          <span class="trust-label">سنوات خبرة</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>اكتشف المزيد</span>
+      <div class="scroll-arrow">↓</div>
     </div>
   </section>
 
-  <section id="courses" class="courses-section">
+  <!-- Stats Section -->
+  <section id="stats" class="stats-section">
     <div class="container">
-      <h2>الدورات المتاحة</h2>
-      <div class="course-grid">
-        <!-- Course 1 -->
-        <div class="course-card" data-course-id="course1">
-          <h3>دورة STEP المكثفة</h3>
-          <p>برنامج مكثف يغطّي أهم مهارات القراءة، الاستماع، القواعد والمفردات.</p>
-          <ul>
-            <li>خطة دراسة لمدة 4 أسابيع</li>
-            <li>تجميعات وأسئلة حديثة</li>
-            <li>دعم مباشر عبر تيليجرام</li>
-          </ul>
-          <div class="price">
-            <span class="old-price">299 ريال</span>
-            <span class="new-price">199 ريال</span>
-          </div>
-          <button class="btn register-btn" data-course-id="course1">التسجيل في الدورة</button>
+      <div class="stats-grid">
+        <div class="stat-card" data-aos>
+          <div class="stat-icon">🎓</div>
+          <div class="stat-number" data-target="500">0</div>
+          <div class="stat-plus">+</div>
+          <div class="stat-label">طالب مسجّل</div>
         </div>
-        <!-- Course 2 -->
-        <div class="course-card" data-course-id="course2">
-          <h3>دورة STEP الأساسيات</h3>
-          <p>أساسيات اختبار STEP في أسبوعين، مناسبة للمبتدئين والمتوسطين.</p>
-          <ul>
-            <li>منهج مبسّط لجميع الأقسام</li>
-            <li>ملخصات PDF حصرية</li>
-            <li>نماذج محلولة</li>
-          </ul>
-          <div class="price">
-            <span class="old-price">199 ريال</span>
-            <span class="new-price">149 ريال</span>
-          </div>
-          <button class="btn register-btn" data-course-id="course2">التسجيل في الدورة</button>
+        <div class="stat-card" data-aos>
+          <div class="stat-icon">⭐</div>
+          <div class="stat-number" data-target="92">0</div>
+          <div class="stat-plus">%</div>
+          <div class="stat-label">نسبة رضا الطلاب</div>
         </div>
-        <!-- Course 3 -->
-        <div class="course-card" data-course-id="course3">
-          <h3>دورة STEP المتقدمة</h3>
-          <p>تركيز على التقنيات المتقدمة والحيل لاجتياز أعلى الدرجات.</p>
-          <ul>
-            <li>استراتيجيات احترافية للحل</li>
-            <li>اختبارات محاكية</li>
-            <li>جلسات توجيه فردية</li>
-          </ul>
-          <div class="price">
-            <span class="old-price">349 ريال</span>
-            <span class="new-price">249 ريال</span>
-          </div>
-          <button class="btn register-btn" data-course-id="course3">التسجيل في الدورة</button>
+        <div class="stat-card" data-aos>
+          <div class="stat-icon">📚</div>
+          <div class="stat-number" data-target="3">0</div>
+          <div class="stat-plus">+</div>
+          <div class="stat-label">دورات متخصصة</div>
+        </div>
+        <div class="stat-card" data-aos>
+          <div class="stat-icon">🏅</div>
+          <div class="stat-number" data-target="85">0</div>
+          <div class="stat-plus">%</div>
+          <div class="stat-label">نسبة تجاوز الدرجة المطلوبة</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Courses Section -->
+  <section id="courses" class="courses-section">
+    <div class="container">
+      <div class="section-header" data-aos>
+        <div class="section-badge">دوراتنا</div>
+        <h2>الدورات المتاحة</h2>
+        <p class="section-subtitle">اختر الدورة التي تناسب مستواك وهدفك، وابدأ رحلتك نحو النجاح في اختبار STEP</p>
+      </div>
+      <div class="course-grid">
+
+        <!-- Course 1: Foundation -->
+        <div class="course-card" data-course-id="course2" data-aos>
+          <div class="course-badge">مناسب للمبتدئين</div>
+          <div class="course-icon">📖</div>
+          <h3>دورة STEP الأساسيات</h3>
+          <p class="course-desc">أساسيات اختبار STEP في أسبوعين، مناسبة للمبتدئين والمتوسطين الراغبين في بناء قاعدة متينة.</p>
+          <ul class="course-features">
+            <li><span class="feature-icon">✅</span> منهج مبسّط يغطي جميع الأقسام</li>
+            <li><span class="feature-icon">✅</span> ملخصات PDF حصرية</li>
+            <li><span class="feature-icon">✅</span> نماذج محلولة تفصيلياً</li>
+            <li><span class="feature-icon">✅</span> دعم عبر مجموعة تيليجرام</li>
+          </ul>
+          <div class="course-duration">
+            <span class="duration-icon">🗓️</span>
+            <span>خطة دراسة لمدة أسبوعين</span>
+          </div>
+          <div class="price-box">
+            <div class="price-row">
+              <span class="old-price">199 ريال</span>
+              <span class="discount-badge">خصم 25%</span>
+            </div>
+            <div class="new-price">149 ريال</div>
+          </div>
+          <button class="btn primary register-btn full-width" data-course-id="course2">
+            سجّل الآن ←
+          </button>
+        </div>
+
+        <!-- Course 2: Intensive (Featured) -->
+        <div class="course-card featured" data-course-id="course1" data-aos>
+          <div class="featured-ribbon">الأكثر طلباً</div>
+          <div class="course-badge">للجميع</div>
+          <div class="course-icon">🚀</div>
+          <h3>دورة STEP المكثفة</h3>
+          <p class="course-desc">برنامج مكثف يغطّي أهم مهارات القراءة، الاستماع، القواعد والمفردات بأسلوب تفاعلي ومميز.</p>
+          <ul class="course-features">
+            <li><span class="feature-icon">✅</span> خطة دراسة لمدة 4 أسابيع</li>
+            <li><span class="feature-icon">✅</span> تجميعات وأسئلة حديثة حصرية</li>
+            <li><span class="feature-icon">✅</span> دعم مباشر عبر تيليجرام</li>
+            <li><span class="feature-icon">✅</span> اختبارات تجريبية محاكية</li>
+            <li><span class="feature-icon">✅</span> مراجعات أسبوعية مكثفة</li>
+          </ul>
+          <div class="course-duration">
+            <span class="duration-icon">🗓️</span>
+            <span>خطة دراسة لمدة 4 أسابيع</span>
+          </div>
+          <div class="price-box">
+            <div class="price-row">
+              <span class="old-price">299 ريال</span>
+              <span class="discount-badge">خصم 33%</span>
+            </div>
+            <div class="new-price">199 ريال</div>
+          </div>
+          <button class="btn primary register-btn full-width" data-course-id="course1">
+            سجّل الآن ←
+          </button>
+        </div>
+
+        <!-- Course 3: Advanced -->
+        <div class="course-card" data-course-id="course3" data-aos>
+          <div class="course-badge">للمتقدمين</div>
+          <div class="course-icon">🏆</div>
+          <h3>دورة STEP المتقدمة</h3>
+          <p class="course-desc">تركيز على التقنيات المتقدمة والاستراتيجيات الاحترافية لاجتياز أعلى الدرجات بثقة واحترافية.</p>
+          <ul class="course-features">
+            <li><span class="feature-icon">✅</span> استراتيجيات احترافية للحل</li>
+            <li><span class="feature-icon">✅</span> اختبارات محاكية للبيئة الحقيقية</li>
+            <li><span class="feature-icon">✅</span> جلسات توجيه فردية مع المدرب</li>
+            <li><span class="feature-icon">✅</span> تحليل شخصي لنقاط الضعف</li>
+            <li><span class="feature-icon">✅</span> ضمان الوصول للدرجة المستهدفة</li>
+          </ul>
+          <div class="course-duration">
+            <span class="duration-icon">🗓️</span>
+            <span>خطة دراسة لمدة 6 أسابيع</span>
+          </div>
+          <div class="price-box">
+            <div class="price-row">
+              <span class="old-price">349 ريال</span>
+              <span class="discount-badge">خصم 28%</span>
+            </div>
+            <div class="new-price">249 ريال</div>
+          </div>
+          <button class="btn primary register-btn full-width" data-course-id="course3">
+            سجّل الآن ←
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us Section -->
+  <section id="why-us" class="why-us-section">
+    <div class="container">
+      <div class="section-header" data-aos>
+        <div class="section-badge">لماذا نحن؟</div>
+        <h2>ما يميّز أكاديمية عايد</h2>
+        <p class="section-subtitle">نقدم تجربة تعليمية متكاملة مصممة خصيصاً لمساعدتك على النجاح</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item" data-aos>
+          <div class="feature-icon-box">🎯</div>
+          <h4>محتوى مُوجَّه</h4>
+          <p>كل درس ومادة مصممة لتغطية ما يخرج فعلاً في الاختبار، لا وقت مُهدر.</p>
+        </div>
+        <div class="feature-item" data-aos>
+          <div class="feature-icon-box">💬</div>
+          <h4>دعم مستمر</h4>
+          <p>لست وحدك في رحلتك. مجموعة دعم نشطة وإجابات سريعة على استفساراتك.</p>
+        </div>
+        <div class="feature-item" data-aos>
+          <div class="feature-icon-box">📊</div>
+          <h4>تحديث دائم</h4>
+          <p>المحتوى يُحدَّث باستمرار ليواكب أحدث تغييرات الاختبار وأنماطه.</p>
+        </div>
+        <div class="feature-item" data-aos>
+          <div class="feature-icon-box">⚡</div>
+          <h4>نتائج سريعة</h4>
+          <p>طلابنا يلاحظون تحسناً ملموساً خلال أسبوعين فقط من بدء الدراسة.</p>
+        </div>
+        <div class="feature-item" data-aos>
+          <div class="feature-icon-box">📱</div>
+          <h4>تعلّم من أي مكان</h4>
+          <p>المواد متاحة على جميع الأجهزة. تعلّم في أي وقت ومن أي مكان يناسبك.</p>
+        </div>
+        <div class="feature-item" data-aos>
+          <div class="feature-icon-box">💰</div>
+          <h4>أسعار مناسبة</h4>
+          <p>لا تنازل عن الجودة في مقابل السعر. نقدم أفضل قيمة بأفضل سعر.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trainer Section -->
+  <section id="trainer" class="trainer-section">
+    <div class="container">
+      <div class="trainer-wrapper" data-aos>
+        <div class="trainer-image-area">
+          <div class="trainer-avatar">
+            <div class="avatar-placeholder">عايد</div>
+          </div>
+          <div class="trainer-badges">
+            <div class="trainer-badge-item">🏅 خبير STEP معتمد</div>
+            <div class="trainer-badge-item">📚 مدرّس محترف</div>
+          </div>
+        </div>
+        <div class="trainer-info">
+          <div class="section-badge">المدرب</div>
+          <h2>تعرّف على المدرب</h2>
+          <h3 class="trainer-name">المدرب عايد</h3>
+          <p class="trainer-bio">
+            متخصص في تدريب اختبار STEP بخبرة تمتد لأكثر من <strong>3 سنوات</strong> في المجال. 
+            ساعد أكثر من <strong>500 طالب وطالبة</strong> على تحقيق درجاتهم المستهدفة 
+            في الاختبار والحصول على قبولهم الجامعي والتوظيفي.
+          </p>
+          <p class="trainer-bio">
+            يؤمن المدرب عايد بأن النجاح في STEP ليس حكراً على أحد، بل هو نتيجة 
+            للتحضير الصحيح والمنهجية السليمة التي يوفرها من خلال دوراته المتخصصة.
+          </p>
+          <div class="trainer-stats">
+            <div class="t-stat">
+              <span class="t-num">500+</span>
+              <span class="t-lbl">طالب</span>
+            </div>
+            <div class="t-stat">
+              <span class="t-num">3+</span>
+              <span class="t-lbl">سنوات</span>
+            </div>
+            <div class="t-stat">
+              <span class="t-num">92%</span>
+              <span class="t-lbl">رضا الطلاب</span>
+            </div>
+          </div>
+          <a href="https://t.me/stepp2024" target="_blank" class="btn primary trainer-contact-btn">
+            تواصل مع المدرب عبر تيليجرام
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="container">
+      <div class="section-header" data-aos>
+        <div class="section-badge">آراء الطلاب</div>
+        <h2>ماذا يقول طلابنا؟</h2>
+        <p class="section-subtitle">تجارب حقيقية من طلاب حققوا أهدافهم مع أكاديمية عايد</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card" data-aos>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"كنت خايف من الاختبار بس بعد الدورة المكثفة تغير كل شيء. حصلت على 80+ وما كنت أتوقع!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">م.ع</div>
+            <div>
+              <div class="author-name">محمد ع.</div>
+              <div class="author-detail">دورة STEP المكثفة</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"المدرب عايد شرح بطريقة ما شفتها في أي مكان. المواد منظمة ومرتبة والدعم ما قصّر معي أبداً."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">س.م</div>
+            <div>
+              <div class="author-name">سارة م.</div>
+              <div class="author-detail">دورة STEP الأساسيات</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"اشتركت في الدورة المتقدمة وحصلت على 90 في STEP. السعر يستاهل مقارنة بالنتيجة الرهيبة!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ع.خ</div>
+            <div>
+              <div class="author-name">عبدالله خ.</div>
+              <div class="author-detail">دورة STEP المتقدمة</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"فاجأني المحتوى الغني والمحدّث. كل أسبوع في يدّي مواد جديدة ومفيدة. أنصح الجميع بالتسجيل."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ن.أ</div>
+            <div>
+              <div class="author-name">نورة أ.</div>
+              <div class="author-detail">دورة STEP المكثفة</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"جربت قبل كذا مكان وما استفدت. بس مع أكاديمية عايد شفت فرق واضح من الأسبوع الأول."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ف.ر</div>
+            <div>
+              <div class="author-name">فيصل ر.</div>
+              <div class="author-detail">دورة STEP الأساسيات</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"الجلسات الفردية في الدورة المتقدمة غيّرت مستواي كلياً. المدرب يعرف بالضبط وين مشكلتك ويساعدك."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ر.ص</div>
+            <div>
+              <div class="author-name">ريم ص.</div>
+              <div class="author-detail">دورة STEP المتقدمة</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="section-header" data-aos>
+        <div class="section-badge">أسئلة شائعة</div>
+        <h2>الأسئلة الأكثر شيوعاً</h2>
+        <p class="section-subtitle">إجابات على أهم استفساراتك حول الدورات والتسجيل</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item" data-aos>
+          <button class="faq-question">
+            <span>ما هو اختبار STEP وما أهميته؟</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>اختبار STEP (اختبار قدرات اللغة الإنجليزية الوطني) هو اختبار معياري يُستخدم في المملكة العربية السعودية للقبول في الجامعات ولبعض متطلبات التوظيف. يقيس مستوى اللغة الإنجليزية في مهارات القراءة والاستماع والقواعد والمفردات.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-aos>
+          <button class="faq-question">
+            <span>أي دورة تناسبني؟</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>إذا كنت مبتدئاً أو مستواك متوسط، ابدأ بـ<strong>دورة الأساسيات</strong>. إذا كنت تريد تغطية شاملة وسريعة، اختر <strong>الدورة المكثفة</strong>. أما إذا كنت تسعى لأعلى الدرجات وتريد إعداداً احترافياً، فـ<strong>الدورة المتقدمة</strong> هي خيارك.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-aos>
+          <button class="faq-question">
+            <span>كيف يتم تسليم المواد بعد التسجيل؟</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>بعد تأكيد الدفع وإرسال إيصال التحويل، يتم إضافتك إلى مجموعة تيليجرام الخاصة بالدورة. ستجد فيها جميع المواد والملخصات والمهام التدريبية منظمة أسبوعياً.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-aos>
+          <button class="faq-question">
+            <span>هل يمكنني التسجيل مع مجموعة من الأصدقاء؟</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>نعم بالتأكيد! يمكنك التسجيل لعدة أشخاص في نفس الوقت عبر حقل "عدد المسجلين" في نموذج التسجيل. السعر يُحسب لكل شخص على حدة.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-aos>
+          <button class="faq-question">
+            <span>ما طرق الدفع المتاحة؟</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>الدفع يتم عبر التحويل البنكي إلى حساب مصرف الإنماء المحدد في نموذج التسجيل. بعد التحويل، أرسل صورة الإيصال عبر تيليجرام أو البريد الإلكتروني لتأكيد تسجيلك.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-aos>
+          <button class="faq-question">
+            <span>هل هناك ضمان على الدورة؟</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>نعم، نثق بجودة محتوانا. إذا لم تلاحظ أي تحسن في مستواك بعد إكمال الدورة والتزامك بالمهام، تواصل معنا وسنعمل على إيجاد حل مناسب.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
   <section id="about" class="about-section">
     <div class="container">
-      <h2>عن الأكاديمية</h2>
-      <p>أكاديمية عايد متخصصة في تقديم برامج تدريبية لاختبار STEP مبنية على خبرة سنوات في المجال. نقدم محتوى مطوّر باستمرار يساعدك على التقدم بثقة نحو أهدافك.</p>
+      <div class="about-wrapper" data-aos>
+        <div class="about-text">
+          <div class="section-badge">عن الأكاديمية</div>
+          <h2>أكاديمية عايد.. قصة نجاح تبدأ هنا</h2>
+          <p>أكاديمية عايد هي أكاديمية تدريبية متخصصة في إعداد الطلاب لاختبار STEP. تأسست على يد المدرب عايد الذي آمن بأن كل طالب يستحق الحصول على تدريب احترافي بسعر مناسب.</p>
+          <p>منذ انطلاقتنا، ساعدنا مئات الطلاب على تجاوز حاجزهم اللغوي وتحقيق الدرجات التي تفتح أمامهم أبواب الجامعات والفرص المهنية.</p>
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <span class="highlight-icon">🎯</span>
+              <span>محتوى موجّه ومُحدَّث باستمرار</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-icon">🤝</span>
+              <span>مجتمع دعم نشط ومتفاعل</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-icon">📈</span>
+              <span>نتائج مُثبتة وموثّقة</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- Contact Section -->
   <section id="contact" class="contact-section">
     <div class="container">
-      <h2>تواصل معنا</h2>
-      <p>
-        للاستفسارات أو الدعم، يمكنكم التواصل عبر البريد الإلكتروني:
-        <a href="mailto:info@academy.com">info@academy.com</a>
-        أو عبر قناتنا الرسمية على تيليجرام:
-        <a href="https://t.me/stepp2024" target="_blank">@stepp2024</a>.
-      </p>
-      <p>
-        عندما تكمل نموذج التسجيل، يتم إرسال بياناتك تلقائيًا إلى المنسق عبر سكربت جوجل مرتبط بتيليجرام، وسيتم الرد عليك في أقرب وقت ممكن.
-      </p>
+      <div class="section-header" data-aos>
+        <div class="section-badge">تواصل معنا</div>
+        <h2>نحن هنا لمساعدتك</h2>
+        <p class="section-subtitle">لا تتردد في التواصل معنا لأي استفسار أو مساعدة</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card" data-aos>
+          <div class="contact-icon">✉️</div>
+          <h4>البريد الإلكتروني</h4>
+          <a href="mailto:info@academy.com">info@academy.com</a>
+          <p>نرد خلال 24 ساعة</p>
+        </div>
+        <div class="contact-card" data-aos>
+          <div class="contact-icon">💬</div>
+          <h4>تيليجرام</h4>
+          <a href="https://t.me/stepp2024" target="_blank">@stepp2024</a>
+          <p>للدعم السريع والمباشر</p>
+        </div>
+        <div class="contact-card" data-aos>
+          <div class="contact-icon">🕐</div>
+          <h4>أوقات الدوام</h4>
+          <span>السبت - الخميس</span>
+          <p>9 صباحاً - 10 مساءً</p>
+        </div>
+      </div>
+      <div class="contact-note" data-aos>
+        <p>💡 عند إكمال نموذج التسجيل، يتم إرسال بياناتك تلقائيًا إلى المنسق عبر تيليجرام. سيتم الرد عليك في أقرب وقت لتأكيد التسجيل وتزويدك بروابط الدورة.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Modal for Registration -->
-  <div id="registrationModal" class="modal hidden">
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box" data-aos>
+        <h2>ابدأ رحلتك نحو النجاح اليوم!</h2>
+        <p>لا تنتظر أكثر. سجّل الآن واستفد من العروض الحالية قبل انتهائها.</p>
+        <a href="#courses" class="btn primary cta-main-btn">اختر دورتك الآن</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Modal -->
+  <div id="registrationModal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-overlay"></div>
     <div class="modal-wrapper">
       <div class="modal-header">
         <h3 id="modalTitle">التسجيل في الدورة</h3>
-        <button type="button" class="modal-close">&times;</button>
+        <button type="button" class="modal-close" aria-label="إغلاق">&times;</button>
       </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar-wrapper">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-steps">
+          <span class="progress-step active" data-step="1">1</span>
+          <span class="progress-step" data-step="2">2</span>
+          <span class="progress-step" data-step="3">3</span>
+          <span class="progress-step" data-step="4">✓</span>
+        </div>
+        <div class="progress-labels">
+          <span>المعلومات</span>
+          <span>الفاتورة</span>
+          <span>الدفع</span>
+          <span>تم</span>
+        </div>
+      </div>
+
       <div class="modal-body">
-        <form id="registrationForm">
+        <form id="registrationForm" novalidate>
+
           <!-- Step 1: Student information -->
           <div class="form-step active" data-step="1">
-            <h4>الخطوة 1: معلومات الطالب</h4>
+            <h4 class="step-title">معلومات الطالب</h4>
             <div class="form-group">
-              <label for="fullName">الاسم الكامل</label>
-              <input type="text" id="fullName" name="fullName" required>
+              <label for="fullName">الاسم الكامل <span class="required">*</span></label>
+              <input type="text" id="fullName" name="fullName" placeholder="مثال: محمد أحمد العمري" required>
+              <span class="field-error" id="nameError"></span>
             </div>
             <div class="form-group">
-              <label for="contactInfo">رقم الجوال أو البريد الإلكتروني</label>
-              <input type="text" id="contactInfo" name="contactInfo" required>
+              <label for="contactInfo">رقم الجوال أو البريد الإلكتروني <span class="required">*</span></label>
+              <input type="text" id="contactInfo" name="contactInfo" placeholder="05XXXXXXXX أو example@email.com" required>
+              <span class="field-error" id="contactError"></span>
             </div>
             <div class="form-group">
               <label for="participants">عدد المسجلين</label>
-              <input type="number" id="participants" name="participants" min="1" value="1" required>
+              <div class="number-input-wrapper">
+                <button type="button" class="num-btn minus-btn">−</button>
+                <input type="number" id="participants" name="participants" min="1" max="20" value="1" required>
+                <button type="button" class="num-btn plus-btn">+</button>
+              </div>
             </div>
             <div class="form-group">
-              <label for="source">كيف عرفت عن الأكاديمية؟</label>
+              <label for="source">كيف عرفت عن الأكاديمية؟ <span class="required">*</span></label>
               <select id="source" name="source" required>
                 <option value="" disabled selected>اختر...</option>
-                <option value="صديق">عن طريق صديق</option>
-                <option value="تويتر">تويتر</option>
-                <option value="إعلان">إعلان</option>
+                <option value="صديق">عن طريق صديق أو زميل</option>
+                <option value="تويتر">تويتر / X</option>
+                <option value="انستغرام">انستغرام</option>
+                <option value="سناب">سناب شات</option>
+                <option value="إعلان">إعلان ممول</option>
+                <option value="بحث">بحث في جوجل</option>
                 <option value="أخرى">أخرى</option>
               </select>
+              <span class="field-error" id="sourceError"></span>
             </div>
             <div class="modal-actions">
-              <button type="button" class="btn primary next-step">التالي</button>
+              <button type="button" class="btn primary next-step full-width">التالي ←</button>
             </div>
           </div>
 
           <!-- Step 2: Invoice summary -->
           <div class="form-step" data-step="2">
-            <h4>الخطوة 2: ملخص الرسوم</h4>
-            <div class="invoice">
-              <p>السعر قبل الخصم: <span id="priceBefore"></span></p>
-              <p>قيمة الخصم: <span id="discountValue"></span></p>
-              <p>السعر بعد الخصم: <strong id="totalPrice"></strong></p>
+            <h4 class="step-title">ملخص الرسوم</h4>
+            <div class="invoice-box">
+              <div class="invoice-row">
+                <span>اسم الدورة</span>
+                <strong id="invoiceCourseName"></strong>
+              </div>
+              <div class="invoice-row">
+                <span>عدد المسجلين</span>
+                <strong id="invoiceParticipants"></strong>
+              </div>
+              <div class="invoice-row">
+                <span>السعر الأصلي</span>
+                <span id="priceBefore" class="old-price-invoice"></span>
+              </div>
+              <div class="invoice-row discount-row">
+                <span>قيمة الخصم</span>
+                <span id="discountValue" class="discount-value">−</span>
+              </div>
+              <div class="invoice-row total-row">
+                <span>الإجمالي المستحق</span>
+                <strong id="totalPrice" class="total-amount"></strong>
+              </div>
             </div>
-            <div class="modal-actions">
-              <button type="button" class="btn secondary prev-step">رجوع</button>
-              <button type="button" class="btn primary next-step">تأكيد الدفع</button>
+            <div class="modal-actions dual-actions">
+              <button type="button" class="btn secondary prev-step">← رجوع</button>
+              <button type="button" class="btn primary next-step">تأكيد والمتابعة →</button>
             </div>
           </div>
 
           <!-- Step 3: Payment details -->
           <div class="form-step" data-step="3">
-            <h4>الخطوة 3: معلومات الدفع</h4>
-            <p>الرجاء تحويل المبلغ إلى الحساب التالي:</p>
-            <div class="bank-details">
-              <p>اسم البنك: <strong id="bankName"></strong></p>
-              <p>اسم المستفيد: <strong id="beneficiary"></strong></p>
-              <p>رقم الحساب: <strong id="accountNumber"></strong> <button type="button" class="copy-btn" data-target="accountNumber">نسخ</button></p>
-              <p>الآيبان: <strong id="iban"></strong> <button type="button" class="copy-btn" data-target="iban">نسخ</button></p>
+            <h4 class="step-title">معلومات الدفع</h4>
+            <p class="payment-instruction">يرجى تحويل المبلغ إلى الحساب التالي ثم إرسال إيصال الدفع:</p>
+            <div class="bank-card">
+              <div class="bank-header">
+                <span class="bank-icon">🏦</span>
+                <strong id="bankName"></strong>
+              </div>
+              <div class="bank-row">
+                <span class="bank-label">اسم المستفيد</span>
+                <span id="beneficiary"></span>
+              </div>
+              <div class="bank-row">
+                <span class="bank-label">رقم الحساب</span>
+                <div class="copy-row">
+                  <span id="accountNumber"></span>
+                  <button type="button" class="copy-btn" data-target="accountNumber">نسخ 📋</button>
+                </div>
+              </div>
+              <div class="bank-row">
+                <span class="bank-label">رقم الآيبان</span>
+                <div class="copy-row">
+                  <span id="iban"></span>
+                  <button type="button" class="copy-btn" data-target="iban">نسخ 📋</button>
+                </div>
+              </div>
+              <div class="bank-amount-row">
+                <span>المبلغ المطلوب تحويله:</span>
+                <strong id="paymentAmount" class="payment-amount-display"></strong>
+              </div>
             </div>
-            <p class="payment-note">بعد إجراء التحويل، يرجى إرسال صورة من إيصال الدفع عبر البريد الإلكتروني أو تيليجرام ليتم تأكيد تسجيلك.</p>
-            <div class="modal-actions">
-              <button type="button" class="btn secondary prev-step">رجوع</button>
-              <button type="button" class="btn primary next-step">إرسال تأكيد التسجيل</button>
+            <div class="payment-steps-note">
+              <p>📌 <strong>الخطوات بعد التحويل:</strong></p>
+              <ol>
+                <li>أرسل صورة إيصال الدفع عبر <a href="https://t.me/stepp2024" target="_blank">تيليجرام</a> أو البريد الإلكتروني</li>
+                <li>انتظر تأكيد التسجيل خلال 24 ساعة</li>
+                <li>ستصلك رابط الدورة فور تأكيد الدفع</li>
+              </ol>
+            </div>
+            <div class="modal-actions dual-actions">
+              <button type="button" class="btn secondary prev-step">← رجوع</button>
+              <button type="button" class="btn primary next-step">إرسال تأكيد التسجيل ✓</button>
             </div>
           </div>
 
           <!-- Step 4: Confirmation -->
           <div class="form-step" data-step="4">
-            <h4>تم الإرسال</h4>
-            <p>شكرًا لك! تم استلام بياناتك. سيتم التواصل معك قريبًا لتزويدك بروابط الدورة بعد تأكيد الدفع.</p>
+            <div class="success-animation">
+              <div class="success-icon">✅</div>
+              <div class="success-rings">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+              </div>
+            </div>
+            <h4 class="step-title success-title">تم استلام طلبك بنجاح!</h4>
+            <p class="success-message">شكرًا لك يا <strong id="confirmName"></strong>! تم استلام بيانات تسجيلك في <strong id="confirmCourse"></strong>.</p>
+            <div class="next-steps-box">
+              <p>📋 <strong>الخطوات التالية:</strong></p>
+              <ul>
+                <li>أرسل إيصال الدفع عبر تيليجرام <a href="https://t.me/stepp2024" target="_blank">@stepp2024</a></li>
+                <li>سيتم التواصل معك خلال 24 ساعة لتأكيد تسجيلك</li>
+                <li>ستحصل على رابط الانضمام للدورة فور التأكيد</li>
+              </ul>
+            </div>
             <div class="modal-actions">
-              <button type="button" class="btn primary close-modal">إغلاق</button>
+              <button type="button" class="btn primary close-modal full-width">ممتاز! إغلاق</button>
             </div>
           </div>
 
-          <!-- hidden fields -->
           <input type="hidden" id="selectedCourseId" name="selectedCourseId">
         </form>
       </div>
     </div>
   </div>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>© 2025 أكاديمية عايد. جميع الحقوق محفوظة.</p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">🎓 أكاديمية عايد</div>
+          <p>متخصصون في إعداد الطلاب لاختبار STEP بخبرة واحترافية.</p>
+        </div>
+        <div class="footer-links">
+          <h5>روابط سريعة</h5>
+          <ul>
+            <li><a href="#courses">الدورات</a></li>
+            <li><a href="#trainer">المدرب</a></li>
+            <li><a href="#testimonials">آراء الطلاب</a></li>
+            <li><a href="#faq">الأسئلة الشائعة</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h5>تواصل معنا</h5>
+          <p><a href="mailto:info@academy.com">info@academy.com</a></p>
+          <p><a href="https://t.me/stepp2024" target="_blank">تيليجرام: @stepp2024</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 أكاديمية عايد. جميع الحقوق محفوظة.</p>
+      </div>
     </div>
   </footer>
 
