@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نتائج اختبار STEP - أكاديمية عايد</title>
+<meta name="description" content="تقرير تفصيلي بنتائج اختبار تحديد المستوى وخطة مذاكرة مخصصة">
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1628">
+<style>
+.results-page { min-height: 100vh; padding: 30px 0 80px; }
+.results-container { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+/* Score card */
+.score-card { background: var(--bg2); border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 40px 32px; text-align: center; margin-bottom: 28px; position: relative; overflow: hidden; }
+.score-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+.score-name { font-size: 1.1rem; color: var(--text2); margin-bottom: 8px; }
+.score-main { display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; margin: 20px 0; }
+.score-circle-wrap { position: relative; }
+.score-circle-svg { width: 150px; height: 150px; transform: rotate(-90deg); }
+.score-circle-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 10; }
+.score-circle-fill { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1.5s ease; }
+.score-circle-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+.score-pct { font-size: 2.2rem; font-weight: 900; display: block; }
+.score-lbl { font-size: 0.75rem; color: var(--text2); }
+.level-display { text-align: center; }
+.level-tag { display: inline-block; padding: 10px 24px; border-radius: 30px; font-size: 1.2rem; font-weight: 900; margin-bottom: 8px; }
+.level-name { font-size: 1.5rem; font-weight: 900; color: var(--accent); display: block; }
+.level-desc { font-size: 0.85rem; color: var(--text2); max-width: 200px; margin: 0 auto; }
+.score-praise { font-size: 1.1rem; color: var(--text); max-width: 500px; margin: 0 auto 20px; line-height: 1.7; }
+
+/* Section bars */
+.sections-card { background: var(--bg2); border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 28px; }
+.sections-card h3 { font-size: 1.05rem; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.section-row { margin-bottom: 18px; }
+.section-row-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.section-row-name { font-size: 0.92rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.section-row-score { font-size: 0.9rem; font-weight: 700; }
+.section-row-bar { height: 10px; background: rgba(255,255,255,0.08); border-radius: 5px; overflow: hidden; }
+.section-row-fill { height: 100%; border-radius: 5px; transition: width 1.2s ease; }
+.section-feedback { font-size: 0.82rem; color: var(--text2); margin-top: 5px; }
+
+/* Plan card */
+.plan-card { background: var(--bg2); border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 28px; }
+.plan-card h3 { font-size: 1.05rem; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.plan-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 12px; margin-bottom: 20px; }
+.plan-option { background: var(--card); border: 2px solid var(--card-border); border-radius: var(--radius); padding: 14px 10px; text-align: center; cursor: pointer; transition: all var(--transition); }
+.plan-option:hover { border-color: var(--primary-light); }
+.plan-option.selected { border-color: var(--primary-light); background: rgba(26,107,82,0.15); }
+.plan-option .p-days { font-size: 1.2rem; font-weight: 900; color: var(--accent); }
+.plan-option .p-label { font-size: 0.78rem; color: var(--text2); margin-top: 4px; }
+.plan-option .p-rec { font-size: 0.7rem; color: var(--primary-light); font-weight: 700; }
+
+/* Daily schedule */
+.schedule-box { background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius); overflow: hidden; }
+.schedule-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+.schedule-header h4 { font-size: 0.95rem; font-weight: 800; }
+.schedule-days { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.sched-day { background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; }
+.sched-day-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; }
+.sched-day-num { width: 30px; height: 30px; background: var(--primary); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 700; flex-shrink: 0; }
+.sched-day-title { font-size: 0.9rem; font-weight: 700; flex: 1; }
+.sched-day-arrow { font-size: 0.8rem; color: var(--text3); transition: transform var(--transition); }
+.sched-day.open .sched-day-arrow { transform: rotate(180deg); }
+.sched-day-tasks { display: none; padding: 0 14px 12px; }
+.sched-day.open .sched-day-tasks { display: block; }
+.sched-task { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.88rem; }
+.sched-task:last-child { border-bottom: none; }
+.sched-task-time { color: var(--primary-light); font-weight: 600; min-width: 80px; font-size: 0.82rem; }
+.sched-task-text { color: var(--text2); line-height: 1.5; }
+
+/* CTA */
+.cta-results { background: linear-gradient(135deg, rgba(26,107,82,0.2), rgba(250,204,21,0.1)); border: 1px solid rgba(26,107,82,0.3); border-radius: var(--radius-lg); padding: 36px; text-align: center; margin-bottom: 28px; }
+.cta-results h3 { font-size: 1.5rem; color: var(--accent); margin-bottom: 12px; }
+.cta-results p { color: var(--text2); margin-bottom: 24px; font-size: 0.95rem; }
+.cta-results-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* Telegram plan card */
+.tg-card { background: rgba(0,136,204,0.08); border: 1px solid rgba(0,136,204,0.25); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+.tg-card h4 { color: #2db6f5; margin-bottom: 8px; font-size: 0.95rem; }
+.tg-plan-text { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-size: 0.85rem; color: var(--text2); direction: rtl; line-height: 1.9; white-space: pre-wrap; margin-bottom: 12px; max-height: 200px; overflow-y: auto; }
+
+/* Share */
+.share-bar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+
+/* No results */
+.no-results { text-align: center; padding: 80px 20px; }
+
+@media (max-width: 600px) {
+  .score-main { gap: 20px; }
+  .plan-options { grid-template-columns: repeat(3,1fr); }
+  .cta-results-btns { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header" id="mainHeader">
+  <div class="container">
+    <div class="header-inner">
+      <div class="header-logo" onclick="location.href='index.html'">
+        <div style="width:42px;height:42px;background:linear-gradient(135deg,#1a6b52,#0f4a38);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem">🎓</div>
+        <div class="logo-text-wrap">
+          <div class="logo-name">أكاديمية عايد</div>
+          <div class="logo-sub">STEP 2026</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-ghost btn-sm" onclick="location.href='quiz.html'">إعادة الاختبار 🔄</button>
+        <button class="btn btn-accent btn-sm" onclick="location.href='register.html'">سجّل في الدورة ←</button>
+        <button class="menu-toggle" id="menuToggle">
+          <div class="hamburger"><span></span><span></span><span></span></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-panel">
+    <div class="mobile-menu-header">
+      <div style="font-weight:800;color:var(--accent)">القائمة</div>
+      <button style="background:none;border:none;color:var(--text2);font-size:1.4rem;cursor:pointer" id="mobileMenuClose">✕</button>
+    </div>
+    <a class="mobile-nav-link" href="index.html">🏠 الرئيسية</a>
+    <a class="mobile-nav-link" href="quiz.html">📝 إعادة الاختبار</a>
+    <a class="mobile-nav-link" href="register.html">💳 التسجيل</a>
+    <a class="mobile-nav-link" href="course.html">📚 الدورة</a>
+  </div>
+</div>
+
+<main class="results-page">
+  <div class="results-container">
+
+    <!-- No results fallback -->
+    <div id="noResults" class="no-results" style="display:none">
+      <div style="font-size:4rem;margin-bottom:16px">🤔</div>
+      <h2 style="color:var(--accent);margin-bottom:12px">لا توجد نتائج</h2>
+      <p style="color:var(--text2);margin-bottom:24px">يبدو أنك لم تُكمل الاختبار بعد. ابدأ اختبار تحديد المستوى للحصول على تقريرك.</p>
+      <a href="quiz.html" class="btn btn-accent btn-lg">ابدأ الاختبار مجاناً ←</a>
+    </div>
+
+    <!-- Results content -->
+    <div id="resultsContent" style="display:none">
+      <div style="text-align:center;margin-bottom:28px;animation:fadeInUp 0.6s ease">
+        <div class="section-badge">تقريرك الشخصي</div>
+        <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);color:var(--accent);margin:12px 0 8px">نتائج اختبار STEP</h1>
+        <p style="color:var(--text2)" id="resultHeaderName">مرحباً بك!</p>
+      </div>
+
+      <!-- Score Card -->
+      <div class="score-card" data-aos id="scoreCard">
+        <div class="score-name" id="scoreNameEl"></div>
+        <div class="score-main">
+          <div class="score-circle-wrap">
+            <svg class="score-circle-svg" viewBox="0 0 150 150">
+              <circle class="score-circle-bg" cx="75" cy="75" r="62"/>
+              <circle class="score-circle-fill" id="scoreCircleFill" cx="75" cy="75" r="62"
+                stroke-dasharray="389.6" stroke-dashoffset="389.6"/>
+            </svg>
+            <div class="score-circle-text">
+              <span class="score-pct" id="scorePctEl">0%</span>
+              <span class="score-lbl" id="scoreCountEl">0/24</span>
+            </div>
+          </div>
+          <div class="level-display">
+            <div class="level-tag" id="levelTagEl">B1</div>
+            <span class="level-name" id="levelNameEl">متوسط</span>
+            <p class="level-desc" id="levelDescEl">المستوى المتوسط</p>
+          </div>
+        </div>
+        <p class="score-praise" id="scorePraiseEl"></p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="share-btn share-whatsapp" onclick="shareResults('whatsapp')">💬 شارك النتيجة</button>
+          <button class="share-btn share-telegram" onclick="shareResults('telegram')">✈️ شارك على تيليجرام</button>
+          <button class="share-btn share-copy" onclick="shareResults('copy')">🔗 نسخ الرابط</button>
+        </div>
+      </div>
+
+      <!-- Section breakdown -->
+      <div class="sections-card" data-aos>
+        <h3>📊 تفصيل الأداء بالأقسام</h3>
+        <div id="sectionBars"></div>
+      </div>
+
+      <!-- Study Plan -->
+      <div class="plan-card" data-aos>
+        <h3>📅 خطة المذاكرة المقترحة</h3>
+        <p style="color:var(--text2);font-size:0.9rem;margin-bottom:16px">اختر الخطة المناسبة لوقتك المتاح:</p>
+        <div class="plan-options" id="planOptions">
+          <div class="plan-option" data-key="1days" onclick="selectPlan('1days')"><div class="p-days">1</div><div class="p-label">يوم</div><div class="p-rec">طوارئ</div></div>
+          <div class="plan-option" data-key="3days" onclick="selectPlan('3days')"><div class="p-days">3</div><div class="p-label">أيام</div></div>
+          <div class="plan-option" data-key="7days" onclick="selectPlan('7days')"><div class="p-days">7</div><div class="p-label">أيام</div></div>
+          <div class="plan-option" data-key="15days" onclick="selectPlan('15days')"><div class="p-days">15</div><div class="p-label">يوم</div><div class="p-rec">موصى</div></div>
+          <div class="plan-option" data-key="30days" onclick="selectPlan('30days')"><div class="p-days">30</div><div class="p-label">يوم</div><div class="p-rec">مثالي</div></div>
+          <div class="plan-option" data-key="60days" onclick="selectPlan('60days')"><div class="p-days">60</div><div class="p-label">يوم</div></div>
+        </div>
+
+        <!-- Schedule display -->
+        <div class="schedule-box" id="scheduleBox">
+          <div class="schedule-header">
+            <h4 id="scheduleTitle">جدول يومي مقترح</h4>
+            <button class="btn btn-ghost btn-sm" onclick="downloadPlan()">⬇️ تحميل</button>
+          </div>
+          <div class="schedule-days" id="scheduleDays"></div>
+        </div>
+
+        <!-- Telegram plan -->
+        <div class="tg-card" style="margin-top:16px">
+          <h4>📱 أرسل خطتك على تيليجرام</h4>
+          <div class="tg-plan-text" id="tgPlanText"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" onclick="copyTgPlan()">📋 نسخ الخطة</button>
+            <a id="tgSendBtn" href="#" target="_blank" class="btn btn-primary btn-sm">✈️ فتح تيليجرام</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-results">
+        <h3>🚀 خطوتك التالية</h3>
+        <p id="ctaDesc">سجّل في الدورة المكثفة وحقق درجتك المستهدفة مع عايد السطوحي</p>
+        <div class="cta-results-btns">
+          <a href="register.html" class="btn btn-accent btn-lg">سجّل في الدورة الآن ←</a>
+          <a href="course.html" class="btn btn-ghost">📋 استعرض فهرس الدورة</a>
+          <a href="https://t.me/stepp2024" target="_blank" class="btn btn-outline">✈️ تواصل مع المدرب</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<div id="toastContainer"></div>
+
+<script src="assets/js/app.js"></script>
+<script>
+
+// ===== PLANS DATA =====
+const PLANS = {
+  '1days': {
+    title: 'خطة يوم واحد - طوارئ',
+    days: [
+      {
+        num: 1, title: 'يوم الاختبار - مراجعة مكثفة',
+        tasks: [
+          { time: '7:00 - 8:00', text: 'مراجعة أهم قواعد Grammar (الأزمنة الرئيسية الـ 3)' },
+          { time: '8:00 - 9:00', text: 'مراجعة Vocabulary - المفردات الأكثر شيوعاً في STEP' },
+          { time: '9:00 - 10:00', text: 'حل نموذج STEP واحد كامل وسريع' },
+          { time: '10:00 - 11:00', text: 'استراتيجيات Reading: skimming وscanning' },
+          { time: '11:00 - 12:00', text: 'Listening: التركيز على الكلمات الرئيسية' },
+          { time: 'قبل الاختبار', text: 'نوم جيد ووجبة خفيفة قبل الاختبار' },
+        ]
+      }
+    ]
+  },
+  '3days': {
+    title: 'خطة 3 أيام',
+    days: [
+      { num: 1, title: 'Grammar + Vocabulary', tasks: [
+        { time: '9:00 - 10:30', text: 'الأزمنة الإنجليزية: Present, Past, Future' },
+        { time: '10:30 - 12:00', text: 'Conditionals (If clauses) النوع 1 و2 و3' },
+        { time: '3:00 - 4:30', text: 'Vocabulary: أكثر 100 كلمة شيوعاً في STEP' },
+        { time: '4:30 - 6:00', text: 'تطبيق على نماذج Grammar + Vocabulary' },
+      ]},
+      { num: 2, title: 'Reading + اختبار تجريبي', tasks: [
+        { time: '9:00 - 10:30', text: 'استراتيجيات Reading: قراءة السؤال أولاً' },
+        { time: '10:30 - 12:00', text: 'تدريب على نصوص Reading متنوعة' },
+        { time: '3:00 - 5:00', text: 'حل نموذج STEP كامل بتوقيت حقيقي' },
+        { time: '5:00 - 6:00', text: 'مراجعة الأخطاء وفهم التفسيرات' },
+      ]},
+      { num: 3, title: 'Listening + مراجعة شاملة', tasks: [
+        { time: '9:00 - 10:30', text: 'استراتيجيات Listening: التركيز على الأرقام والأسماء' },
+        { time: '10:30 - 12:00', text: 'تدريب على نماذج Listening' },
+        { time: '3:00 - 4:30', text: 'مراجعة شاملة لأضعف القسم عندك' },
+        { time: '4:30 - 5:00', text: 'راحة ومراجعة خفيفة' },
+      ]},
+    ]
+  },
+  '7days': {
+    title: 'خطة 7 أيام',
+    days: [
+      { num: 1, title: 'Grammar: الأزمنة الأساسية', tasks: [
+        { time: '9:00 - 10:00', text: 'Simple Present + Present Continuous' },
+        { time: '10:00 - 11:00', text: 'Simple Past + Past Continuous' },
+        { time: '4:00 - 5:00', text: 'تمارين تطبيقية + مراجعة' },
+      ]},
+      { num: 2, title: 'Grammar: الأزمنة المتقدمة', tasks: [
+        { time: '9:00 - 10:00', text: 'Present Perfect + Past Perfect' },
+        { time: '10:00 - 11:00', text: 'Conditionals النوع 1 و2' },
+        { time: '4:00 - 5:00', text: 'تمارين + نماذج Grammar' },
+      ]},
+      { num: 3, title: 'Vocabulary', tasks: [
+        { time: '9:00 - 10:30', text: 'أكثر 150 كلمة شيوعاً في STEP' },
+        { time: '4:00 - 5:30', text: 'تمارين Synonyms و Antonyms' },
+      ]},
+      { num: 4, title: 'Reading Strategies', tasks: [
+        { time: '9:00 - 10:30', text: 'استراتيجيات الفهم القرائي: skimming, scanning' },
+        { time: '4:00 - 5:30', text: 'تدريب على نصوص Reading متنوعة' },
+      ]},
+      { num: 5, title: 'Listening Strategies', tasks: [
+        { time: '9:00 - 10:30', text: 'استراتيجيات الاستماع وأنواع الأسئلة' },
+        { time: '4:00 - 5:30', text: 'تدريب على نماذج Listening' },
+      ]},
+      { num: 6, title: 'نموذج كامل', tasks: [
+        { time: '9:00 - 11:00', text: 'حل نموذج STEP كامل بتوقيت حقيقي (160 دقيقة)' },
+        { time: '4:00 - 5:30', text: 'مراجعة الأخطاء وتحليل الأداء' },
+      ]},
+      { num: 7, title: 'مراجعة + استعداد', tasks: [
+        { time: '9:00 - 10:30', text: 'مراجعة أضعف الأقسام' },
+        { time: '4:00 - 4:30', text: 'راحة كاملة قبل الاختبار' },
+      ]},
+    ]
+  },
+  '15days': {
+    title: 'خطة 15 يوم - الأكثر توصية',
+    days: [
+      { num: 1, title: 'مقدمة + Grammar الأساس', tasks: [
+        { time: '9:00 - 10:00', text: 'تعرّف على بنية اختبار STEP وأقسامه' },
+        { time: '10:00 - 11:30', text: 'Simple Tenses (Present, Past, Future)' },
+        { time: '4:00 - 5:00', text: 'تمارين تطبيقية - 20 سؤال' },
+      ]},
+      { num: 2, title: 'Grammar: الاستمرارية والتامة', tasks: [
+        { time: '9:00 - 10:30', text: 'Continuous Tenses (Present/Past/Future)' },
+        { time: '10:30 - 12:00', text: 'Perfect Tenses + مقارنة بينها' },
+        { time: '4:00 - 5:00', text: 'تمارين مكثفة' },
+      ]},
+      { num: 3, title: 'Grammar: Conditionals', tasks: [
+        { time: '9:00 - 11:00', text: 'الشروط النوع 1 و2 و3 + Mixed' },
+        { time: '4:00 - 5:30', text: 'نماذج أسئلة Conditionals في STEP' },
+      ]},
+      { num: 4, title: 'Grammar: Relative Clauses', tasks: [
+        { time: '9:00 - 11:00', text: 'ضمائر الوصل: who, which, that, whose, whom' },
+        { time: '4:00 - 5:00', text: 'تمارين + مراجعة Grammar عامة' },
+      ]},
+      { num: '5 و6', title: 'Vocabulary المكثف', tasks: [
+        { time: '9:00 - 11:00', text: '200 كلمة STEP الأكثر شيوعاً (100 يومياً)' },
+        { time: '4:00 - 5:30', text: 'Synonyms, Antonyms, Word Forms' },
+      ]},
+      { num: 7, title: 'مراجعة + اختبار تجريبي', tasks: [
+        { time: '9:00 - 10:00', text: 'مراجعة Grammar + Vocabulary' },
+        { time: '10:00 - 12:00', text: 'نموذج Grammar + Vocabulary كامل' },
+        { time: '4:00 - 5:00', text: 'تحليل الأداء + مراجعة الأخطاء' },
+      ]},
+      { num: '8 و9', title: 'Reading الشامل', tasks: [
+        { time: '9:00 - 10:30', text: 'استراتيجيات Reading (Day 8)' },
+        { time: '4:00 - 5:30', text: 'تدريب على 3 نصوص Reading (Day 9)' },
+      ]},
+      { num: '10 و11', title: 'Listening الشامل', tasks: [
+        { time: '9:00 - 10:30', text: 'استراتيجيات Listening: القصير والطويل (Day 10)' },
+        { time: '4:00 - 5:30', text: 'تدريب على نماذج Listening متنوعة (Day 11)' },
+      ]},
+      { num: '12 و13', title: 'نماذج STEP كاملة', tasks: [
+        { time: '9:00 - 11:30', text: 'نموذج STEP كامل (بتوقيت) كل يوم' },
+        { time: '4:00 - 5:30', text: 'مراجعة تفصيلية للأخطاء' },
+      ]},
+      { num: 14, title: 'مراجعة نقاط الضعف', tasks: [
+        { time: '9:00 - 12:00', text: 'مراجعة مكثفة لأضعف الأقسام' },
+        { time: '4:00 - 5:00', text: 'تمارين إضافية + ملخصات' },
+      ]},
+      { num: 15, title: 'استعداد نهائي', tasks: [
+        { time: '9:00 - 10:00', text: 'مراجعة خفيفة للنقاط المهمة' },
+        { time: 'بعد الظهر', text: 'راحة كاملة + نوم مبكر' },
+      ]},
+    ]
+  },
+  '30days': {
+    title: 'خطة 30 يوم - مثالية',
+    days: [
+      { num: '1-3', title: 'الأسبوع الأول: Grammar الأساسي', tasks: [
+        { time: 'صباحاً', text: 'الأزمنة البسيطة والمستمرة والتامة (الـ 12 زمن)' },
+        { time: 'مساءً', text: 'تمارين تطبيقية 30 سؤال يومياً' },
+      ]},
+      { num: '4-7', title: 'الأسبوع الأول: Grammar المتقدم', tasks: [
+        { time: 'صباحاً', text: 'Conditionals, Relative Clauses, Passive Voice, Reported Speech' },
+        { time: 'مساءً', text: 'نماذج Grammar من STEP' },
+      ]},
+      { num: '8-12', title: 'الأسبوع الثاني: Vocabulary', tasks: [
+        { time: 'صباحاً', text: '400 كلمة أساسية (80 كلمة/يوم) + Word Forms' },
+        { time: 'مساءً', text: 'تمارين Synonyms/Antonyms/Context' },
+      ]},
+      { num: '13-18', title: 'الأسبوع الثالث: Reading + Listening', tasks: [
+        { time: 'صباحاً', text: 'Reading: استراتيجيات + نصوص يومية' },
+        { time: 'مساءً', text: 'Listening: نماذج + استراتيجيات' },
+      ]},
+      { num: '19-27', title: 'الأسبوع الرابع: نماذج مكثفة', tasks: [
+        { time: 'صباحاً', text: 'نموذج STEP كامل كل يومين' },
+        { time: 'مساءً', text: 'مراجعة الأخطاء + تقوية نقاط الضعف' },
+      ]},
+      { num: '28-30', title: 'الأيام الأخيرة: مراجعة + استعداد', tasks: [
+        { time: 'صباحاً', text: 'مراجعة شاملة خفيفة للنقاط المهمة' },
+        { time: 'آخر يوم', text: 'راحة كاملة + نوم مبكر + فطور قبل الاختبار' },
+      ]},
+    ]
+  },
+  '60days': {
+    title: 'خطة 60 يوم',
+    days: [
+      { num: '1-10', title: 'الشهر الأول: Grammar الشامل', tasks: [
+        { time: 'صباحاً', text: 'الـ 12 زمن + Conditionals + Passive + Reported Speech' },
+        { time: 'مساءً', text: 'تمارين يومية 40 سؤال' },
+      ]},
+      { num: '11-20', title: 'الشهر الأول: Vocabulary', tasks: [
+        { time: 'صباحاً', text: '600 كلمة STEP + Word Families' },
+        { time: 'مساءً', text: 'تمارين سياقية' },
+      ]},
+      { num: '21-40', title: 'الشهر الثاني: Reading + Listening', tasks: [
+        { time: 'صباحاً', text: 'Reading: استراتيجيات متقدمة + نصوص أكاديمية' },
+        { time: 'مساءً', text: 'Listening: محادثات + محاضرات' },
+      ]},
+      { num: '41-56', title: 'نماذج مكثفة', tasks: [
+        { time: 'كل يومين', text: 'نموذج STEP كامل + مراجعة تفصيلية' },
+      ]},
+      { num: '57-60', title: 'استعداد نهائي', tasks: [
+        { time: 'آخر 3 أيام', text: 'مراجعة خفيفة + راحة قبل الاختبار' },
+      ]},
+    ]
+  },
+};
+
+// ===== LEVEL CONFIGS =====
+const LEVEL_CONFIG = {
+  'A1': { color: '#ef4444', bg: 'rgba(239,68,68,0.15)', label: 'مبتدئ A1', desc: 'ابدأ من الأساسيات', praise: 'لا تقلق! كل شخص يبدأ من مكان. الدورة المكثفة ستأخذك لمستوى أعلى بكثير.', defaultPlan: '30days' },
+  'A2': { color: '#f59e0b', bg: 'rgba(245,158,11,0.15)', label: 'مبتدئ A2', desc: 'معك أساسيات جيدة', praise: 'أنت على الطريق الصحيح! مع التدريب المنتظم ستصل لمستوى B1 في وقت قصير.', defaultPlan: '15days' },
+  'B1': { color: '#3b82f6', bg: 'rgba(59,130,246,0.15)', label: 'متوسط B1', desc: 'مستوى جيد - تقدّم!', praise: 'أداء جيد جداً! التركيز على Reading وListening سيأخذك لـ B2 بسرعة.', defaultPlan: '7days' },
+  'B2': { color: '#10b981', bg: 'rgba(16,185,129,0.15)', label: 'متقدم B2', desc: 'مستوى ممتاز!', praise: 'ممتاز! أنت في مستوى متقدم. ركّز على الدقة والنماذج لضمان أعلى درجة.', defaultPlan: '7days' },
+};
+
+const SECTION_META = {
+  grammar:    { name: 'Grammar',    emoji: '📝', color: '#22c55e', feedback: { high: 'ممتاز في القواعد!', mid: 'قواعدك جيدة، مزيد من التمارين', low: 'ركّز على الأزمنة والقواعد الأساسية' } },
+  vocabulary: { name: 'Vocabulary', emoji: '📖', color: '#facc15', feedback: { high: 'مفرداتك ممتازة!', mid: 'وسّع قاموسك اللغوي أكثر', low: 'تحتاج تعزيز كبير في المفردات' } },
+  reading:    { name: 'Reading',    emoji: '📚', color: '#3b82f6', feedback: { high: 'فهم قرائي ممتاز!', mid: 'استراتيجيات Reading ستساعدك', low: 'تدرّب على الفهم القرائي يومياً' } },
+  listening:  { name: 'Listening',  emoji: '🎧', color: '#f87171', feedback: { high: 'استماعك ممتاز!', mid: 'ستتحسن مع المزيد من التدريب', low: 'الاستماع يحتاج تدريباً مستمراً' } },
+};
+
+// ===== MAIN =====
+document.addEventListener('DOMContentLoaded', () => {
+  initHeader();
+  initAOS();
+
+  const results = store.get('quizResults');
+  if (!results || !results.scores) {
+    document.getElementById('noResults').style.display = '';
+    return;
+  }
+  document.getElementById('resultsContent').style.display = '';
+  renderResults(results);
+});
+
+function renderResults(r) {
+  const cfg = LEVEL_CONFIG[r.level] || LEVEL_CONFIG['B1'];
+
+  // Header
+  document.getElementById('resultHeaderName').textContent = `تقرير ${r.name} - ${new Date(r.timestamp).toLocaleDateString('ar-SA')}`;
+  document.getElementById('scoreNameEl').textContent = `أهلاً ${r.name}! هذه نتائج اختبار تحديد مستواك في STEP`;
+
+  // Score circle animation
+  setTimeout(() => {
+    const fill = document.getElementById('scoreCircleFill');
+    const circumference = 389.6;
+    const offset = circumference - (r.pct / 100) * circumference;
+    fill.style.stroke = cfg.color;
+    fill.style.strokeDashoffset = offset;
+    document.getElementById('scorePctEl').style.color = cfg.color;
+    animateNum(document.getElementById('scorePctEl'), 0, r.pct, '%', 1200);
+    document.getElementById('scoreCountEl').textContent = `${r.total}/${r.totalQuestions}`;
+  }, 400);
+
+  // Level
+  const levelTag = document.getElementById('levelTagEl');
+  levelTag.textContent = r.level;
+  levelTag.style.background = cfg.bg;
+  levelTag.style.color = cfg.color;
+  levelTag.style.border = `2px solid ${cfg.color}`;
+  document.getElementById('levelNameEl').textContent = cfg.label;
+  document.getElementById('levelDescEl').textContent = cfg.desc;
+  document.getElementById('scorePraiseEl').textContent = cfg.praise;
+
+  // Section bars
+  const barsEl = document.getElementById('sectionBars');
+  barsEl.innerHTML = '';
+  ['grammar','vocabulary','reading','listening'].forEach(sec => {
+    const meta = SECTION_META[sec];
+    const score = r.scores[sec] || 0;
+    const pct = Math.round(score / 6 * 100);
+    const fb = pct >= 67 ? meta.feedback.high : pct >= 34 ? meta.feedback.mid : meta.feedback.low;
+    barsEl.innerHTML += `
+      <div class="section-row">
+        <div class="section-row-header">
+          <div class="section-row-name">${meta.emoji} ${meta.name}</div>
+          <div class="section-row-score" style="color:${meta.color}">${score}/6 (${pct}%)</div>
+        </div>
+        <div class="section-row-bar">
+          <div class="section-row-fill" id="bar_${sec}" style="width:0%;background:${meta.color}"></div>
+        </div>
+        <div class="section-feedback">${fb}</div>
+      </div>`;
+  });
+  setTimeout(() => {
+    ['grammar','vocabulary','reading','listening'].forEach(sec => {
+      const pct = Math.round((r.scores[sec] || 0) / 6 * 100);
+      const bar = document.getElementById(`bar_${sec}`);
+      if (bar) bar.style.width = pct + '%';
+    });
+  }, 600);
+
+  // Plan
+  const defaultPlan = r.examDatePref || cfg.defaultPlan || '15days';
+  selectPlan(defaultPlan);
+
+  // CTA
+  const ctaDescs = {
+    'A1': 'مستواك A1 — الدورة المكثفة ستأخذك لـ B1 أو أعلى بإذن الله خلال أسابيع.',
+    'A2': 'مستواك A2 — مع الدورة المكثفة ستصل لـ B1+ بسهولة.',
+    'B1': 'مستواك B1 — خطوة واحدة تفصلك عن B2! سجّل في الدورة الآن.',
+    'B2': 'مستواك ممتاز B2! الدورة ستضمن لك أعلى الدرجات في STEP.',
+  };
+  document.getElementById('ctaDesc').textContent = ctaDescs[r.level] || '';
+}
+
+function selectPlan(key) {
+  document.querySelectorAll('.plan-option').forEach(el => el.classList.toggle('selected', el.dataset.key === key));
+  const plan = PLANS[key];
+  if (!plan) return;
+
+  // Schedule title
+  document.getElementById('scheduleTitle').textContent = plan.title;
+
+  // Days
+  const daysEl = document.getElementById('scheduleDays');
+  daysEl.innerHTML = plan.days.map((d, i) => `
+    <div class="sched-day ${i === 0 ? 'open' : ''}">
+      <div class="sched-day-header" onclick="toggleSchedDay(this.parentElement)">
+        <div class="sched-day-num">${d.num}</div>
+        <div class="sched-day-title">${d.title}</div>
+        <div class="sched-day-arrow">▼</div>
+      </div>
+      <div class="sched-day-tasks">
+        ${d.tasks.map(t => `<div class="sched-task"><div class="sched-task-time">${t.time}</div><div class="sched-task-text">${t.text}</div></div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  // Telegram plan text
+  const results = store.get('quizResults') || {};
+  const levelAr = (LEVEL_CONFIG[results.level] || {}).label || results.level || 'متوسط';
+  const tgText = generateTelegramPlan(results, plan, key);
+  document.getElementById('tgPlanText').textContent = tgText;
+  const tgBtn = document.getElementById('tgSendBtn');
+  tgBtn.href = `https://t.me/stepp2024`;
+}
+
+function toggleSchedDay(el) {
+  el.classList.toggle('open');
+}
+
+function generateTelegramPlan(r, plan, key) {
+  const levelAr = (LEVEL_CONFIG[r.level] || {}).label || r.level || '';
+  const lines = [
+    `📚 خطة مذاكرة STEP من أكاديمية عايد`,
+    ``,
+    `👤 الاسم: ${r.name || 'الطالب'}`,
+    `📊 المستوى: ${levelAr}`,
+    `📅 الخطة: ${plan.title}`,
+    `✅ النتيجة: ${r.pct}% (${r.total}/${r.totalQuestions})`,
+    ``,
+    `📈 الأداء بالأقسام:`,
+    `• Grammar: ${r.scores?.grammar || 0}/6`,
+    `• Vocabulary: ${r.scores?.vocabulary || 0}/6`,
+    `• Reading: ${r.scores?.reading || 0}/6`,
+    `• Listening: ${r.scores?.listening || 0}/6`,
+    ``,
+    `🎯 الخطوة التالية: سجّل في الدورة المكثفة`,
+    `🔗 الموقع: ${window.location.origin}`,
+    `✈️ تيليجرام: https://t.me/stepp2024`,
+  ];
+  return lines.join('\n');
+}
+
+function copyTgPlan() {
+  const text = document.getElementById('tgPlanText').textContent;
+  copyText(text);
+}
+
+function downloadPlan() {
+  const results = store.get('quizResults') || {};
+  const selected = document.querySelector('.plan-option.selected');
+  const key = selected?.dataset.key || '15days';
+  const plan = PLANS[key];
+  const text = generateTelegramPlan(results, plan, key);
+
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'step-plan-ayed.txt'; a.click();
+  URL.revokeObjectURL(url);
+  toast.success('تم تحميل الخطة!');
+}
+
+function shareResults(method) {
+  const r = store.get('quizResults') || {};
+  const cfg = LEVEL_CONFIG[r.level] || {};
+  const text = `✨ حصلت على مستوى ${cfg.label || r.level} في اختبار STEP من أكاديمية عايد!\nاختبر مستواك أنت: ${window.location.origin}/quiz.html`;
+
+  if (method === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+  else if (method === 'telegram') window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.origin)}&text=${encodeURIComponent(text)}`, '_blank');
+  else if (method === 'copy') copyText(window.location.origin + '/quiz.html');
+}
+
+function animateNum(el, from, to, suffix, dur) {
+  const start = performance.now();
+  const update = now => {
+    const p = Math.min((now - start) / dur, 1);
+    el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1-p, 3))) + suffix;
+    if (p < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+</script>
+</body>
+</html>

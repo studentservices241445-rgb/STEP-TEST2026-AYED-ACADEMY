@@ -1,209 +1,764 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>أكاديمية عايد - دورات STEP</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#012b28">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أكاديمية عايد - STEP 2026 | المنصة الشاملة</title>
+<meta name="description" content="أكاديمية عايد - المنصة الأولى للتحضير لاختبار STEP 2026 لطلاب الجامعة السعودية الإلكترونية">
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1628">
+<style>
+/* Hero */
+.hero-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; padding: 100px 0 60px; }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(26,107,82,0.2) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(250,204,21,0.08) 0%, transparent 50%); pointer-events: none; }
+.hero-orbs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.15; animation: orbFloat 12s ease infinite; }
+.orb1 { width: 400px; height: 400px; background: #1a6b52; top: -100px; right: -100px; }
+.orb2 { width: 300px; height: 300px; background: #facc15; bottom: 50px; left: -80px; animation-delay: 4s; }
+.orb3 { width: 200px; height: 200px; background: #3b82f6; top: 40%; left: 60%; animation-delay: 7s; }
+@keyframes orbFloat { 0%,100%{transform:translate(0,0);} 33%{transform:translate(20px,-30px);} 66%{transform:translate(-20px,20px);} }
+.hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; text-align: center; }
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(250,204,21,0.1); border: 1px solid rgba(250,204,21,0.3); color: #facc15; padding: 7px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 700; margin-bottom: 24px; }
+.hero-title { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 20px; }
+.hero-title .grad { background: linear-gradient(135deg, #22c55e, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-desc { font-size: 1.1rem; color: #94a3b8; max-width: 600px; margin: 0 auto 36px; line-height: 1.8; }
+.hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-trust { display: flex; justify-content: center; gap: 36px; flex-wrap: wrap; }
+.trust-stat { text-align: center; }
+.trust-stat .num { font-size: 2rem; font-weight: 900; color: #facc15; display: block; }
+.trust-stat .lbl { font-size: 0.8rem; color: #64748b; }
+.trust-divider { width: 1px; height: 44px; background: rgba(255,255,255,0.1); align-self: center; }
+/* University Badge */
+.uni-badge { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.25); color: #93c5fd; padding: 10px 18px; border-radius: 12px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+/* Announcements ticker */
+.ticker-wrap { background: rgba(250,204,21,0.08); border-top: 1px solid rgba(250,204,21,0.15); border-bottom: 1px solid rgba(250,204,21,0.15); padding: 10px 0; overflow: hidden; position: relative; }
+.ticker-track { display: flex; gap: 80px; animation: tickerScroll 30s linear infinite; white-space: nowrap; }
+.ticker-item { display: flex; align-items: center; gap: 8px; color: #fcd34d; font-size: 0.85rem; font-weight: 600; }
+@keyframes tickerScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+/* Stats */
+.stats-sec { padding: 70px 0; background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.05); }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+.stat-card { text-align: center; padding: 28px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; transition: all 0.3s; position: relative; overflow: hidden; }
+.stat-card::after { content:''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #1a6b52, #facc15); transform: scaleX(0); transition: transform 0.3s; }
+.stat-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); border-color: rgba(26,107,82,0.3); }
+.stat-card:hover::after { transform: scaleX(1); }
+.stat-icon { font-size: 2rem; margin-bottom: 10px; }
+.stat-num { font-size: 2.6rem; font-weight: 900; color: #facc15; display: inline; }
+.stat-suf { font-size: 1.4rem; font-weight: 900; color: #22c55e; }
+.stat-lbl { font-size: 0.82rem; color: #64748b; margin-top: 4px; }
+/* University Section */
+.uni-section { padding: 70px 0; }
+.uni-card { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.2); border-radius: 20px; padding: 36px; }
+.uni-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+@media(max-width:768px){ .uni-grid{grid-template-columns:1fr;} }
+.uni-logo-placeholder { width: 120px; height: 120px; background: rgba(59,130,246,0.15); border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: 16px; }
+/* Why STEP Section */
+.why-step-sec { padding: 70px 0; }
+.info-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.info-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; transition: all 0.3s; }
+.info-card:hover { border-color: rgba(26,107,82,0.3); transform: translateY(-3px); }
+.info-card .ic-icon { font-size: 2.2rem; margin-bottom: 12px; }
+.info-card h4 { font-size: 1.05rem; font-weight: 800; color: #facc15; margin-bottom: 8px; }
+.info-card p { font-size: 0.88rem; color: #64748b; line-height: 1.7; }
+/* Quiz Promo */
+.quiz-promo { padding: 70px 0; background: rgba(0,0,0,0.2); }
+.quiz-promo-box { background: linear-gradient(135deg, rgba(26,107,82,0.2), rgba(250,204,21,0.08)); border: 1px solid rgba(26,107,82,0.3); border-radius: 24px; padding: 52px 40px; text-align: center; position: relative; overflow: hidden; }
+.quiz-promo-box::before { content:''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(26,107,82,0.15); border-radius: 50%; }
+.quiz-steps { display: flex; justify-content: center; gap: 0; margin: 32px 0; flex-wrap: wrap; }
+.q-step { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; min-width: 100px; }
+.q-step-icon { width: 56px; height: 56px; background: rgba(26,107,82,0.2); border: 2px solid rgba(26,107,82,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+.q-step-label { font-size: 0.82rem; color: #94a3b8; text-align: center; }
+.q-arrow { color: #374151; font-size: 1.2rem; align-self: center; margin-bottom: 24px; }
+/* Course Section */
+.course-sec { padding: 70px 0; }
+.single-course-card { background: linear-gradient(135deg, rgba(26,107,82,0.15) 0%, rgba(0,0,0,0.3) 100%); border: 1px solid rgba(26,107,82,0.3); border-radius: 24px; padding: 40px; max-width: 900px; margin: 0 auto; position: relative; overflow: hidden; }
+.single-course-card::before { content: '⭐ الأكثر طلباً'; position: absolute; top: 20px; left: 20px; background: #facc15; color: #000; font-size: 0.75rem; font-weight: 900; padding: 4px 12px; border-radius: 20px; }
+.course-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 28px; flex-wrap: wrap; }
+.course-title-area h3 { font-size: 1.6rem; font-weight: 900; color: #facc15; margin-bottom: 6px; }
+.course-price-area { text-align: center; }
+.old-p { text-decoration: line-through; color: #64748b; font-size: 0.95rem; }
+.new-p { font-size: 2.5rem; font-weight: 900; color: #22c55e; }
+.new-p small { font-size: 0.9rem; color: #94a3b8; }
+.benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+@media(max-width:600px){ .benefits-grid{grid-template-columns:1fr;} }
+.benefit-row { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #e2e8f0; }
+.benefit-row .bi { color: #22c55e; flex-shrink: 0; }
+/* Testimonials */
+.test-sec { padding: 70px 0; }
+.test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+/* FAQ */
+.faq-sec { padding: 70px 0; background: rgba(0,0,0,0.2); }
+.faq-item { border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; margin-bottom: 10px; overflow: hidden; transition: border-color 0.3s; }
+.faq-item.open { border-color: rgba(26,107,82,0.3); }
+.faq-q { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 20px; cursor: pointer; background: rgba(255,255,255,0.03); font-weight: 700; transition: background 0.3s; }
+.faq-q:hover { background: rgba(255,255,255,0.05); }
+.faq-arrow { transition: transform 0.3s; color: #1a6b52; font-size: 0.8rem; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+.faq-a.open { max-height: 300px; padding: 16px 20px; }
+.faq-a p { color: #94a3b8; font-size: 0.92rem; line-height: 1.8; }
+/* Share Section */
+.share-sec { padding: 50px 0; background: rgba(26,107,82,0.06); border-top: 1px solid rgba(26,107,82,0.15); }
+/* Footer */
+footer { background: #060d1a; border-top: 1px solid rgba(255,255,255,0.05); padding: 56px 0 24px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+@media(max-width:900px){ .footer-grid{grid-template-columns:1fr 1fr;} }
+@media(max-width:580px){ .footer-grid{grid-template-columns:1fr;} }
+.f-col h5 { color: #f8fafc; font-weight: 800; margin-bottom: 14px; font-size: 0.95rem; }
+.f-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.f-col ul li a { color: #4b5563; font-size: 0.88rem; transition: color 0.3s; }
+.f-col ul li a:hover { color: #22c55e; }
+.f-col p { color: #4b5563; font-size: 0.88rem; line-height: 1.7; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.04); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 12px; }
+.footer-bottom p { color: #374151; font-size: 0.82rem; }
+/* Urgency Bar */
+.urgency-bar { background: linear-gradient(135deg, #dc2626, #991b1b); padding: 12px 0; text-align: center; position: sticky; top: 62px; z-index: 150; }
+.urgency-bar p { font-size: 0.85rem; color: #fff; font-weight: 700; }
+/* Popup Signup */
+.signup-popup { position: fixed; bottom: 20px; right: 20px; z-index: 600; background: var(--bg2); border: 1px solid rgba(26,107,82,0.3); border-radius: 16px; padding: 20px; max-width: 280px; box-shadow: 0 8px 30px rgba(0,0,0,0.4); display: none; animation: slideUp 0.4s ease; }
+</style>
 </head>
 <body>
-  <header class="header">
-    <div class="container flex-between">
-      <div class="logo">أكاديمية عايد</div>
-      <nav>
-        <button class="menu-toggle">القائمة ☰</button>
-        <ul class="nav-list">
-          <li><a href="#courses">الدورات</a></li>
-          <li><a href="#about">حول</a></li>
-          <li><a href="#contact">تواصل</a></li>
-        </ul>
+
+<!-- Header -->
+<header class="site-header" id="mainHeader">
+  <div class="container">
+    <div class="header-inner">
+      <div class="header-logo" onclick="location.href='index.html'">
+        <div style="width:44px;height:44px;background:linear-gradient(135deg,#1a6b52,#0f4a38);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:white;border:2px solid rgba(250,204,21,0.3);box-shadow:0 0 12px rgba(26,107,82,0.4)">ع</div>
+        <div class="logo-text-wrap">
+          <div class="logo-name">أكاديمية عايد</div>
+          <div class="logo-sub">STEP 2026</div>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <a href="#quiz">اختبار المستوى</a>
+        <a href="#course">الدورة</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+        <a href="register.html" class="btn btn-accent btn-sm">سجّل الآن</a>
       </nav>
-    </div>
-  </header>
-
-  <section id="hero" class="hero">
-    <div class="container">
-      <h1>ارتقِ بمهاراتك في اختبار STEP</h1>
-      <p>اختر الدورة المناسبة لك وسجّل الآن بخطوات بسيطة.</p>
-      <a href="#courses" class="btn primary">استعرض الدورات</a>
-    </div>
-  </section>
-
-  <section id="courses" class="courses-section">
-    <div class="container">
-      <h2>الدورات المتاحة</h2>
-      <div class="course-grid">
-        <!-- Course 1 -->
-        <div class="course-card" data-course-id="course1">
-          <h3>دورة STEP المكثفة</h3>
-          <p>برنامج مكثف يغطّي أهم مهارات القراءة، الاستماع، القواعد والمفردات.</p>
-          <ul>
-            <li>خطة دراسة لمدة 4 أسابيع</li>
-            <li>تجميعات وأسئلة حديثة</li>
-            <li>دعم مباشر عبر تيليجرام</li>
-          </ul>
-          <div class="price">
-            <span class="old-price">299 ريال</span>
-            <span class="new-price">199 ريال</span>
-          </div>
-          <button class="btn register-btn" data-course-id="course1">التسجيل في الدورة</button>
+      <div class="header-actions">
+        <div class="header-user" id="headerUserBtn" onclick="location.href='login.html'">
+          <div class="user-avatar" id="headerAvatar">م</div>
+          <span class="user-name" id="headerUserName">حسابي</span>
         </div>
-        <!-- Course 2 -->
-        <div class="course-card" data-course-id="course2">
-          <h3>دورة STEP الأساسيات</h3>
-          <p>أساسيات اختبار STEP في أسبوعين، مناسبة للمبتدئين والمتوسطين.</p>
-          <ul>
-            <li>منهج مبسّط لجميع الأقسام</li>
-            <li>ملخصات PDF حصرية</li>
-            <li>نماذج محلولة</li>
-          </ul>
-          <div class="price">
-            <span class="old-price">199 ريال</span>
-            <span class="new-price">149 ريال</span>
-          </div>
-          <button class="btn register-btn" data-course-id="course2">التسجيل في الدورة</button>
-        </div>
-        <!-- Course 3 -->
-        <div class="course-card" data-course-id="course3">
-          <h3>دورة STEP المتقدمة</h3>
-          <p>تركيز على التقنيات المتقدمة والحيل لاجتياز أعلى الدرجات.</p>
-          <ul>
-            <li>استراتيجيات احترافية للحل</li>
-            <li>اختبارات محاكية</li>
-            <li>جلسات توجيه فردية</li>
-          </ul>
-          <div class="price">
-            <span class="old-price">349 ريال</span>
-            <span class="new-price">249 ريال</span>
-          </div>
-          <button class="btn register-btn" data-course-id="course3">التسجيل في الدورة</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="about-section">
-    <div class="container">
-      <h2>عن الأكاديمية</h2>
-      <p>أكاديمية عايد متخصصة في تقديم برامج تدريبية لاختبار STEP مبنية على خبرة سنوات في المجال. نقدم محتوى مطوّر باستمرار يساعدك على التقدم بثقة نحو أهدافك.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <h2>تواصل معنا</h2>
-      <p>
-        للاستفسارات أو الدعم، يمكنكم التواصل عبر البريد الإلكتروني:
-        <a href="mailto:info@academy.com">info@academy.com</a>
-        أو عبر قناتنا الرسمية على تيليجرام:
-        <a href="https://t.me/stepp2024" target="_blank">@stepp2024</a>.
-      </p>
-      <p>
-        عندما تكمل نموذج التسجيل، يتم إرسال بياناتك تلقائيًا إلى المنسق عبر سكربت جوجل مرتبط بتيليجرام، وسيتم الرد عليك في أقرب وقت ممكن.
-      </p>
-    </div>
-  </section>
-
-  <!-- Modal for Registration -->
-  <div id="registrationModal" class="modal hidden">
-    <div class="modal-overlay"></div>
-    <div class="modal-wrapper">
-      <div class="modal-header">
-        <h3 id="modalTitle">التسجيل في الدورة</h3>
-        <button type="button" class="modal-close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="registrationForm">
-          <!-- Step 1: Student information -->
-          <div class="form-step active" data-step="1">
-            <h4>الخطوة 1: معلومات الطالب</h4>
-            <div class="form-group">
-              <label for="fullName">الاسم الكامل</label>
-              <input type="text" id="fullName" name="fullName" required>
-            </div>
-            <div class="form-group">
-              <label for="contactInfo">رقم الجوال أو البريد الإلكتروني</label>
-              <input type="text" id="contactInfo" name="contactInfo" required>
-            </div>
-            <div class="form-group">
-              <label for="participants">عدد المسجلين</label>
-              <input type="number" id="participants" name="participants" min="1" value="1" required>
-            </div>
-            <div class="form-group">
-              <label for="source">كيف عرفت عن الأكاديمية؟</label>
-              <select id="source" name="source" required>
-                <option value="" disabled selected>اختر...</option>
-                <option value="صديق">عن طريق صديق</option>
-                <option value="تويتر">تويتر</option>
-                <option value="إعلان">إعلان</option>
-                <option value="أخرى">أخرى</option>
-              </select>
-            </div>
-            <div class="modal-actions">
-              <button type="button" class="btn primary next-step">التالي</button>
-            </div>
-          </div>
-
-          <!-- Step 2: Invoice summary -->
-          <div class="form-step" data-step="2">
-            <h4>الخطوة 2: ملخص الرسوم</h4>
-            <div class="invoice">
-              <p>السعر قبل الخصم: <span id="priceBefore"></span></p>
-              <p>قيمة الخصم: <span id="discountValue"></span></p>
-              <p>السعر بعد الخصم: <strong id="totalPrice"></strong></p>
-            </div>
-            <div class="modal-actions">
-              <button type="button" class="btn secondary prev-step">رجوع</button>
-              <button type="button" class="btn primary next-step">تأكيد الدفع</button>
-            </div>
-          </div>
-
-          <!-- Step 3: Payment details -->
-          <div class="form-step" data-step="3">
-            <h4>الخطوة 3: معلومات الدفع</h4>
-            <p>الرجاء تحويل المبلغ إلى الحساب التالي:</p>
-            <div class="bank-details">
-              <p>اسم البنك: <strong id="bankName"></strong></p>
-              <p>اسم المستفيد: <strong id="beneficiary"></strong></p>
-              <p>رقم الحساب: <strong id="accountNumber"></strong> <button type="button" class="copy-btn" data-target="accountNumber">نسخ</button></p>
-              <p>الآيبان: <strong id="iban"></strong> <button type="button" class="copy-btn" data-target="iban">نسخ</button></p>
-            </div>
-            <p class="payment-note">بعد إجراء التحويل، يرجى إرسال صورة من إيصال الدفع عبر البريد الإلكتروني أو تيليجرام ليتم تأكيد تسجيلك.</p>
-            <div class="modal-actions">
-              <button type="button" class="btn secondary prev-step">رجوع</button>
-              <button type="button" class="btn primary next-step">إرسال تأكيد التسجيل</button>
-            </div>
-          </div>
-
-          <!-- Step 4: Confirmation -->
-          <div class="form-step" data-step="4">
-            <h4>تم الإرسال</h4>
-            <p>شكرًا لك! تم استلام بياناتك. سيتم التواصل معك قريبًا لتزويدك بروابط الدورة بعد تأكيد الدفع.</p>
-            <div class="modal-actions">
-              <button type="button" class="btn primary close-modal">إغلاق</button>
-            </div>
-          </div>
-
-          <!-- hidden fields -->
-          <input type="hidden" id="selectedCourseId" name="selectedCourseId">
-        </form>
+        <button class="menu-toggle" id="menuToggle">
+          <div class="hamburger"><span></span><span></span><span></span></div>
+        </button>
       </div>
     </div>
   </div>
+</header>
 
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 أكاديمية عايد. جميع الحقوق محفوظة.</p>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-panel">
+    <div class="mobile-menu-header">
+      <div style="font-weight:800;color:#facc15">القائمة</div>
+      <button style="background:none;border:none;color:#94a3b8;font-size:1.4rem;cursor:pointer" id="mobileMenuClose">✕</button>
     </div>
-  </footer>
+    <a class="mobile-nav-link" href="index.html">🏠 الرئيسية</a>
+    <a class="mobile-nav-link" href="#quiz">📝 اختبار المستوى</a>
+    <a class="mobile-nav-link" href="#course">📚 الدورة المكثفة</a>
+    <a class="mobile-nav-link" href="register.html">💳 التسجيل والدفع</a>
+    <a class="mobile-nav-link" href="#faq">❓ الأسئلة الشائعة</a>
+    <a class="mobile-nav-link" href="https://t.me/stepp2024" target="_blank">✈️ تيليجرام</a>
+    <div style="margin-top:16px">
+      <button class="btn btn-accent btn-full" onclick="location.href='register.html'">سجّل في الدورة ←</button>
+    </div>
+    <div style="margin-top:10px">
+      <button class="btn btn-ghost btn-full" onclick="auth.logout()">تسجيل الخروج</button>
+    </div>
+  </div>
+</div>
 
-  <script src="app.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
+<!-- Urgency Bar -->
+<div class="urgency-bar" id="urgencyBar">
+  <p>🔥 عرض محدود! المقاعد تُنفد. <span id="urgencyCountdown" style="color:#fcd34d">جاري التحميل...</span> — <a href="register.html" style="color:#fff;text-decoration:underline;font-weight:900">سجّل الآن</a></p>
+</div>
+
+<!-- Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item">📢 دورة STEP المكثفة 2026 متاحة الآن</span>
+    <span class="ticker-item">✅ 500+ طالب اجتاز STEP مع أكاديمية عايد</span>
+    <span class="ticker-item">🎯 اختبار تحديد المستوى مجاني 100%</span>
+    <span class="ticker-item">📅 المقاعد محدودة — احجز مكانك</span>
+    <span class="ticker-item">🏛️ مخصص لطلاب الجامعة السعودية الإلكترونية</span>
+    <span class="ticker-item">📢 دورة STEP المكثفة 2026 متاحة الآن</span>
+    <span class="ticker-item">✅ 500+ طالب اجتاز STEP مع أكاديمية عايد</span>
+    <span class="ticker-item">🎯 اختبار تحديد المستوى مجاني 100%</span>
+    <span class="ticker-item">📅 المقاعد محدودة — احجز مكانك</span>
+    <span class="ticker-item">🏛️ مخصص لطلاب الجامعة السعودية الإلكترونية</span>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero-section">
+  <div class="hero-bg"></div>
+  <div class="hero-orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
+  <div class="container">
+    <div class="hero-content animate-fade-up">
+      <div class="uni-badge">🏛️ مخصص لطلاب الجامعة السعودية الإلكترونية</div>
+      <div class="hero-tag">🏆 المنصة الأولى للتحضير لـ STEP في السعودية</div>
+      <h1 class="hero-title">
+        اجتز اختبار <span class="grad">STEP 2026</span><br>بثقة واحترافية
+      </h1>
+      <p class="hero-desc">ابدأ باختبار تحديد المستوى المجاني، احصل على خطة مذاكرة مخصصة لك، وانضم لأكثر من 500 طالب حققوا أهدافهم مع أكاديمية عايد.</p>
+      <div class="hero-cta">
+        <a href="quiz.html" class="btn btn-primary btn-lg">🎯 ابدأ اختبار المستوى مجاناً</a>
+        <a href="#course" class="btn btn-ghost btn-lg">📚 استعرض الدورة</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-stat"><span class="num" data-count="500">0</span><span>+</span><div class="lbl">طالب مسجّل</div></div>
+        <div class="trust-divider"></div>
+        <div class="trust-stat"><span class="num" data-count="92">0</span><span>%</span><div class="lbl">نسبة النجاح</div></div>
+        <div class="trust-divider"></div>
+        <div class="trust-stat"><span class="num" data-count="30">0</span><span>+</span><div class="lbl">نموذج حديث</div></div>
+        <div class="trust-divider"></div>
+        <div class="trust-stat"><span class="num" data-count="3">0</span><span>+</span><div class="lbl">سنوات خبرة</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats-sec">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card" data-aos><div class="stat-icon">🎓</div><div><span class="stat-num" data-target="500">0</span><span class="stat-suf">+</span></div><div class="stat-lbl">طالب استفاد من الدورة</div></div>
+      <div class="stat-card" data-aos><div class="stat-icon">⭐</div><div><span class="stat-num" data-target="92">0</span><span class="stat-suf">%</span></div><div class="stat-lbl">نسبة رضا الطلاب</div></div>
+      <div class="stat-card" data-aos><div class="stat-icon">📚</div><div><span class="stat-num" data-target="30">0</span><span class="stat-suf">+</span></div><div class="stat-lbl">نموذج STEP محلول</div></div>
+      <div class="stat-card" data-aos><div class="stat-icon">🏅</div><div><span class="stat-num" data-target="85">0</span><span class="stat-suf">%</span></div><div class="stat-lbl">تجاوزوا الدرجة المستهدفة</div></div>
+      <div class="stat-card" data-aos><div class="stat-icon">🏫</div><div><span class="stat-num" data-target="8">0</span><span class="stat-suf">+</span></div><div class="stat-lbl">خطط مذاكرة متاحة</div></div>
+      <div class="stat-card" data-aos><div class="stat-icon">⏱️</div><div><span class="stat-num" data-target="3">0</span><span class="stat-suf">+</span></div><div class="stat-lbl">سنوات خبرة</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- University Section -->
+<section class="uni-section">
+  <div class="container">
+    <div class="uni-card" data-aos>
+      <div class="uni-grid">
+        <div>
+          <div class="uni-logo-placeholder">🏛️</div>
+          <h2 style="font-size:1.6rem;color:#facc15;margin-bottom:12px">الجامعة السعودية الإلكترونية</h2>
+          <p style="color:#94a3b8;font-size:0.92rem;line-height:1.8;margin-bottom:16px">يُعدّ اختبار STEP من متطلبات القبول في بعض برامج الجامعة السعودية الإلكترونية. تأهّل للقبول وحقق الدرجة المطلوبة مع أكاديمية عايد.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="badge badge-info">إدارة الأعمال</span>
+            <span class="badge badge-info">تقنية المعلومات</span>
+            <span class="badge badge-info">علوم الحاسب</span>
+            <span class="badge badge-info">الإعلام والاتصال</span>
+          </div>
+        </div>
+        <div>
+          <h4 style="color:#93c5fd;margin-bottom:16px;font-size:1rem">لماذا STEP مهم لك؟</h4>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="benefit-row"><span class="bi">✅</span><span>متطلب قبول في بعض برامج الجامعة</span></div>
+            <div class="benefit-row"><span class="bi">✅</span><span>تُحدد مسارك الأكاديمي من اليوم الأول</span></div>
+            <div class="benefit-row"><span class="bi">✅</span><span>درجاتك تفتح أبواب الفرص الوظيفية</span></div>
+            <div class="benefit-row"><span class="bi">✅</span><span>بديل مُعتمد للبرنامج المكثف في اللغة</span></div>
+          </div>
+          <a href="quiz.html" class="btn btn-primary" style="margin-top:20px;text-decoration:none">اعرف مستواك الآن →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why STEP & What we offer -->
+<section class="why-step-sec" id="about">
+  <div class="container">
+    <div class="section-header" data-aos>
+      <div class="section-badge">ما نقدمه</div>
+      <h2>كل ما تحتاجه في مكان واحد</h2>
+      <p class="section-subtitle">منصة متكاملة تأخذك من تحديد مستواك إلى اجتياز الاختبار بثقة</p>
+    </div>
+    <div class="info-cards">
+      <div class="info-card" data-aos><div class="ic-icon">🎯</div><h4>اختبار تحديد المستوى</h4><p>اختبر نفسك في جميع أقسام STEP واعرف مستواك الحقيقي مع شرح مفصل لكل إجابة.</p></div>
+      <div class="info-card" data-aos><div class="ic-icon">📅</div><h4>خطة مذاكرة مخصصة</h4><p>احصل على خطة دراسية تتناسب مع مستواك وتاريخ اختبارك، من يوم واحد حتى 3 أشهر.</p></div>
+      <div class="info-card" data-aos><div class="ic-icon">📝</div><h4>بنك أسئلة شامل</h4><p>أكثر من 200 سؤال في Grammar و Reading و Listening و Vocabulary مع حلول مفصّلة.</p></div>
+      <div class="info-card" data-aos><div class="ic-icon">🎓</div><h4>الدورة المكثفة</h4><p>محتوى شامل يغطي جميع أقسام STEP مع محاضرات مسجلة وملخصات ونماذج محلولة.</p></div>
+      <div class="info-card" data-aos><div class="ic-icon">💬</div><h4>دعم مباشر</h4><p>مجموعة دعم نشطة على تيليجرام وردود سريعة من المدرب على استفساراتك.</p></div>
+      <div class="info-card" data-aos><div class="ic-icon">📱</div><h4>تطبيق يعمل أوفلاين</h4><p>احفظ خطتك ونتائجك واستمر في المذاكرة حتى بدون إنترنت عبر تطبيق PWA.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Quiz Promo -->
+<section class="quiz-promo" id="quiz">
+  <div class="container">
+    <div class="quiz-promo-box" data-aos>
+      <div class="section-badge" style="position:relative;z-index:1">مجاني 100%</div>
+      <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);color:#facc15;margin:12px 0;position:relative;z-index:1">اختبر مستواك الآن في STEP!</h2>
+      <p style="color:#94a3b8;font-size:1rem;max-width:550px;margin:0 auto 32px;position:relative;z-index:1">حل 24 سؤالاً في جميع أقسام STEP واحصل فوراً على تقييمك ومستواك وخطة مذاكرة مخصصة تُرسل لك على تيليجرام.</p>
+      <div class="quiz-steps">
+        <div class="q-step"><div class="q-step-icon">📝</div><div class="q-step-label">حل الأسئلة</div></div>
+        <div class="q-arrow">←</div>
+        <div class="q-step"><div class="q-step-icon">📊</div><div class="q-step-label">اعرف مستواك</div></div>
+        <div class="q-arrow">←</div>
+        <div class="q-step"><div class="q-step-icon">📅</div><div class="q-step-label">خطة مخصصة</div></div>
+        <div class="q-arrow">←</div>
+        <div class="q-step"><div class="q-step-icon">🚀</div><div class="q-step-label">سجّل في الدورة</div></div>
+      </div>
+      <a href="quiz.html" class="btn btn-accent btn-lg" style="position:relative;z-index:1;text-decoration:none">ابدأ الاختبار مجاناً ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- Course Section -->
+<section class="course-sec" id="course">
+  <div class="container">
+    <div class="section-header" data-aos>
+      <div class="section-badge">الدورة الشاملة</div>
+      <h2>الدورة المكثفة 2026</h2>
+      <p class="section-subtitle">دورة واحدة تغطي كل ما تحتاجه لاجتياز STEP بأعلى الدرجات</p>
+    </div>
+    <!-- Countdown + Seats -->
+    <div style="max-width:900px;margin:0 auto 32px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div id="countdownEl"></div>
+      <div id="seatsEl"></div>
+    </div>
+    <div class="single-course-card" data-aos>
+      <div class="course-header">
+        <div class="course-title-area">
+          <h3>دورة STEP المكثفة 2026</h3>
+          <p style="color:#94a3b8;font-size:0.92rem">مع المدرب: عايد السطوحي | خطة 4 أسابيع</p>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <span class="badge badge-success">Grammar</span>
+            <span class="badge badge-info">Reading</span>
+            <span class="badge badge-accent">Listening</span>
+            <span class="badge badge-primary">Vocabulary</span>
+          </div>
+        </div>
+        <div class="course-price-area">
+          <div class="old-p">كان 299 ريال</div>
+          <div class="new-p">199 <small>ريال</small></div>
+          <div style="background:rgba(250,204,21,0.15);border:1px solid rgba(250,204,21,0.3);border-radius:8px;padding:4px 10px;font-size:0.78rem;color:#facc15;margin-top:4px">وفّر 100 ريال 🎉</div>
+        </div>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-row"><span class="bi">✅</span><span>محاضرات مسجلة لجميع أقسام STEP</span></div>
+        <div class="benefit-row"><span class="bi">✅</span><span>ملخصات PDF حصرية</span></div>
+        <div class="benefit-row"><span class="bi">✅</span><span>30+ نموذج محلول وغير محلول</span></div>
+        <div class="benefit-row"><span class="bi">✅</span><span>استراتيجيات احترافية للحل</span></div>
+        <div class="benefit-row"><span class="bi">✅</span><span>دعم مباشر عبر تيليجرام</span></div>
+        <div class="benefit-row"><span class="bi">✅</span><span>خطة مذاكرة مخصصة</span></div>
+        <div class="benefit-row"><span class="bi">✅</span><span>تجميعات وأسئلة حديثة 2026</span></div>
+        <div class="benefit-row"><span class="bi">✅</span><span>خرائط مفاهيم + ملخصات سريعة</span></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="course.html" class="btn btn-ghost" style="text-decoration:none">📋 استعرض الفهرس الكامل</a>
+        <a href="register.html" class="btn btn-primary btn-lg" style="flex:1;text-decoration:none;text-align:center">سجّل في الدورة الآن ←</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="test-sec" id="reviews">
+  <div class="container">
+    <div class="section-header" data-aos>
+      <div class="section-badge">آراء الطلاب</div>
+      <h2>ماذا يقول طلابنا؟</h2>
+    </div>
+    <div class="test-grid">
+      <div class="testimonial-card" data-aos>
+        <div style="color:#facc15;margin-bottom:10px;font-size:0.9rem">⭐⭐⭐⭐⭐</div>
+        <p style="color:#94a3b8;font-size:0.92rem;line-height:1.8;font-style:italic;margin-bottom:16px">"اختبار المستوى حدّد نقاط ضعفي بالضبط! والخطة اللي طلعت لي ساعدتني أنظم وقتي. اجتزت STEP بـ 82 بعد 3 أسابيع فقط."</p>
+        <div style="display:flex;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px">
+          <div style="width:38px;height:38px;background:linear-gradient(135deg,#1a6b52,#0f4a38);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.82rem">م.ع</div>
+          <div><div style="font-weight:700;font-size:0.9rem">محمد ع.</div><div style="font-size:0.78rem;color:#4b5563">طالب - جامعة الإلكترونية</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card" data-aos>
+        <div style="color:#facc15;margin-bottom:10px;font-size:0.9rem">⭐⭐⭐⭐⭐</div>
+        <p style="color:#94a3b8;font-size:0.92rem;line-height:1.8;font-style:italic;margin-bottom:16px">"كنت A1 وبعد شهرين مع أكاديمية عايد وصلت B2! الفهرس منظّم والمواد شاملة. شكراً عايد على هذا الجهد الرائع."</p>
+        <div style="display:flex;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px">
+          <div style="width:38px;height:38px;background:linear-gradient(135deg,#6366f1,#4f46e5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.82rem">س.م</div>
+          <div><div style="font-weight:700;font-size:0.9rem">سارة م.</div><div style="font-size:0.78rem;color:#4b5563">طالبة دراسات عليا</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card" data-aos>
+        <div style="color:#facc15;margin-bottom:10px;font-size:0.9rem">⭐⭐⭐⭐⭐</div>
+        <p style="color:#94a3b8;font-size:0.92rem;line-height:1.8;font-style:italic;margin-bottom:16px">"أفضل استثمار! النماذج المحلولة مع الشرح فهّمتني أكثر من أي كتاب. حصلت 78 وما كنت أتوقع هالرقم بصراحة."</p>
+        <div style="display:flex;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px">
+          <div style="width:38px;height:38px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.82rem">ع.خ</div>
+          <div><div style="font-weight:700;font-size:0.9rem">عبدالله خ.</div><div style="font-size:0.78rem;color:#4b5563">موظف حكومي</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- عروض ومناسبات -->
+<section style="padding:60px 0;background:rgba(0,0,0,0.15)" id="offers">
+  <div class="container">
+    <div class="section-header" data-aos>
+      <div class="section-badge">عروض حصرية</div>
+      <h2>عروض أكاديمية عايد</h2>
+      <p>استفد من العروض قبل انتهائها!</p>
+    </div>
+    <div class="promo-grid">
+      <div class="card promo-card ramadan" data-aos>
+        <span class="promo-badge">عرض رمضان 🌙</span>
+        <div class="promo-emoji">🌙</div>
+        <h3 style="margin-bottom:8px">عرض رمضان الكريم</h3>
+        <p style="font-size:0.85rem;color:var(--text2);margin-bottom:12px">في شهر البركة، وفّر أكثر على الدورة المكثفة</p>
+        <div class="promo-old-price">299 ر.</div>
+        <div class="promo-new-price">179 ر.</div>
+        <a href="register.html" class="btn btn-primary btn-sm" style="margin-top:12px">احجز بسعر رمضان</a>
+      </div>
+      <div class="card promo-card foundations" data-aos>
+        <span class="promo-badge">يوم الأسس 🎉</span>
+        <div class="promo-emoji">🎊</div>
+        <h3 style="margin-bottom:8px">خصم يوم الأسس</h3>
+        <p style="font-size:0.85rem;color:var(--text2);margin-bottom:12px">احتفالاً بيوم تأسيس أكاديمية عايد</p>
+        <div class="promo-old-price">299 ر.</div>
+        <div class="promo-new-price">189 ر.</div>
+        <a href="register.html" class="btn btn-primary btn-sm" style="margin-top:12px">استفد من الخصم</a>
+      </div>
+      <div class="card promo-card exam-day" data-aos>
+        <span class="promo-badge">العرض الدائم 💚</span>
+        <div class="promo-emoji">🎯</div>
+        <h3 style="margin-bottom:8px">العرض الحالي</h3>
+        <p style="font-size:0.85rem;color:var(--text2);margin-bottom:12px">الدورة المكثفة بأفضل سعر - سنة كاملة</p>
+        <div class="promo-old-price">299 ر.</div>
+        <div class="promo-new-price">199 ر.</div>
+        <a href="register.html" class="btn btn-accent btn-sm" style="margin-top:12px">سجّل الحين 🚀</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- أدوات ومميزات إضافية -->
+<section style="padding:60px 0" id="tools">
+  <div class="container">
+    <div class="section-header" data-aos>
+      <div class="section-badge">أدوات مجانية</div>
+      <h2>أدوات STEP المجانية</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="tools.html" class="card tool-card" data-aos style="text-decoration:none">
+        <div class="tool-icon">🔢</div>
+        <h4>آلة حاسبة</h4>
+        <p>احسب درجتك المتوقعة في STEP</p>
+      </a>
+      <a href="tools.html#vocab" class="card tool-card" data-aos style="text-decoration:none">
+        <div class="tool-icon">📚</div>
+        <h4>بطاقات المفردات</h4>
+        <p>تعلم أهم مفردات STEP بطريقة ممتعة</p>
+      </a>
+      <a href="tools.html#grammar" class="card tool-card" data-aos style="text-decoration:none">
+        <div class="tool-icon">📝</div>
+        <h4>ملخص القواعد</h4>
+        <p>مرجع سريع لأهم قواعد STEP</p>
+      </a>
+      <a href="tools.html#game" class="card tool-card" data-aos style="text-decoration:none">
+        <div class="tool-icon">🎮</div>
+        <h4>Wordle STEP</h4>
+        <p>لعبة تعليمية تعمل أوفلاين</p>
+      </a>
+      <a href="dashboard.html" class="card tool-card" data-aos style="text-decoration:none">
+        <div class="tool-icon">📊</div>
+        <h4>جدول المذاكرة</h4>
+        <p>تابع تقدمك وأنجز مهامك اليومية</p>
+      </a>
+      <a href="pre-quiz.html" class="card tool-card" data-aos style="text-decoration:none">
+        <div class="tool-icon">📋</div>
+        <h4>استبيان المذاكرة</h4>
+        <p>احصل على خطة مخصصة لوضعك</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- تقييمات موسعة -->
+<section style="padding:60px 0;background:rgba(0,0,0,0.15)" id="reviews-full">
+  <div class="container">
+    <div class="section-header" data-aos>
+      <div class="section-badge">آراء موثقة</div>
+      <h2>تجارب طلاب حقيقيين ✨</h2>
+      <p>آراء طلاب حققوا أهدافهم مع أكاديمية عايد</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card card" data-aos>
+        <div style="position:absolute;top:16px;left:20px;font-size:3rem;color:rgba(250,204,21,0.1);font-family:serif">"</div>
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">م</div>
+          <div class="testimonial-info">
+            <div class="name">محمد العتيبي</div>
+            <div class="meta">طالب - الجامعة الإلكترونية · إدارة أعمال</div>
+            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+        <p class="testimonial-text">"اختبار تحديد المستوى حدّد نقاط ضعفي بالضبط! والخطة اللي طلعت لي ساعدتني أنظم وقتي. اجتزت STEP بـ 82 بعد 3 أسابيع فقط."</p>
+        <span class="testimonial-score">📊 82% في STEP</span>
+        <a href="register.html" class="btn btn-ghost btn-sm redirect-btn">سجّل مثلي →</a>
+      </div>
+      <div class="testimonial-card card" data-aos>
+        <div class="testimonial-header">
+          <div class="testimonial-avatar female">س</div>
+          <div class="testimonial-info">
+            <div class="name">سارة الزهراني</div>
+            <div class="meta">طالبة - دراسات عليا</div>
+            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+        <p class="testimonial-text">"كنت A1 وبعد شهرين مع أكاديمية عايد وصلت B2! الفهرس منظّم والمواد شاملة. شكراً عايد على هذا الجهد الرائع."</p>
+        <span class="testimonial-score">📈 من A1 إلى B2</span>
+        <a href="register.html" class="btn btn-ghost btn-sm redirect-btn">أريد نفس النتيجة →</a>
+      </div>
+      <div class="testimonial-card card" data-aos>
+        <div class="testimonial-header">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">ع</div>
+          <div class="testimonial-info">
+            <div class="name">عبدالله الشمري</div>
+            <div class="meta">موظف حكومي</div>
+            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+        <p class="testimonial-text">"أفضل استثمار! النماذج المحلولة مع الشرح فهّمتني أكثر من أي كتاب. حصلت 78 وما كنت أتوقع هالرقم بصراحة."</p>
+        <span class="testimonial-score">📊 78% في STEP</span>
+        <a href="register.html" class="btn btn-ghost btn-sm redirect-btn">ابدأ رحلتي →</a>
+      </div>
+      <div class="testimonial-card card" data-aos>
+        <div class="testimonial-header">
+          <div class="testimonial-avatar female" style="background:linear-gradient(135deg,#10b981,#059669)">ن</div>
+          <div class="testimonial-info">
+            <div class="name">نورة العتيبي</div>
+            <div class="meta">طالبة - تقنية المعلومات</div>
+            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+        <p class="testimonial-text">"حصلت على 85% في STEP بعد الكورس وكنت قبله ما أعرف شو افعل! الدكتور عايد يشرح بأسلوب بسيط وواضح جداً."</p>
+        <span class="testimonial-score">📊 85% في STEP</span>
+        <a href="register.html" class="btn btn-ghost btn-sm redirect-btn">سجّل الحين →</a>
+      </div>
+      <div class="testimonial-card card" data-aos>
+        <div class="testimonial-header">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#6366f1,#4f46e5)">خ</div>
+          <div class="testimonial-info">
+            <div class="name">خالد الغامدي</div>
+            <div class="meta">طالب - المحاسبة</div>
+            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+        <p class="testimonial-text">"الكورس أنقذني! كان موعد الاختبار بعد أسبوعين وما كنت مستعد. بعد الكورس المكثف حصلت على 71% ونجحت في التخرج."</p>
+        <span class="testimonial-score">✅ اجتاز شرط التخرج</span>
+        <a href="register.html" class="btn btn-ghost btn-sm redirect-btn">أريد النجاح أيضاً →</a>
+      </div>
+      <div class="testimonial-card card" data-aos>
+        <div class="testimonial-header">
+          <div class="testimonial-avatar female" style="background:linear-gradient(135deg,#ec4899,#be185d)">م</div>
+          <div class="testimonial-info">
+            <div class="name">منيرة الدوسري</div>
+            <div class="meta">موظفة - الرياض</div>
+            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+        <p class="testimonial-text">"سجلت مساء واتواصلت معي صباح اليوم التالي! الدعم عبر تيليجرام ممتاز وسريع. والمحاضرات واضحة ومرتبة."</p>
+        <span class="testimonial-score">⭐ دعم ممتاز وسريع</span>
+        <a href="register.html" class="btn btn-ghost btn-sm redirect-btn">جربيه الآن →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec" id="faq">
+  <div class="container container-md">
+    <div class="section-header" data-aos>
+      <div class="section-badge">الأسئلة الشائعة</div>
+      <h2>الأسئلة الأكثر شيوعاً</h2>
+    </div>
+    <div id="faqList"></div>
+  </div>
+</section>
+
+<!-- Share Section -->
+<section class="share-sec">
+  <div class="container" style="text-align:center">
+    <h3 style="color:#facc15;margin-bottom:8px">شارك مع أصدقائك 📤</h3>
+    <p style="color:#64748b;font-size:0.9rem;margin-bottom:20px">ساعد زملاءك في اجتياز STEP</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="share-btn share-twitter" onclick="share.twitter()">🐦 تويتر</button>
+      <button class="share-btn share-whatsapp" onclick="share.whatsapp()">💬 واتساب</button>
+      <button class="share-btn share-telegram" onclick="share.telegram()">✈️ تيليجرام</button>
+      <button class="share-btn share-copy" onclick="share.copy()">🔗 نسخ الرابط</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-col">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <div style="width:40px;height:40px;background:linear-gradient(135deg,#1a6b52,#0f4a38);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem">🎓</div>
+          <div><div style="font-weight:900;color:#facc15">أكاديمية عايد</div><div style="font-size:0.75rem;color:#4b5563">STEP 2026</div></div>
+        </div>
+        <p>متخصصون في التحضير لاختبار STEP لطلاب الجامعة السعودية الإلكترونية وجميع الراغبين في الاجتياز.</p>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <a href="https://t.me/stepp2024" target="_blank" class="btn btn-ghost btn-sm">✈️ تيليجرام</a>
+          <a href="https://twitter.com/Ayed_Academy" target="_blank" class="btn btn-ghost btn-sm">🐦 تويتر</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>روابط سريعة</h5>
+        <ul>
+          <li><a href="index.html">🏠 الرئيسية</a></li>
+          <li><a href="quiz.html">📝 اختبار المستوى</a></li>
+          <li><a href="course.html">📚 الدورة</a></li>
+          <li><a href="register.html">💳 التسجيل</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>الدعم</h5>
+        <ul>
+          <li><a href="#faq">❓ الأسئلة الشائعة</a></li>
+          <li><a href="https://t.me/stepp2024" target="_blank">✈️ تيليجرام</a></li>
+          <li><a href="mailto:info@ayedacademy.co">📧 البريد</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>أوقات الدعم</h5>
+        <p>السبت - الخميس<br>9 صباحاً - 11 مساءً</p>
+        <div style="margin-top:12px"><span class="badge badge-success">● متاح الآن</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 أكاديمية عايد للتدريب. جميع الحقوق محفوظة.</p>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" onclick="share.native()">📤 مشاركة</button>
+        <button class="btn btn-ghost btn-sm" onclick="triggerInstall()">📲 تثبيت</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Assistant -->
+<div id="floatingAssistant">
+  <button class="assistant-btn" id="assistantBtn" title="المساعد">🤖</button>
+  <div class="assistant-panel" id="assistantPanel">
+    <div class="assistant-header">
+      <div class="assistant-avatar">🎓</div>
+      <div><h4>مساعد أكاديمية عايد</h4><p>كيف أقدر أساعدك؟</p></div>
+    </div>
+    <div class="assistant-links">
+      <div class="assistant-link" onclick="location.href='quiz.html'"><span class="assistant-link-icon">🎯</span><span>اختبار تحديد المستوى</span></div>
+      <div class="assistant-link" onclick="location.href='course.html'"><span class="assistant-link-icon">📚</span><span>عرض محتوى الدورة</span></div>
+      <div class="assistant-link" onclick="location.href='register.html'"><span class="assistant-link-icon">💳</span><span>التسجيل في الدورة</span></div>
+      <div class="assistant-link" onclick="window.open('https://t.me/stepp2024','_blank')"><span class="assistant-link-icon">✈️</span><span>تواصل مع المدرب</span></div>
+      <div class="assistant-link" onclick="location.href='#faq'"><span class="assistant-link-icon">❓</span><span>الأسئلة الشائعة</span></div>
+      <div class="assistant-link" onclick="auth.logout()"><span class="assistant-link-icon">🚪</span><span>تسجيل الخروج</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer"></div>
+
+<script src="assets/js/app.js"></script>
+<script>
+  // Auth check
+  if (!auth.checkAll()) { /* redirected */ }
+
+  // Update header user info
+  const u = auth.getUser();
+  if (u) {
+    document.getElementById('headerAvatar').textContent = u.name?.charAt(0) || 'م';
+    document.getElementById('headerUserName').textContent = u.name?.split(' ')[0] || 'حسابي';
+  }
+
+  // Stats counter animation
+  function animateCounters(selector = '[data-target]') {
+    document.querySelectorAll(selector).forEach(el => {
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          const target = parseInt(el.dataset.target || el.dataset.count || 0);
+          let current = 0;
+          const duration = 1800;
+          const start = performance.now();
+          const update = now => {
+            const p = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(ease * target);
+            if (p < 1) requestAnimationFrame(update);
+            else el.textContent = target;
+          };
+          requestAnimationFrame(update);
+          obs.disconnect();
+        }
+      }, { threshold: 0.5 });
+      obs.observe(el);
+    });
+  }
+  animateCounters('[data-target]');
+  animateCounters('[data-count]');
+
+  // Countdown in urgency bar
+  const cdEl = document.getElementById('urgencyCountdown');
+  const target = countdown.getOrCreateTarget('urgencyTarget', 48);
+  countdown.start('urgency', target, ({h, m, s}) => {
+    cdEl.textContent = `ينتهي خلال ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }, () => { store.remove('urgencyTarget'); });
+
+  // Countdown widget
+  renderCountdown(document.getElementById('countdownEl'), 48);
+  seats.render(document.getElementById('seatsEl'));
+
+  // FAQ data
+  const faqs = [
+    { q: 'ما هو اختبار STEP وما أهميته للجامعة السعودية الإلكترونية؟', a: 'STEP اختصار لـ Standardized Test of English Proficiency، يقيس مستوى اللغة الإنجليزية. تشترطه بعض برامج الجامعة السعودية الإلكترونية للقبول والتخرج. يتكون من 4 أقسام: Listening وReading وGrammar وVocabulary.' },
+    { q: 'كيف أستفيد من اختبار تحديد المستوى في هذا الموقع؟', a: 'اختبار تحديد المستوى مجاني ويشمل جميع أقسام STEP. بعد الانتهاء ستحصل على مستواك، أقوى وأضعف نقاطك، وخطة مذاكرة مخصصة تُرسل على تيليجرام مع جدول يومي يمكنك تحميله.' },
+    { q: 'ماذا يتضمن فهرس الدورة المكثفة 2026؟', a: 'يتضمن: محاضرات تمهيدية، قسم Grammar كامل (الأزمنة والاستثناءات وضمائر الوصل)، قسم Reading مع استراتيجيات، قسم Listening مع نماذج، 30+ نموذج محلول وغير محلول، وملفات PDF شاملة.' },
+    { q: 'ما طريقة الدفع والتسجيل في الدورة؟', a: 'الدفع عبر التحويل البنكي لحساب مصرف الإنماء. بعد التحويل أرفق الإيصال في نموذج التسجيل وسيتم التأكيد خلال 24 ساعة، ثم تصلك رابط الانضمام لقناة تيليجرام الخاصة.' },
+    { q: 'هل يمكنني الاسترداد إذا لم أستفد؟', a: 'يمكن طلب الاسترداد خلال 24 ساعة من الدفع وقبل الاطلاع على المحتوى. بعد ذلك لا يوجد استرداد. لكن نعدك بأنك ستجد قيمة حقيقية في الدورة!' },
+    { q: 'هل الدورة مناسبة للمبتدئين تماماً؟', a: 'نعم! الدورة تبدأ من الأساسيات وتصعّد تدريجياً. ابدأ باختبار تحديد المستوى لتعرف أين تقف وستحصل على خطة مناسبة لمستواك.' },
+  ];
+  const faqList = document.getElementById('faqList');
+  faqs.forEach((f, i) => {
+    const el = document.createElement('div');
+    el.className = 'faq-item';
+    el.innerHTML = `<div class="faq-q" onclick="toggleFaq(${i})"><span>${f.q}</span><span class="faq-arrow">▼</span></div><div class="faq-a"><p>${f.a}</p></div>`;
+    faqList.appendChild(el);
+  });
+  function toggleFaq(i) {
+    const items = document.querySelectorAll('.faq-item');
+    const item = items[i];
+    const isOpen = item.classList.contains('open');
+    items.forEach(it => { it.classList.remove('open'); it.querySelector('.faq-a').classList.remove('open'); });
+    if (!isOpen) { item.classList.add('open'); item.querySelector('.faq-a').classList.add('open'); }
+  }
+</script>
+
+<!-- مساعد تيليجرام (WhatsApp-Style) -->
+<div class="floating-assistant">
+  <button id="assistantToggle" title="تحدث مع مساعد عايد">
+    💬
+    <span class="notif-dot"></span>
+  </button>
+  <div id="assistantChat">
+    <div class="chat-header">
+      <div class="chat-avatar">ع</div>
+      <div class="chat-info">
+        <div class="name">مساعد أكاديمية عايد</div>
+        <div class="status">● متصل الآن - رد سريع</div>
+      </div>
+    </div>
+    <div class="chat-messages"></div>
+    <div class="quick-replies"></div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" placeholder="اكتب سؤالك..." id="chatInput">
+      <button class="chat-send-btn" onclick="assistant.sendToTelegram()">➤</button>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer"></div>
 </body>
 </html>

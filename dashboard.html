@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة المتابعة - أكاديمية عايد STEP 2026</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo-192.png">
+<style>
+.dash-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.dash-tab { padding: 9px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; background: rgba(255,255,255,0.06); border: 1px solid var(--card-border); color: var(--text2); cursor: pointer; transition: all 0.3s; }
+.dash-tab.active { background: var(--primary); border-color: var(--primary); color: white; }
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; }
+.cal-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px; font-size: 0.72rem; cursor: pointer; transition: all 0.2s; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); }
+.cal-day.today { background: var(--primary); color: white; font-weight: 800; }
+.cal-day.has-tasks { border-color: rgba(250,204,21,0.4); }
+.cal-day.done { background: rgba(16,185,129,0.2); border-color: rgba(16,185,129,0.4); }
+.cal-day:hover { transform: scale(1.1); }
+.challenge-card { display: flex; align-items: center; gap: 14px; padding: 16px; margin-bottom: 10px; border-radius: 14px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.04); transition: all 0.3s; }
+.challenge-card.completed { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.3); }
+.challenge-icon { font-size: 2rem; width: 52px; text-align: center; flex-shrink: 0; }
+.challenge-info { flex: 1; }
+.challenge-info .title { font-weight: 800; font-size: 0.92rem; }
+.challenge-info .desc { font-size: 0.78rem; color: var(--text2); margin-top: 2px; }
+.challenge-xp { font-size: 1.1rem; font-weight: 900; color: var(--accent); }
+.notif-toggle { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+</style>
+</head>
+<body>
+<div id="toastContainer"></div>
+
+<header class="site-header" id="mainHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="academy-logo-sm">ع</div>
+      <div class="logo-text">
+        <span class="logo-name">أكاديمية عايد</span>
+        <span class="logo-sub">STEP 2026</span>
+      </div>
+    </a>
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="tools.html" class="btn btn-ghost btn-sm">🔧 أدوات</a>
+      <div id="userPill" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.07);border-radius:30px;padding:5px 12px 5px 6px;cursor:pointer" onclick="auth.logout()">
+        <div class="user-avatar"><span class="user-avatar-initial">ط</span></div>
+        <span class="user-name" style="font-size:0.82rem">طالب</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main style="padding:40px 0 80px">
+  <div class="container">
+
+    <!-- ترحيب + ملخص -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px">
+      <div>
+        <h1 style="font-size:1.5rem;color:var(--accent)">لوحة المتابعة 📊</h1>
+        <p style="color:var(--text2);font-size:0.9rem">أهلاً <strong class="user-name">طالب</strong>! كمل طريقك للنجاح 💪</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="quiz.html" class="btn btn-primary btn-sm">🎯 اختبار جديد</a>
+        <a href="results.html" class="btn btn-ghost btn-sm">📈 نتائجي</a>
+        <a href="register.html" class="btn btn-accent btn-sm">🚀 سجّل في الكورس</a>
+      </div>
+    </div>
+
+    <!-- بطاقات الملخص -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:28px">
+      <div class="card" style="text-align:center;padding:20px 16px">
+        <div style="font-size:2rem;margin-bottom:8px">🎯</div>
+        <div style="font-size:1.8rem;font-weight:900;color:var(--accent)" id="scoreDisplay">--</div>
+        <div style="font-size:0.75rem;color:var(--text2)">نتيجة آخر اختبار</div>
+      </div>
+      <div class="card" style="text-align:center;padding:20px 16px">
+        <div style="font-size:2rem;margin-bottom:8px">📊</div>
+        <div style="font-size:1.8rem;font-weight:900;color:var(--info)" id="levelDisplay">--</div>
+        <div style="font-size:0.75rem;color:var(--text2)">مستواك الحالي</div>
+      </div>
+      <div class="card" style="text-align:center;padding:20px 16px">
+        <div style="font-size:2rem;margin-bottom:8px">🏆</div>
+        <div style="font-size:1.8rem;font-weight:900;color:var(--accent)" id="xpDisplay">0</div>
+        <div style="font-size:0.75rem;color:var(--text2)">نقاط XP</div>
+      </div>
+      <div class="card" style="text-align:center;padding:20px 16px">
+        <div style="font-size:2rem;margin-bottom:8px">✅</div>
+        <div style="font-size:1.8rem;font-weight:900;color:var(--success)" id="progressDisplay">0%</div>
+        <div style="font-size:0.75rem;color:var(--text2)">إنجاز اليوم</div>
+      </div>
+      <div class="card" style="text-align:center;padding:20px 16px">
+        <div style="font-size:2rem;margin-bottom:8px">🔥</div>
+        <div style="font-size:1.8rem;font-weight:900;color:var(--danger)" id="streakDisplay">0</div>
+        <div style="font-size:0.75rem;color:var(--text2)">أيام متتالية</div>
+      </div>
+    </div>
+
+    <!-- تبويبات لوحة التحكم -->
+    <div class="dash-nav">
+      <button class="dash-tab active" onclick="switchDashTab('today')">📅 مهام اليوم</button>
+      <button class="dash-tab" onclick="switchDashTab('calendar')">📆 التقويم</button>
+      <button class="dash-tab" onclick="switchDashTab('challenges')">🏆 التحديات</button>
+      <button class="dash-tab" onclick="switchDashTab('notifications')">🔔 الإشعارات</button>
+      <button class="dash-tab" onclick="switchDashTab('settings')">⚙️ الإعدادات</button>
+    </div>
+
+    <!-- ===== مهام اليوم ===== -->
+    <div class="tab-content active" id="tab-today">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+        <h2 style="font-size:1.1rem;color:var(--accent)">📅 مهام اليوم</h2>
+        <div style="display:flex;gap:10px;align-items:center">
+          <span id="taskProgressText" style="font-size:0.85rem;color:var(--text2)">0 من 0 مهمة</span>
+          <button class="btn btn-ghost btn-sm" onclick="refreshTasks()">🔄 تحديث</button>
+        </div>
+      </div>
+
+      <div class="progress-bar-wrap" style="margin-bottom:20px">
+        <div class="progress-bar-fill" id="taskProgressBar" style="width:0%"></div>
+      </div>
+
+      <div id="tasksList" class="card" style="padding:20px"></div>
+
+      <!-- تشجيع إذا أنهى كل المهام -->
+      <div id="allDoneMsg" style="display:none;text-align:center;padding:32px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:16px;margin-top:16px;animation:fadeIn 0.5s ease">
+        <div style="font-size:3rem;margin-bottom:12px">🎉</div>
+        <h3 style="color:var(--success)">أنهيت كل مهام اليوم!</h3>
+        <p style="color:var(--text2);margin-top:8px">عظيم! كمّل بهذا المستوى وستنجح في STEP 💪</p>
+      </div>
+
+      <!-- إذا لم يسجل بعد: تشجيع على التسجيل -->
+      <div id="registerPromo" style="display:none;margin-top:20px">
+        <div style="background:linear-gradient(135deg,rgba(26,107,82,0.15),rgba(250,204,21,0.08));border:1.5px solid rgba(250,204,21,0.3);border-radius:16px;padding:24px;text-align:center">
+          <div style="font-size:2rem;margin-bottom:10px">📚</div>
+          <h3 style="color:var(--accent);margin-bottom:8px">هل سجلت في الكورس؟</h3>
+          <p style="color:var(--text2);font-size:0.88rem;margin-bottom:16px">احصل على المحاضرات المسجلة والنماذج الكاملة 49-52 وخطة دراسية مخصصة</p>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+            <a href="register.html" class="btn btn-primary">🚀 سجّل الحين - 199 ر. فقط</a>
+            <a href="index.html#course" class="btn btn-ghost">معرفة المزيد</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== التقويم ===== -->
+    <div class="tab-content" id="tab-calendar">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <h2 style="font-size:1.1rem;color:var(--accent)">📆 جدول المذاكرة</h2>
+        <button class="btn btn-ghost btn-sm" onclick="exportSchedule()">📥 تحميل الجدول</button>
+      </div>
+
+      <!-- الشهر والأسبوع -->
+      <div class="card" style="margin-bottom:20px">
+        <div id="calendarHeader" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <button class="btn btn-ghost btn-sm" onclick="prevMonth()">→</button>
+          <span id="monthTitle" style="font-weight:800;font-size:1rem"></span>
+          <button class="btn btn-ghost btn-sm" onclick="nextMonth()">←</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px;text-align:center">
+          <span style="font-size:0.7rem;color:var(--text3)">أحد</span>
+          <span style="font-size:0.7rem;color:var(--text3)">اثنين</span>
+          <span style="font-size:0.7rem;color:var(--text3)">ثلاثاء</span>
+          <span style="font-size:0.7rem;color:var(--text3)">أربعاء</span>
+          <span style="font-size:0.7rem;color:var(--text3)">خميس</span>
+          <span style="font-size:0.7rem;color:var(--text3)">جمعة</span>
+          <span style="font-size:0.7rem;color:var(--text3)">سبت</span>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+
+      <!-- جدول الأسبوع -->
+      <h3 style="font-size:1rem;margin-bottom:14px;color:var(--accent)">📋 خطة الأسبوع الحالي</h3>
+      <div id="weekSchedule"></div>
+    </div>
+
+    <!-- ===== التحديات ===== -->
+    <div class="tab-content" id="tab-challenges">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <h2 style="font-size:1.1rem;color:var(--accent)">🏆 التحديات والإنجازات</h2>
+        <div style="text-align:center">
+          <div style="font-size:1.5rem;font-weight:900;color:var(--accent)" id="totalXP">0</div>
+          <div style="font-size:0.72rem;color:var(--text3)">إجمالي XP</div>
+        </div>
+      </div>
+
+      <!-- شريط XP -->
+      <div style="margin-bottom:24px">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text2);margin-bottom:6px">
+          <span>المستوى الحالي: <strong id="xpLevel">مبتدئ</strong></span>
+          <span id="xpToNext">0 XP للمستوى التالي</span>
+        </div>
+        <div class="xp-bar-wrap">
+          <div class="xp-bar-fill" id="xpBar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div id="challengesList"></div>
+    </div>
+
+    <!-- ===== الإشعارات ===== -->
+    <div class="tab-content" id="tab-notifications">
+      <h2 style="font-size:1.1rem;color:var(--accent);margin-bottom:20px">🔔 إعدادات الإشعارات</h2>
+
+      <div class="card">
+        <div class="notif-toggle">
+          <div>
+            <div style="font-weight:700;font-size:0.92rem">إشعارات يومية</div>
+            <div style="font-size:0.78rem;color:var(--text2)">تذكير يومي بمهام المذاكرة</div>
+          </div>
+          <div class="toggle-switch on" id="toggle-daily" onclick="toggleNotif('daily', this)">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="notif-toggle">
+          <div>
+            <div style="font-weight:700;font-size:0.92rem">تذكير موعد الاختبار</div>
+            <div style="font-size:0.78rem;color:var(--text2)">تنبيه قبل أسبوع من موعد اختبارك</div>
+          </div>
+          <div class="toggle-switch on" id="toggle-exam" onclick="toggleNotif('exam', this)">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="notif-toggle">
+          <div>
+            <div style="font-weight:700;font-size:0.92rem">إشعارات المحتوى الجديد</div>
+            <div style="font-size:0.78rem;color:var(--text2)">عند إضافة نماذج أو محاضرات جديدة</div>
+          </div>
+          <div class="toggle-switch" id="toggle-content" onclick="toggleNotif('content', this)">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px">
+          <label class="form-label">وقت التذكير اليومي</label>
+          <input type="time" class="form-control" id="reminderTime" value="08:00" style="max-width:180px" onchange="saveReminderTime(this.value)">
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.07)">
+          <button class="btn btn-ghost btn-sm" onclick="requestNotificationPermission()">
+            🔔 تفعيل إشعارات المتصفح
+          </button>
+          <p style="font-size:0.75rem;color:var(--text3);margin-top:8px">للحصول على إشعارات حتى عند إغلاق المتصفح</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== الإعدادات ===== -->
+    <div class="tab-content" id="tab-settings">
+      <h2 style="font-size:1.1rem;color:var(--accent);margin-bottom:20px">⚙️ إعدادات المستخدم</h2>
+
+      <div class="card" style="margin-bottom:20px">
+        <h3 style="font-size:0.95rem;color:var(--accent);margin-bottom:16px">👤 بياناتك</h3>
+        <div id="userDataDisplay"></div>
+        <a href="login.html" class="btn btn-ghost btn-sm" style="margin-top:12px">✏️ تعديل البيانات</a>
+      </div>
+
+      <div class="card" style="margin-bottom:20px">
+        <h3 style="font-size:0.95rem;color:var(--accent);margin-bottom:16px">🎨 التفضيلات</h3>
+        <div class="settings-section">
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="title">الانتقال التلقائي للسؤال التالي</div>
+              <div class="desc">بعد الإجابة بـ 2 ثانية</div>
+            </div>
+            <div class="toggle-switch on" id="set-autoNext" onclick="toggleSetting('autoNext',this)"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="title">إظهار المؤقت في الاختبار</div>
+              <div class="desc">عداد تنازلي لكل سؤال</div>
+            </div>
+            <div class="toggle-switch on" id="set-showTimer" onclick="toggleSetting('showTimer',this)"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="title">المؤثرات الصوتية</div>
+              <div class="desc">صوت عند الإجابة الصحيحة/الخاطئة</div>
+            </div>
+            <div class="toggle-switch" id="set-soundEffects" onclick="toggleSetting('soundEffects',this)"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:0.95rem;color:var(--danger);margin-bottom:12px">⚠️ إعدادات متقدمة</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-danger btn-sm" onclick="clearProgress()">🗑️ مسح تقدمي</button>
+          <button class="btn btn-ghost btn-sm" onclick="exportData()">📤 تصدير بياناتي</button>
+          <button class="btn btn-ghost btn-sm" onclick="auth.logout()">🚪 تسجيل الخروج</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- مساعد تيليجرام -->
+<div class="floating-assistant">
+  <button id="assistantToggle" title="المساعد الذكي">
+    💬
+    <span class="notif-dot"></span>
+  </button>
+  <div id="assistantChat">
+    <div class="chat-header">
+      <div class="chat-avatar">ع</div>
+      <div class="chat-info">
+        <div class="name">مساعد عايد</div>
+        <div class="status">● متصل الآن</div>
+      </div>
+    </div>
+    <div class="chat-messages"></div>
+    <div class="quick-replies"></div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" placeholder="اكتب سؤالك..." id="chatInput">
+      <button class="chat-send-btn" onclick="assistant.sendToTelegram()">➤</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script>
+let currentCalMonth = new Date().getMonth();
+let currentCalYear = new Date().getFullYear();
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!auth.checkAll()) return;
+
+  const user = auth.getUser();
+  if (user) {
+    document.querySelectorAll('.user-name').forEach(el => el.textContent = user.name || 'طالب');
+    document.querySelectorAll('.user-avatar-initial').forEach(el => el.textContent = (user.name||'ط').charAt(0));
+  }
+
+  // عرض النتائج
+  const score = store.get('quizScore');
+  const level = store.get('quizLevel');
+  document.getElementById('scoreDisplay').textContent = score !== null ? score + '%' : '--';
+  document.getElementById('levelDisplay').textContent = level || '--';
+
+  // XP والتحديات
+  const xp = challenges.getTotalXP();
+  document.getElementById('xpDisplay').textContent = xp;
+  document.getElementById('totalXP').textContent = xp;
+  updateXPBar(xp);
+
+  // تقدم اليوم
+  loadTodayTasks();
+  buildCalendar();
+  buildChallenges();
+  loadUserSettings();
+  loadUserData(user);
+
+  // إشعار إذا لم يسجل
+  const isReg = store.get('isRegistered');
+  if (!isReg) {
+    document.getElementById('registerPromo').style.display = 'block';
+  }
+
+  // Streak
+  updateStreak();
+});
+
+function switchDashTab(name) {
+  document.querySelectorAll('.dash-tab').forEach((btn, i) => {
+    const tabs = ['today','calendar','challenges','notifications','settings'];
+    btn.classList.toggle('active', tabs[i] === name);
+  });
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+function loadTodayTasks() {
+  const plan = store.get('selectedPlan') || '7';
+  const survey = store.get('prequizSurvey') || {};
+  const day = Math.floor((Date.now() - (store.get('startDate') || Date.now())) / 86400000);
+  let tasks = store.get('dailyTasks');
+
+  // إنشاء مهام اليوم إذا لم توجد أو من يوم مختلف
+  const today = new Date().toDateString();
+  if (!tasks || !tasks.length || tasks[0]?.date !== today) {
+    tasks = taskTracker.generateDailyTasks(plan, day, survey.hoursPerDay || 2);
+    if (!store.get('startDate')) store.set('startDate', Date.now());
+    taskTracker.saveTasks(tasks);
+  }
+
+  renderTasks(tasks);
+}
+
+function renderTasks(tasks) {
+  const container = document.getElementById('tasksList');
+  const done = tasks.filter(t => t.done).length;
+  const total = tasks.length;
+  const pct = total ? Math.round(done / total * 100) : 0;
+
+  document.getElementById('taskProgressBar').style.width = pct + '%';
+  document.getElementById('taskProgressText').textContent = `${done} من ${total} مهمة`;
+  document.getElementById('progressDisplay').textContent = pct + '%';
+
+  if (done === total && total > 0) {
+    document.getElementById('allDoneMsg').style.display = 'block';
+  }
+
+  const icons = { grammar: '📝', vocabulary: '📚', reading: '📖', listening: '🎧' };
+  container.innerHTML = tasks.map(task => `
+    <div class="task-item">
+      <div class="task-checkbox ${task.done ? 'checked' : ''}" onclick="toggleTask('${task.id}')">
+        ${task.done ? '✓' : ''}
+      </div>
+      <div style="flex:1">
+        <div class="task-text ${task.done ? 'done' : ''}">${icons[task.section]||'📌'} ${task.text}</div>
+        <div style="font-size:0.72rem;color:var(--text3);margin-top:2px">${task.section}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleTask(id) {
+  const done = taskTracker.toggleTask(id);
+  const tasks = taskTracker.getTasks();
+  renderTasks(tasks);
+  if (done) toast.success('أحسنت! مهمة مكتملة ✅');
+}
+
+function refreshTasks() {
+  store.remove('dailyTasks');
+  loadTodayTasks();
+  toast.info('تم تحديث المهام 🔄');
+}
+
+function buildCalendar() {
+  const now = new Date(currentCalYear, currentCalMonth, 1);
+  const monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  document.getElementById('monthTitle').textContent = `${monthNames[currentCalMonth]} ${currentCalYear}`;
+
+  const firstDay = now.getDay();
+  const daysInMonth = new Date(currentCalYear, currentCalMonth + 1, 0).getDate();
+  const today = new Date().getDate();
+  const todayMonth = new Date().getMonth();
+  const todayYear = new Date().getFullYear();
+
+  let html = '';
+  for (let i = 0; i < firstDay; i++) html += '<div></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isToday = d === today && currentCalMonth === todayMonth && currentCalYear === todayYear;
+    html += `<div class="cal-day ${isToday ? 'today' : ''}" title="${d} ${monthNames[currentCalMonth]}">${d}</div>`;
+  }
+  document.getElementById('calendarGrid').innerHTML = html;
+
+  buildWeekSchedule();
+}
+
+function buildWeekSchedule() {
+  const days = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const sections = [
+    { name: 'القواعد', icon: '📝', color: '#3b82f6' },
+    { name: 'المفردات', icon: '📚', color: '#8b5cf6' },
+    { name: 'القراءة', icon: '📖', color: '#10b981' },
+    { name: 'الاستماع', icon: '🎧', color: '#f59e0b' },
+    { name: 'نموذج كامل', icon: '📋', color: '#ef4444' },
+    { name: 'مراجعة', icon: '🔄', color: '#6b7280' },
+    { name: 'راحة', icon: '😴', color: '#1f2937' },
+  ];
+  const plan = store.get('selectedPlan') || '7';
+
+  let html = '';
+  days.forEach((day, i) => {
+    const sec = sections[i % sections.length];
+    html += `
+      <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;margin-bottom:8px">
+        <div style="width:70px;font-size:0.85rem;font-weight:700;color:var(--text2);flex-shrink:0">${day}</div>
+        <div style="width:10px;height:10px;border-radius:50%;background:${sec.color};flex-shrink:0"></div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:0.88rem">${sec.icon} ${sec.name}</div>
+          <div style="font-size:0.72rem;color:var(--text3)">${store.get('prequizSurvey')?.hoursPerDay || 2} ساعة</div>
+        </div>
+      </div>
+    `;
+  });
+  document.getElementById('weekSchedule').innerHTML = html;
+}
+
+function prevMonth() {
+  if (currentCalMonth === 0) { currentCalMonth = 11; currentCalYear--; }
+  else currentCalMonth--;
+  buildCalendar();
+}
+
+function nextMonth() {
+  if (currentCalMonth === 11) { currentCalMonth = 0; currentCalYear++; }
+  else currentCalMonth++;
+  buildCalendar();
+}
+
+function exportSchedule() {
+  const plan = store.get('selectedPlan') || '7';
+  const user = auth.getUser() || {};
+  const text = `جدول دراسة STEP 2026 - ${user.name || 'طالب'}
+الخطة: ${plan} أيام
+================================
+الأحد: القواعد (Grammar) - ${store.get('prequizSurvey')?.hoursPerDay || 2} ساعة
+الإثنين: المفردات (Vocabulary)
+الثلاثاء: القراءة (Reading)
+الأربعاء: الاستماع (Listening)
+الخميس: نموذج كامل
+الجمعة: مراجعة شاملة
+السبت: راحة أو مذاكرة حرة
+================================
+أكاديمية عايد STEP 2026
+تيليجرام: @stepp2024`;
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'جدول-دراسة-STEP-2026.txt';
+  a.click();
+  toast.success('تم تحميل الجدول 📥');
+}
+
+function buildChallenges() {
+  const completed = challenges.getCompleted();
+  let html = '';
+  challenges.list.forEach(c => {
+    const isDone = completed.includes(c.id);
+    html += `
+      <div class="challenge-card ${isDone ? 'completed' : ''}">
+        <div class="challenge-icon">${c.icon}</div>
+        <div class="challenge-info">
+          <div class="title">${c.title}</div>
+          <div class="desc">${c.desc}</div>
+        </div>
+        <div style="text-align:center">
+          <div class="challenge-xp">+${c.xp}</div>
+          <div style="font-size:0.65rem;color:var(--text3)">XP</div>
+          ${isDone ? '<div style="font-size:0.72rem;color:var(--success);margin-top:4px">✅ منجز</div>' : ''}
+        </div>
+      </div>
+    `;
+  });
+  document.getElementById('challengesList').innerHTML = html;
+}
+
+function updateXPBar(xp) {
+  const levels = [
+    { name: 'مبتدئ', max: 100 },
+    { name: 'متعلم', max: 250 },
+    { name: 'متقدم', max: 500 },
+    { name: 'خبير', max: 1000 },
+    { name: 'متميز', max: Infinity },
+  ];
+  const level = levels.find(l => xp < l.max) || levels[levels.length - 1];
+  const prev = levels[levels.indexOf(level) - 1];
+  const prevMax = prev?.max || 0;
+  const pct = Math.min(100, ((xp - prevMax) / (level.max - prevMax)) * 100);
+
+  document.getElementById('xpLevel').textContent = level.name;
+  document.getElementById('xpBar').style.width = pct + '%';
+  document.getElementById('xpToNext').textContent = level.max === Infinity ? 'أعلى مستوى!' : `${level.max - xp} XP للمستوى التالي`;
+}
+
+function updateStreak() {
+  const lastLogin = store.get('lastLoginDate');
+  const today = new Date().toDateString();
+  let streak = store.get('loginStreak') || 0;
+
+  if (lastLogin !== today) {
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    streak = (lastLogin === yesterday) ? streak + 1 : 1;
+    store.set('loginStreak', streak);
+    store.set('lastLoginDate', today);
+    if (streak >= 7) challenges.complete('c4');
+  }
+
+  document.getElementById('streakDisplay').textContent = streak;
+}
+
+function toggleNotif(type, el) {
+  el.classList.toggle('on');
+  const settings = userSettings.get();
+  settings['notify_' + type] = el.classList.contains('on');
+  userSettings.save(settings);
+  toast.success(el.classList.contains('on') ? 'تم تفعيل الإشعارات ✅' : 'تم إيقاف الإشعارات');
+}
+
+function toggleSetting(key, el) {
+  el.classList.toggle('on');
+  userSettings.set(key, el.classList.contains('on'));
+}
+
+function saveReminderTime(val) {
+  userSettings.set('reminderTime', val);
+  toast.success('تم حفظ وقت التذكير ✅');
+}
+
+async function requestNotificationPermission() {
+  if (!('Notification' in window)) { toast.error('المتصفح لا يدعم الإشعارات'); return; }
+  const perm = await Notification.requestPermission();
+  if (perm === 'granted') {
+    toast.success('تم تفعيل الإشعارات! 🔔');
+    new Notification('أكاديمية عايد STEP 2026', { body: 'تم تفعيل الإشعارات بنجاح!', icon: '/logo-192.png' });
+  } else {
+    toast.warning('لم يتم السماح بالإشعارات');
+  }
+}
+
+function loadUserSettings() {
+  const s = userSettings.get();
+  ['autoNext','showTimer','soundEffects'].forEach(key => {
+    const el = document.getElementById('set-' + key);
+    if (el) el.classList.toggle('on', s[key] !== false);
+  });
+  const remTime = document.getElementById('reminderTime');
+  if (remTime && s.reminderTime) remTime.value = s.reminderTime;
+}
+
+function loadUserData(user) {
+  if (!user) return;
+  const container = document.getElementById('userDataDisplay');
+  container.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:0.88rem">
+      <div style="display:flex;gap:8px"><span style="color:var(--text3);width:100px">الاسم:</span><strong>${user.name||'-'}</strong></div>
+      <div style="display:flex;gap:8px"><span style="color:var(--text3);width:100px">الجوال:</span><strong dir="ltr">${user.phone||'-'}</strong></div>
+      <div style="display:flex;gap:8px"><span style="color:var(--text3);width:100px">الجامعة:</span><strong>${user.university||'-'}</strong></div>
+      <div style="display:flex;gap:8px"><span style="color:var(--text3);width:100px">التخصص:</span><strong>${user.major||'-'}</strong></div>
+      <div style="display:flex;gap:8px"><span style="color:var(--text3);width:100px">تاريخ التسجيل:</span><strong>${new Date(user.registeredAt||Date.now()).toLocaleDateString('ar-SA')}</strong></div>
+      <div style="display:flex;gap:8px"><span style="color:var(--text3);width:100px">الحالة:</span><strong style="color:${store.get('isRegistered') ? 'var(--success)' : 'var(--warning)'}">
+        ${store.get('isRegistered') ? '✅ مسجل في الكورس' : '⏳ لم يتم التسجيل بعد'}
+      </strong></div>
+    </div>
+  `;
+}
+
+function clearProgress() {
+  if (!confirm('هل أنت متأكد من مسح كل تقدمك؟')) return;
+  ['dailyTasks','quizScore','quizLevel','lastQuizTime','loginStreak','completedChallenges','notifyShown'].forEach(k => store.remove(k));
+  toast.warning('تم مسح التقدم');
+  setTimeout(() => location.reload(), 1500);
+}
+
+function exportData() {
+  const data = {
+    user: auth.getUser(),
+    score: store.get('quizScore'),
+    level: store.get('quizLevel'),
+    challenges: challenges.getCompleted(),
+    xp: challenges.getTotalXP(),
+    settings: userSettings.get(),
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'ayed-data.json';
+  a.click();
+  toast.success('تم تصدير البيانات 📤');
+}
+</script>
+</body>
+</html>

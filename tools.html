@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أدوات STEP - أكاديمية عايد 2026</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo-192.png">
+<style>
+.tools-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.tool-tab { padding: 9px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; background: rgba(255,255,255,0.06); border: 1px solid var(--card-border); color: var(--text2); cursor: pointer; transition: all 0.3s; }
+.tool-tab.active { background: var(--primary); border-color: var(--primary); color: white; }
+.tool-panel { display: none; animation: fadeIn 0.4s ease; }
+.tool-panel.active { display: block; }
+/* آلة حاسبة */
+.calc-screen { background: rgba(0,0,0,0.5); border: 1px solid var(--card-border); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; min-height: 70px; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; }
+.calc-expression { font-size: 0.85rem; color: var(--text3); font-family: monospace; min-height: 20px; }
+.calc-result { font-size: 2.2rem; font-weight: 700; font-family: monospace; }
+/* حاسبة الدرجة */
+.score-input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* لعبة الكلمات */
+.word-hint { font-size: 0.82rem; color: var(--accent); margin-bottom: 12px; }
+/* الأدوات المرجعية */
+.ref-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.ref-table th { background: rgba(26,107,82,0.2); padding: 10px 14px; text-align: right; font-weight: 700; color: var(--accent); }
+.ref-table td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--text2); }
+.ref-table tr:hover td { background: rgba(255,255,255,0.03); }
+</style>
+</head>
+<body>
+<div id="toastContainer"></div>
+
+<header class="site-header" id="mainHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="academy-logo-sm">ع</div>
+      <div class="logo-text">
+        <span class="logo-name">أكاديمية عايد</span>
+        <span class="logo-sub">أدوات STEP 2026</span>
+      </div>
+    </a>
+    <div style="display:flex;gap:8px">
+      <a href="dashboard.html" class="btn btn-ghost btn-sm">📊 لوحتي</a>
+      <a href="index.html" class="btn btn-ghost btn-sm">🏠 الرئيسية</a>
+    </div>
+  </div>
+</header>
+
+<main style="padding:40px 0 80px">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px">
+      <h1 style="font-size:1.8rem;color:var(--accent)">🔧 أدوات STEP المتكاملة</h1>
+      <p style="color:var(--text2)">كل الأدوات اللي تحتاجها لتحضير STEP في مكان واحد</p>
+    </div>
+
+    <div class="tools-nav">
+      <button class="tool-tab active" onclick="switchTool('calc')">🔢 آلة حاسبة</button>
+      <button class="tool-tab" onclick="switchTool('score')">📊 حاسبة الدرجة</button>
+      <button class="tool-tab" onclick="switchTool('vocab')">📚 مفردات مهمة</button>
+      <button class="tool-tab" onclick="switchTool('grammar')">📝 ملخص القواعد</button>
+      <button class="tool-tab" onclick="switchTool('idioms')">💬 تعبيرات اصطلاحية</button>
+      <button class="tool-tab" onclick="switchTool('game')">🎮 لعبة الكلمات</button>
+    </div>
+
+    <!-- ===== آلة حاسبة ===== -->
+    <div class="tool-panel active" id="tool-calc">
+      <div style="max-width:380px;margin:0 auto">
+        <div class="calc-screen">
+          <div class="calc-expression" id="calcExpr"></div>
+          <div class="calc-result" id="calcResult">0</div>
+        </div>
+        <div class="calc-grid">
+          <button class="calc-btn" onclick="calcInput('C')">C</button>
+          <button class="calc-btn op" onclick="calcInput('±')">±</button>
+          <button class="calc-btn op" onclick="calcInput('%')">%</button>
+          <button class="calc-btn op" onclick="calcInput('/')">÷</button>
+          <button class="calc-btn" onclick="calcInput('7')">7</button>
+          <button class="calc-btn" onclick="calcInput('8')">8</button>
+          <button class="calc-btn" onclick="calcInput('9')">9</button>
+          <button class="calc-btn op" onclick="calcInput('*')">×</button>
+          <button class="calc-btn" onclick="calcInput('4')">4</button>
+          <button class="calc-btn" onclick="calcInput('5')">5</button>
+          <button class="calc-btn" onclick="calcInput('6')">6</button>
+          <button class="calc-btn op" onclick="calcInput('-')">−</button>
+          <button class="calc-btn" onclick="calcInput('1')">1</button>
+          <button class="calc-btn" onclick="calcInput('2')">2</button>
+          <button class="calc-btn" onclick="calcInput('3')">3</button>
+          <button class="calc-btn op" onclick="calcInput('+')">+</button>
+          <button class="calc-btn" onclick="calcInput('0')" style="grid-column:span 2">0</button>
+          <button class="calc-btn" onclick="calcInput('.')">.</button>
+          <button class="calc-btn eq" onclick="calcInput('=')">=</button>
+        </div>
+        <div style="margin-top:16px;padding:12px;background:rgba(250,204,21,0.08);border-radius:10px;font-size:0.82rem;color:var(--text2)">
+          💡 مفيدة لحساب النسب المئوية في الاختبار وتقدير الدرجة
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== حاسبة الدرجة ===== -->
+    <div class="tool-panel" id="tool-score">
+      <div class="card" style="max-width:600px;margin:0 auto">
+        <h3 style="font-size:1.1rem;color:var(--accent);margin-bottom:20px">📊 احسب درجتك المتوقعة في STEP</h3>
+
+        <div class="score-input-row">
+          <div class="form-group">
+            <label class="form-label">أسئلة القواعد الصحيحة (من 30)</label>
+            <input type="number" class="form-control" id="grammarScore" min="0" max="30" placeholder="0-30" oninput="calcSTEPScore()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">أسئلة المفردات الصحيحة (من 30)</label>
+            <input type="number" class="form-control" id="vocabScore" min="0" max="30" placeholder="0-30" oninput="calcSTEPScore()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">أسئلة القراءة الصحيحة (من 30)</label>
+            <input type="number" class="form-control" id="readScore" min="0" max="30" placeholder="0-30" oninput="calcSTEPScore()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">أسئلة الاستماع الصحيحة (من 30)</label>
+            <input type="number" class="form-control" id="listenScore" min="0" max="30" placeholder="0-30" oninput="calcSTEPScore()">
+          </div>
+        </div>
+
+        <div id="scoreResult" style="display:none;margin-top:20px">
+          <div style="background:rgba(26,107,82,0.1);border:1px solid rgba(26,107,82,0.3);border-radius:14px;padding:20px;text-align:center">
+            <div style="font-size:0.9rem;color:var(--text2);margin-bottom:8px">درجتك التقديرية</div>
+            <div style="font-size:3rem;font-weight:900;color:var(--accent)" id="totalScore">0</div>
+            <div style="font-size:1rem;color:var(--text2)">من 100</div>
+            <div class="level-badge" id="scoreLevelBadge" style="margin:16px auto 0">--</div>
+            <div style="font-size:0.85rem;color:var(--text2);margin-top:12px" id="scoreAdvice"></div>
+          </div>
+          <div style="margin-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px" id="sectionBreakdown"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== مفردات مهمة ===== -->
+    <div class="tool-panel" id="tool-vocab">
+      <div style="margin-bottom:20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <input type="text" class="form-control" id="vocabSearch" placeholder="ابحث عن كلمة..." style="max-width:300px" oninput="filterVocab(this.value)">
+        <button class="btn btn-ghost btn-sm" onclick="flipCard()">🔄 اقلب البطاقة</button>
+        <button class="btn btn-ghost btn-sm" onclick="nextVocab()">التالي ←</button>
+      </div>
+
+      <!-- بطاقة الحفظ -->
+      <div style="max-width:400px;margin:0 auto 24px">
+        <div id="vocabCard" style="background:linear-gradient(135deg,rgba(26,107,82,0.2),rgba(10,22,40,0.5));border:1.5px solid rgba(26,107,82,0.3);border-radius:20px;padding:32px;text-align:center;cursor:pointer;min-height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:all 0.3s" onclick="flipCard()">
+          <div id="vocabFront">
+            <div style="font-size:2rem;font-weight:900;color:var(--accent)" id="vocabWord">DETERMINE</div>
+            <div style="font-size:0.78rem;color:var(--text3);margin-top:8px">اضغط لرؤية المعنى</div>
+          </div>
+          <div id="vocabBack" style="display:none">
+            <div style="font-size:1.4rem;font-weight:700;color:var(--text)" id="vocabMeaning">يُحدِّد / يقرر</div>
+            <div style="font-size:0.85rem;color:var(--text2);margin-top:12px" id="vocabExample">Can you determine the cause of the problem?</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px;justify-content:center">
+          <button class="btn btn-danger btn-sm" onclick="markVocab('hard')">😰 صعبة</button>
+          <button class="btn btn-ghost btn-sm" onclick="markVocab('medium')">😐 متوسطة</button>
+          <button class="btn btn-success btn-sm" onclick="markVocab('easy')">😊 سهلة</button>
+        </div>
+      </div>
+
+      <!-- قائمة المفردات -->
+      <div id="vocabList" class="card">
+        <table class="ref-table">
+          <thead><tr><th>الكلمة</th><th>المعنى</th><th>المستوى</th><th>التكرار</th></tr></thead>
+          <tbody id="vocabTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== ملخص القواعد ===== -->
+    <div class="tool-panel" id="tool-grammar">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+
+        <div class="card">
+          <h3 style="color:var(--accent);margin-bottom:14px">⏰ الأزمنة الأساسية</h3>
+          <table class="ref-table">
+            <thead><tr><th>الزمن</th><th>التكوين</th><th>مثال</th></tr></thead>
+            <tbody>
+              <tr><td>Simple Present</td><td>V / V+s</td><td>She goes</td></tr>
+              <tr><td>Simple Past</td><td>V+ed / V2</td><td>She went</td></tr>
+              <tr><td>Present Perfect</td><td>have/has + V3</td><td>She has gone</td></tr>
+              <tr><td>Past Perfect</td><td>had + V3</td><td>She had gone</td></tr>
+              <tr><td>Future Simple</td><td>will + V</td><td>She will go</td></tr>
+              <tr><td>Future Perfect</td><td>will have + V3</td><td>She will have gone</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3 style="color:var(--accent);margin-bottom:14px">🔀 الجمل الشرطية</h3>
+          <table class="ref-table">
+            <thead><tr><th>النوع</th><th>التركيب</th></tr></thead>
+            <tbody>
+              <tr><td>Zero</td><td>If + present, present</td></tr>
+              <tr><td>Type 1</td><td>If + present, will + V</td></tr>
+              <tr><td>Type 2</td><td>If + past, would + V</td></tr>
+              <tr><td>Type 3</td><td>If + had + V3, would have + V3</td></tr>
+              <tr><td>Mixed</td><td>If + had, would + V (الآن)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3 style="color:var(--accent);margin-bottom:14px">🔄 المبني للمجهول</h3>
+          <table class="ref-table">
+            <thead><tr><th>الزمن</th><th>التكوين</th></tr></thead>
+            <tbody>
+              <tr><td>Present</td><td>is/am/are + V3</td></tr>
+              <tr><td>Past</td><td>was/were + V3</td></tr>
+              <tr><td>Future</td><td>will be + V3</td></tr>
+              <tr><td>Present Perfect</td><td>has/have been + V3</td></tr>
+              <tr><td>Past Perfect</td><td>had been + V3</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3 style="color:var(--accent);margin-bottom:14px">⚠️ قواعد مهمة في STEP</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:0.85rem">
+            <div style="padding:10px;background:rgba(255,255,255,0.04);border-radius:8px">
+              <strong style="color:var(--info)">Neither...nor / Either...or</strong><br>
+              <span style="color:var(--text2)">يتبع الفعل أقرب اسم: Neither Tom nor his friends <em>are</em></span>
+            </div>
+            <div style="padding:10px;background:rgba(255,255,255,0.04);border-radius:8px">
+              <strong style="color:var(--info)">Inversion بعد Hardly/Scarcely</strong><br>
+              <span style="color:var(--text2)">Hardly had I arrived when... (had + subject + V3)</span>
+            </div>
+            <div style="padding:10px;background:rgba(255,255,255,0.04);border-radius:8px">
+              <strong style="color:var(--info)">Wish + Subjunctive</strong><br>
+              <span style="color:var(--text2)">I wish I were... (were مع الكل للحاضر)</span>
+            </div>
+            <div style="padding:10px;background:rgba(255,255,255,0.04);border-radius:8px">
+              <strong style="color:var(--info)">Gerund بعد حروف الجر</strong><br>
+              <span style="color:var(--text2)">Despite/without/by + verb+ing</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== تعبيرات اصطلاحية ===== -->
+    <div class="tool-panel" id="tool-idioms">
+      <div style="margin-bottom:20px">
+        <input type="text" class="form-control" id="idiomSearch" placeholder="ابحث عن تعبير..." style="max-width:300px" oninput="filterIdioms(this.value)">
+      </div>
+      <div id="idiomsList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px"></div>
+    </div>
+
+    <!-- ===== لعبة الكلمات ===== -->
+    <div class="tool-panel" id="tool-game">
+      <div class="word-game" style="max-width:420px;margin:0 auto">
+        <div style="text-align:center;margin-bottom:20px">
+          <h3 style="color:var(--accent);margin-bottom:6px">🎮 Wordle STEP</h3>
+          <p style="font-size:0.85rem;color:var(--text2)">خمّن كلمة إنجليزية من قاموس STEP!</p>
+          <div class="word-hint" id="wordHint"></div>
+          <div style="font-size:0.82rem;color:var(--text3)">
+            المحاولات: <span id="attemptsLeft" style="color:var(--accent)">6</span>/6
+          </div>
+        </div>
+
+        <div class="word-grid" id="wordGrid"></div>
+
+        <div style="margin:16px 0">
+          <div style="display:flex;gap:8px;margin-bottom:8px">
+            <input type="text" class="form-control" id="wordInput" placeholder="اكتب كلمتك..." style="text-transform:uppercase;font-family:monospace;font-size:1rem;letter-spacing:3px" maxlength="12" oninput="this.value=this.value.toUpperCase()">
+            <button class="btn btn-primary" onclick="submitWordGuess()">تحقق</button>
+          </div>
+          <div id="wordMessage" style="font-size:0.85rem;text-align:center;min-height:24px"></div>
+        </div>
+
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm" onclick="newWordGame()">🔄 كلمة جديدة</button>
+          <button class="btn btn-ghost btn-sm" onclick="showWordHint()">💡 تلميح</button>
+        </div>
+
+        <!-- نتيجة اللعبة -->
+        <div id="gameResult" style="display:none;text-align:center;padding:20px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:14px;margin-top:16px">
+          <div id="gameResultEmoji" style="font-size:3rem;margin-bottom:8px">🎉</div>
+          <div id="gameResultText" style="font-weight:700;font-size:1.1rem"></div>
+          <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="newWordGame()">العب مجدداً</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="assets/js/app.js"></script>
+<script>
+// ===== آلة حاسبة =====
+let calcExpression = '';
+let calcDisplay = '0';
+
+function calcInput(val) {
+  const exprEl = document.getElementById('calcExpr');
+  const resultEl = document.getElementById('calcResult');
+
+  if (val === 'C') {
+    calcExpression = '';
+    calcDisplay = '0';
+  } else if (val === '=') {
+    try {
+      const result = Function('"use strict"; return (' + calcExpression + ')')();
+      calcDisplay = parseFloat(result.toFixed(8)).toString();
+      calcExpression = calcDisplay;
+    } catch { calcDisplay = 'خطأ'; }
+  } else if (val === '±') {
+    if (calcExpression) calcExpression = calcExpression.startsWith('-') ? calcExpression.slice(1) : '-' + calcExpression;
+    calcDisplay = calcExpression || '0';
+  } else if (val === '%') {
+    try {
+      const result = parseFloat(Function('"use strict"; return (' + calcExpression + ')')()) / 100;
+      calcExpression = result.toString();
+      calcDisplay = calcExpression;
+    } catch {}
+  } else {
+    calcExpression += val;
+    calcDisplay = calcExpression;
+  }
+
+  exprEl.textContent = calcExpression;
+  resultEl.textContent = calcDisplay;
+}
+
+// ===== حاسبة الدرجة =====
+function calcSTEPScore() {
+  const g = parseInt(document.getElementById('grammarScore').value) || 0;
+  const v = parseInt(document.getElementById('vocabScore').value) || 0;
+  const r = parseInt(document.getElementById('readScore').value) || 0;
+  const l = parseInt(document.getElementById('listenScore').value) || 0;
+  const total = Math.round(((g + v + r + l) / 120) * 100);
+
+  document.getElementById('scoreResult').style.display = 'block';
+  document.getElementById('totalScore').textContent = total;
+
+  const info = scorer.getLevel(total);
+  const badge = document.getElementById('scoreLevelBadge');
+  badge.textContent = `${info.level} - ${info.name}`;
+  badge.style.background = info.color + '22';
+  badge.style.border = `2px solid ${info.color}`;
+  badge.style.color = info.color;
+
+  document.getElementById('scoreAdvice').textContent = info.desc;
+
+  document.getElementById('sectionBreakdown').innerHTML = [
+    { name: 'قواعد', score: g, max: 30 },
+    { name: 'مفردات', score: v, max: 30 },
+    { name: 'قراءة', score: r, max: 30 },
+    { name: 'استماع', score: l, max: 30 },
+  ].map(s => `
+    <div style="text-align:center;background:rgba(255,255,255,0.04);border-radius:10px;padding:12px">
+      <div style="font-size:0.75rem;color:var(--text3)">${s.name}</div>
+      <div style="font-size:1.2rem;font-weight:900;color:var(--accent)">${s.score}/${s.max}</div>
+      <div style="font-size:0.7rem;color:var(--text2)">${Math.round(s.score/s.max*100)}%</div>
+    </div>
+  `).join('');
+}
+
+// ===== بطاقات المفردات =====
+const vocabData = [
+  { word: 'DETERMINE', meaning: 'يُحدِّد / يقرر', example: 'Can you determine the cause?', level: 'intermediate', freq: 7 },
+  { word: 'ANALYZE', meaning: 'يُحلِّل', example: 'We need to analyze the data.', level: 'intermediate', freq: 8 },
+  { word: 'EVALUATE', meaning: 'يُقيِّم', example: 'Teachers evaluate student performance.', level: 'intermediate', freq: 7 },
+  { word: 'PREVALENT', meaning: 'شائع / منتشر', example: 'Smartphones are prevalent today.', level: 'advanced', freq: 6 },
+  { word: 'MITIGATE', meaning: 'يُخفِّف / يُقلِّل', example: 'We must mitigate risks.', level: 'advanced', freq: 5 },
+  { word: 'RESILIENCE', meaning: 'مرونة / صمود', example: 'She showed great resilience.', level: 'advanced', freq: 6 },
+  { word: 'ELABORATE', meaning: 'يُفصِّل / يشرح', example: 'Could you elaborate on this point?', level: 'intermediate', freq: 7 },
+  { word: 'COHERENT', meaning: 'متماسك / منطقي', example: 'His argument was not coherent.', level: 'advanced', freq: 5 },
+  { word: 'AMBIGUOUS', meaning: 'غامض / مبهم', example: 'The instructions were ambiguous.', level: 'advanced', freq: 6 },
+  { word: 'ENHANCE', meaning: 'يُعزز / يُحسِّن', example: 'This will enhance your skills.', level: 'intermediate', freq: 8 },
+  { word: 'COMPREHENSIVE', meaning: 'شامل / مستوعب', example: 'A comprehensive study.', level: 'intermediate', freq: 7 },
+  { word: 'CONTROVERSIAL', meaning: 'مثير للجدل', example: 'A controversial decision.', level: 'advanced', freq: 5 },
+  { word: 'SUBSTANTIAL', meaning: 'كبير / جوهري', example: 'A substantial amount.', level: 'intermediate', freq: 7 },
+  { word: 'CONSEQUENTLY', meaning: 'نتيجةً لذلك', example: 'Consequently, she left.', level: 'intermediate', freq: 8 },
+  { word: 'INEVITABLE', meaning: 'حتمي / لا مفر منه', example: 'Change is inevitable.', level: 'advanced', freq: 5 },
+];
+let currentVocabIdx = 0;
+let isFlipped = false;
+
+function loadVocab() {
+  const v = vocabData[currentVocabIdx];
+  document.getElementById('vocabWord').textContent = v.word;
+  document.getElementById('vocabMeaning').textContent = v.meaning;
+  document.getElementById('vocabExample').textContent = v.example;
+  document.getElementById('vocabFront').style.display = 'block';
+  document.getElementById('vocabBack').style.display = 'none';
+  isFlipped = false;
+  renderVocabTable(vocabData);
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('vocabFront').style.display = isFlipped ? 'none' : 'block';
+  document.getElementById('vocabBack').style.display = isFlipped ? 'block' : 'none';
+}
+
+function nextVocab() {
+  currentVocabIdx = (currentVocabIdx + 1) % vocabData.length;
+  loadVocab();
+}
+
+function markVocab(level) {
+  const word = vocabData[currentVocabIdx].word;
+  toast.info(`${level === 'easy' ? '😊' : level === 'medium' ? '😐' : '😰'} تم تصنيف "${word}"`);
+  nextVocab();
+}
+
+function filterVocab(q) {
+  const filtered = vocabData.filter(v =>
+    v.word.toLowerCase().includes(q.toLowerCase()) ||
+    v.meaning.includes(q)
+  );
+  renderVocabTable(filtered);
+}
+
+function renderVocabTable(data) {
+  document.getElementById('vocabTableBody').innerHTML = data.map(v => `
+    <tr>
+      <td><strong style="font-family:monospace;color:var(--accent)">${v.word}</strong></td>
+      <td>${v.meaning}</td>
+      <td><span class="meta-badge meta-level ${v.level}">${v.level === 'advanced' ? '🔴 متقدم' : '🟡 متوسط'}</span></td>
+      <td><span style="color:var(--accent)">🔥${v.freq}x</span></td>
+    </tr>
+  `).join('');
+}
+
+// ===== تعبيرات اصطلاحية =====
+const idiomsData = [
+  { idiom: 'Under the weather', meaning: 'مريض / غير بخير', example: 'I\'m feeling under the weather today.' },
+  { idiom: 'Beat around the bush', meaning: 'يتهرب من الموضوع', example: 'Stop beating around the bush!' },
+  { idiom: 'A piece of cake', meaning: 'سهل جداً', example: 'The test was a piece of cake.' },
+  { idiom: 'Burn the midnight oil', meaning: 'يسهر للعمل ليلاً', example: 'I burned the midnight oil to finish.' },
+  { idiom: 'Hit the nail on the head', meaning: 'أصاب الهدف / صح تماماً', example: 'You hit the nail on the head!' },
+  { idiom: 'In a nutshell', meaning: 'باختصار', example: 'In a nutshell, we failed.' },
+  { idiom: 'Take with a grain of salt', meaning: 'لا تصدق كل شيء', example: 'Take his claims with a grain of salt.' },
+  { idiom: 'Red herring', meaning: 'حجة مضللة', example: 'That argument is a red herring.' },
+  { idiom: 'On the contrary', meaning: 'على العكس', example: 'On the contrary, she agreed.' },
+  { idiom: 'Tough nut to crack', meaning: 'صعب المراس', example: 'He\'s a tough nut to crack.' },
+  { idiom: 'At the stroke of midnight', meaning: 'عند منتصف الليل تماماً', example: 'Submit by stroke of midnight.' },
+  { idiom: 'Step up your game', meaning: 'حسّن أداءك', example: 'You need to step up your game.' },
+  { idiom: 'Far-reaching', meaning: 'بعيد المدى / واسع الأثر', example: 'Far-reaching consequences.' },
+];
+
+function renderIdioms(data) {
+  document.getElementById('idiomsList').innerHTML = data.map(d => `
+    <div class="card" style="padding:18px">
+      <div style="font-size:1rem;font-weight:800;color:var(--accent);font-family:serif;font-style:italic;margin-bottom:8px">"${d.idiom}"</div>
+      <div style="font-size:0.9rem;font-weight:700;margin-bottom:6px">${d.meaning}</div>
+      <div style="font-size:0.78rem;color:var(--text3);font-style:italic;direction:ltr;text-align:left">"${d.example}"</div>
+    </div>
+  `).join('');
+}
+
+function filterIdioms(q) {
+  const filtered = idiomsData.filter(d =>
+    d.idiom.toLowerCase().includes(q.toLowerCase()) ||
+    d.meaning.includes(q)
+  );
+  renderIdioms(filtered);
+}
+
+// ===== لعبة الكلمات =====
+let currentWord = null;
+let guessCount = 0;
+
+function newWordGame() {
+  currentWord = offlineGame.start();
+  guessCount = 0;
+  document.getElementById('wordHint').textContent = `💡 تلميح: ${currentWord.hint} (${currentWord.letters} أحرف)`;
+  document.getElementById('attemptsLeft').textContent = offlineGame.maxGuesses;
+  document.getElementById('wordGrid').innerHTML = '';
+  document.getElementById('wordMessage').textContent = '';
+  document.getElementById('gameResult').style.display = 'none';
+  document.getElementById('wordInput').value = '';
+  document.getElementById('wordInput').focus();
+
+  // إنشاء شبكة فارغة
+  for (let i = 0; i < offlineGame.maxGuesses; i++) {
+    const row = document.createElement('div');
+    row.className = 'word-row';
+    row.id = 'row-' + i;
+    for (let j = 0; j < currentWord.letters; j++) {
+      const cell = document.createElement('div');
+      cell.className = 'word-cell';
+      cell.id = `cell-${i}-${j}`;
+      row.appendChild(cell);
+    }
+    document.getElementById('wordGrid').appendChild(row);
+  }
+}
+
+function submitWordGuess() {
+  const input = document.getElementById('wordInput');
+  const word = input.value.trim().toUpperCase();
+  if (!word || !currentWord) return;
+
+  if (word.length !== currentWord.word.length) {
+    document.getElementById('wordMessage').textContent = `⚠️ الكلمة يجب أن تكون ${currentWord.letters} أحرف`;
+    document.getElementById('wordMessage').style.color = 'var(--warning)';
+    return;
+  }
+
+  const result = offlineGame.guess(word);
+
+  // عرض النتيجة في الشبكة
+  const row = guessCount;
+  result.result.forEach((r, i) => {
+    const cell = document.getElementById(`cell-${row}-${i}`);
+    cell.textContent = r.char;
+    setTimeout(() => {
+      cell.classList.add(r.status);
+    }, i * 100);
+  });
+
+  guessCount++;
+  document.getElementById('attemptsLeft').textContent = offlineGame.maxGuesses - guessCount;
+  input.value = '';
+
+  if (result.won) {
+    showGameResult(true);
+    challenges.complete('c2'); // تحدي السرعة
+  } else if (result.lost) {
+    showGameResult(false);
+  } else {
+    document.getElementById('wordMessage').textContent = `${offlineGame.maxGuesses - guessCount} محاولات متبقية`;
+    document.getElementById('wordMessage').style.color = 'var(--text2)';
+  }
+}
+
+function showGameResult(won) {
+  const el = document.getElementById('gameResult');
+  el.style.display = 'block';
+  document.getElementById('gameResultEmoji').textContent = won ? '🎉' : '😞';
+  document.getElementById('gameResultText').textContent = won
+    ? `أحسنت! الكلمة هي "${currentWord.word}"`
+    : `الإجابة كانت: "${currentWord.word}" - حاول مرة أخرى!`;
+  if (won) {
+    toast.show(`🏆 أنجزت Wordle STEP! الكلمة: ${currentWord.word}`, 'star', 5000);
+    challenges.complete('c1');
+  }
+}
+
+function showWordHint() {
+  if (currentWord) {
+    toast.tip(`💡 تلميح: ${currentWord.hint}`);
+  }
+}
+
+// ===== تبديل الأدوات =====
+function switchTool(name) {
+  document.querySelectorAll('.tool-tab').forEach((btn, i) => {
+    const tools = ['calc','score','vocab','grammar','idioms','game'];
+    btn.classList.toggle('active', tools[i] === name);
+  });
+  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tool-' + name).classList.add('active');
+}
+
+// ===== تهيئة =====
+document.addEventListener('DOMContentLoaded', () => {
+  loadVocab();
+  renderIdioms(idiomsData);
+  newWordGame();
+});
+</script>
+</body>
+</html>

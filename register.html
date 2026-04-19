@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التسجيل في الدورة - أكاديمية عايد STEP 2026</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo-192.png">
+<style>
+.reg-layout { display: grid; grid-template-columns: 1fr 340px; gap: 28px; align-items: start; }
+.reg-main { }
+.reg-sidebar { position: sticky; top: 80px; }
+@media (max-width: 900px) { .reg-layout { grid-template-columns: 1fr; } .reg-sidebar { position: relative; top: 0; } }
+.price-box { background: linear-gradient(135deg, rgba(26,107,82,0.2), rgba(10,22,40,0.5)); border: 1.5px solid rgba(26,107,82,0.4); border-radius: 20px; padding: 24px; }
+.old-price { text-decoration: line-through; color: var(--text3); font-size: 1rem; }
+.new-price { font-size: 3rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.save-badge { background: var(--danger); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; display: inline-block; margin-top: 4px; }
+.benefit-list { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.benefit-list li { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text2); }
+.tg-msg-preview { background: rgba(0,136,204,0.08); border: 1.5px solid rgba(0,136,204,0.25); border-radius: 14px; padding: 18px; font-family: monospace; font-size: 0.78rem; line-height: 1.8; direction: rtl; text-align: right; white-space: pre-wrap; color: var(--text2); max-height: 280px; overflow-y: auto; }
+.tg-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(0,136,204,0.2); }
+.payment-confirm-card { text-align: center; animation: fadeIn 0.5s ease; }
+</style>
+</head>
+<body>
+<div id="toastContainer"></div>
+
+<header class="site-header" id="mainHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="academy-logo-sm">ع</div>
+      <div class="logo-text">
+        <span class="logo-name">أكاديمية عايد</span>
+        <span class="logo-sub">STEP 2026</span>
+      </div>
+    </a>
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="index.html" class="btn btn-ghost btn-sm">الرئيسية</a>
+      <div id="userPill" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.07);border-radius:30px;padding:5px 12px 5px 6px">
+        <div class="user-avatar"><span class="user-avatar-initial">ط</span></div>
+        <span class="user-name" style="font-size:0.82rem">طالب</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- شريط الإلحاح -->
+<div class="urgency-bar">
+  <span>⚡ عرض محدود!</span>
+  <span>المقاعد المتبقية: <strong id="seatsLeft" style="color:#fff">7</strong></span>
+  <span>|</span>
+  <span>ينتهي الخصم خلال: <span class="countdown-inline" id="headerCountdown"><span>00</span>:<span>00</span>:<span>00</span></span></span>
+</div>
+
+<main style="padding:40px 0 80px">
+  <div class="container">
+
+    <!-- مؤشر الخطوات -->
+    <div class="steps-indicator" style="max-width:700px;margin:0 auto 36px">
+      <div class="step-item active" id="step-ind-1">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div class="step-circle">1</div>
+          <span class="step-label">بياناتك</span>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" id="step-ind-2">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div class="step-circle">2</div>
+          <span class="step-label">الفاتورة</span>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" id="step-ind-3">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div class="step-circle">3</div>
+          <span class="step-label">الدفع</span>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" id="step-ind-4">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div class="step-circle">4</div>
+          <span class="step-label">التأكيد</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reg-layout">
+      <!-- ===== النموذج الرئيسي ===== -->
+      <div class="reg-main">
+
+        <!-- ===== الخطوة 1: بياناتك ===== -->
+        <div class="form-step active card" id="formStep1">
+          <h2 style="font-size:1.2rem;margin-bottom:20px;color:var(--accent)">📋 الخطوة 1: بيانات الطالب</h2>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="form-group">
+              <label class="form-label">الاسم الكامل <span style="color:var(--danger)">*</span></label>
+              <input type="text" class="form-control" id="f-name" placeholder="محمد عبدالله">
+            </div>
+            <div class="form-group">
+              <label class="form-label">رقم الجوال <span style="color:var(--danger)">*</span></label>
+              <input type="tel" class="form-control" id="f-phone" placeholder="05XXXXXXXX" dir="ltr">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">البريد الإلكتروني (اختياري)</label>
+            <input type="email" class="form-control" id="f-email" placeholder="example@email.com" dir="ltr">
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="form-group">
+              <label class="form-label">الجامعة <span style="color:var(--danger)">*</span></label>
+              <select class="form-control" id="f-university">
+                <option value="">اختر الجامعة</option>
+                <option value="seu" selected>الجامعة السعودية الإلكترونية</option>
+                <option value="ksu">جامعة الملك سعود</option>
+                <option value="kau">جامعة الملك عبدالعزيز</option>
+                <option value="ku">جامعة الملك خالد</option>
+                <option value="taibah">جامعة طيبة</option>
+                <option value="pnu">جامعة الأميرة نورة</option>
+                <option value="other">أخرى</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">التخصص</label>
+              <input type="text" class="form-control" id="f-major" placeholder="مثال: إدارة الأعمال">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">موعد اختبار STEP المتوقع <span style="color:var(--danger)">*</span></label>
+            <select class="form-control" id="f-examDate">
+              <option value="">اختر الفترة</option>
+              <option value="this_month">هذا الشهر</option>
+              <option value="1to2months">شهر إلى شهرين</option>
+              <option value="3months">3 أشهر</option>
+              <option value="notset">لم أحدد بعد</option>
+            </select>
+          </div>
+
+          <!-- شروط وأحكام -->
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;margin-bottom:20px">
+            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px">
+              <input type="checkbox" id="agreeTerms" style="accent-color:var(--primary);width:18px;height:18px;flex-shrink:0;margin-top:2px">
+              <label for="agreeTerms" style="font-size:0.82rem;color:var(--text2);cursor:pointer">
+                أوافق على <a href="#" onclick="showModal('termsModal')" style="color:var(--primary-light)">الشروط والأحكام</a> وسياسة <a href="#" onclick="showModal('refundModal')" style="color:var(--primary-light)">الاسترداد</a>
+              </label>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px">
+              <input type="checkbox" id="agreeRefund" style="accent-color:var(--primary);width:18px;height:18px;flex-shrink:0;margin-top:2px">
+              <label for="agreeRefund" style="font-size:0.82rem;color:var(--text2);cursor:pointer">
+                فهمت سياسة الاسترداد: يحق لي الاسترداد الكامل خلال 7 أيام قبل مشاهدة أي محتوى
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-full btn-lg" onclick="goToStep(2)">
+            التالي: مراجعة الفاتورة ←
+          </button>
+        </div>
+
+        <!-- ===== الخطوة 2: الفاتورة ===== -->
+        <div class="form-step card" id="formStep2">
+          <h2 style="font-size:1.2rem;margin-bottom:20px;color:var(--accent)">📄 الخطوة 2: مراجعة الفاتورة</h2>
+
+          <div class="invoice-box" id="invoiceBox">
+            <div class="invoice-header">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div>
+                  <div style="font-size:1.1rem;font-weight:900;color:#1a6b52">أكاديمية عايد STEP 2026</div>
+                  <div style="font-size:0.75rem;color:#6b7280">فاتورة رقم: <span id="invoiceNum">INV-2026-001</span></div>
+                  <div style="font-size:0.75rem;color:#6b7280">التاريخ: <span id="invoiceDate"></span></div>
+                </div>
+                <div style="text-align:left">
+                  <div style="font-size:0.78rem;color:#6b7280">مُقدَّمة لـ:</div>
+                  <div style="font-weight:700" id="inv-name">-</div>
+                  <div style="font-size:0.75rem;color:#6b7280" id="inv-phone">-</div>
+                </div>
+              </div>
+            </div>
+            <div class="invoice-row"><span>الدورة المكثفة - STEP 2026</span><span>299 ر.</span></div>
+            <div class="invoice-row" style="color:#dc2626"><span>خصم العرض المحدود</span><span>- 100 ر.</span></div>
+            <div class="invoice-row"><span>النماذج 49، 50، 51، 52</span><span>مشمولة ✅</span></div>
+            <div class="invoice-row"><span>وصول سنة كاملة</span><span>مشمول ✅</span></div>
+            <div class="invoice-row"><span>مجموعة تيليجرام VIP</span><span>مشمولة ✅</span></div>
+            <div class="invoice-total invoice-row"><span>الإجمالي</span><span>199 ر. فقط</span></div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" onclick="printInvoice()">🖨️ طباعة الفاتورة</button>
+            <button class="btn btn-ghost btn-sm" onclick="copyInvoiceText()">📋 نسخ الفاتورة</button>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+            <button class="btn btn-ghost" onclick="goToStep(1)">← رجوع</button>
+            <button class="btn btn-primary" onclick="goToStep(3)" style="flex:1">التالي: الدفع ←</button>
+          </div>
+        </div>
+
+        <!-- ===== الخطوة 3: الدفع ===== -->
+        <div class="form-step card" id="formStep3">
+          <h2 style="font-size:1.2rem;margin-bottom:6px;color:var(--accent)">💳 الخطوة 3: إتمام الدفع</h2>
+          <p style="font-size:0.85rem;color:var(--text2);margin-bottom:20px">حوّل المبلغ عبر التحويل البنكي ثم ارفع إيصال الدفع</p>
+
+          <!-- بيانات التحويل البنكي -->
+          <div class="bank-card" style="margin-bottom:20px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <span style="font-size:1.5rem">🏦</span>
+              <div>
+                <div style="font-weight:800;font-size:1rem">مصرف الإنماء</div>
+                <div style="font-size:0.75rem;color:var(--text2)">التحويل آمن ومباشر</div>
+              </div>
+            </div>
+            <div class="bank-row">
+              <span class="bank-label">المستفيد</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="bank-value" style="font-size:0.82rem">مؤسسة كريتيفا جلوبال لتقنية المعلومات</span>
+                <button class="bank-copy-btn" onclick="copyToClipboard('مؤسسة كريتيفا جلوبال لتقنية المعلومات','تم نسخ اسم المستفيد 📋')">نسخ</button>
+              </div>
+            </div>
+            <div class="bank-row">
+              <span class="bank-label">رقم الحساب</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="bank-value" id="bankAccount" dir="ltr">68206067557000</span>
+                <button class="bank-copy-btn" onclick="copyToClipboard('68206067557000','تم نسخ رقم الحساب ✅')">نسخ</button>
+              </div>
+            </div>
+            <div class="bank-row">
+              <span class="bank-label">رقم IBAN</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="bank-value" dir="ltr" style="font-size:0.85rem">SA4905000068206067557000</span>
+                <button class="bank-copy-btn" onclick="copyToClipboard('SA4905000068206067557000','تم نسخ IBAN ✅')">نسخ</button>
+              </div>
+            </div>
+            <div class="bank-row">
+              <span class="bank-label">المبلغ</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="bank-value" style="color:var(--accent);font-size:1.1rem">199 ريال سعودي</span>
+                <button class="bank-copy-btn" onclick="copyToClipboard('199','تم نسخ المبلغ ✅')">نسخ</button>
+              </div>
+            </div>
+            <button class="btn btn-ghost btn-full" style="margin-top:12px;font-size:0.85rem" onclick="copyAllBankDetails()">
+              📋 نسخ جميع بيانات التحويل دفعة واحدة
+            </button>
+          </div>
+
+          <!-- رفع إيصال الدفع -->
+          <div class="form-group">
+            <label class="form-label">إيصال الدفع <span style="color:var(--danger)">*</span></label>
+            <p style="font-size:0.8rem;color:var(--text2);margin-bottom:10px">ارفع صورة الإيصال بعد التحويل (PNG, JPG, PDF)</p>
+            <div class="file-upload-zone" id="receiptZone" onclick="document.getElementById('receiptInput').click()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+              <div class="upload-icon">📎</div>
+              <p style="font-weight:700;margin-bottom:4px">اضغط لرفع الإيصال</p>
+              <p style="font-size:0.78rem;color:var(--text2)">أو اسحب الملف وأفلته هنا</p>
+              <p style="font-size:0.72rem;color:var(--text3);margin-top:8px">الحجم الأقصى: 5MB</p>
+            </div>
+            <input type="file" id="receiptInput" accept="image/*,.pdf" style="display:none" onchange="handleFileUpload(this.files[0])">
+            <div class="file-preview" id="filePreview">
+              <img id="previewImg" src="" alt="إيصال الدفع" style="display:none">
+              <div id="fileInfo" style="font-size:0.82rem;color:var(--text2);margin-top:8px"></div>
+            </div>
+          </div>
+
+          <!-- رقم مرجع التحويل -->
+          <div class="form-group">
+            <label class="form-label">رقم مرجع التحويل (اختياري)</label>
+            <input type="text" class="form-control" id="f-txRef" placeholder="من رسالة التحويل البنكية" dir="ltr">
+            <span class="form-hint">يُسرّع عملية التحقق</span>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+            <button class="btn btn-ghost" onclick="goToStep(2)">← رجوع</button>
+            <button class="btn btn-primary btn-lg" onclick="submitRegistration()" style="flex:1" id="submitBtn">
+              ✅ أرسل الإيصال وأكمل التسجيل
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== الخطوة 4: التأكيد وفتح تيليجرام ===== -->
+        <div class="form-step" id="formStep4">
+          <div class="payment-confirm-card card" style="padding:36px">
+            <div style="font-size:4rem;margin-bottom:16px">🎉</div>
+            <h2 style="font-size:1.5rem;color:var(--success);margin-bottom:8px">تم استلام طلب التسجيل!</h2>
+            <p style="color:var(--text2);margin-bottom:24px;font-size:0.92rem">ممتاز! خطوة أخيرة: أرسل رسالة تيليجرام مع إيصال الدفع لتفعيل حسابك</p>
+
+            <!-- الرسالة الجاهزة -->
+            <div style="margin-bottom:20px">
+              <div class="tg-header">
+                <span style="font-size:1.4rem">📱</span>
+                <div>
+                  <div style="font-weight:700;font-size:0.9rem">الرسالة الجاهزة لتيليجرام</div>
+                  <div style="font-size:0.75rem;color:var(--text3)">ستُفتح محادثة تيليجرام مع الرسالة الجاهزة</div>
+                </div>
+              </div>
+              <div class="tg-msg-preview" id="tgMsgPreview">جارٍ التحضير...</div>
+            </div>
+
+            <!-- أزرار الإرسال -->
+            <button class="btn btn-primary btn-full btn-lg" onclick="openTelegramMsg()" id="tgSendBtn" style="margin-bottom:12px">
+              📱 افتح تيليجرام وأرسل الرسالة + الإيصال
+            </button>
+            <button class="btn btn-ghost btn-full btn-sm" onclick="copyTelegramMsg()">
+              📋 نسخ الرسالة للإرسال يدوياً
+            </button>
+
+            <!-- تعليمات واضحة -->
+            <div style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:14px;padding:20px;margin-top:20px;text-align:right">
+              <div style="font-weight:800;color:#93c5fd;margin-bottom:12px">📋 خطوات إتمام التسجيل:</div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text2)">
+                  <span style="background:var(--primary);color:white;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0">1</span>
+                  <span>اضغط الزر الأزرق فوق لفتح تيليجرام</span>
+                </div>
+                <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text2)">
+                  <span style="background:var(--primary);color:white;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0">2</span>
+                  <span>أرسل الرسالة الجاهزة أولاً</span>
+                </div>
+                <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text2)">
+                  <span style="background:var(--primary);color:white;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0">3</span>
+                  <span>ارفع صورة إيصال الدفع في نفس المحادثة</span>
+                </div>
+                <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text2)">
+                  <span style="background:var(--success);color:white;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0">✓</span>
+                  <span>سيتم تفعيل حسابك خلال ساعات وستصلك رسالة تأكيد مع رابط تحميل الجدول</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- روابط إضافية -->
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+              <a href="dashboard.html" class="btn btn-ghost">📊 لوحة المتابعة</a>
+              <a href="results.html" class="btn btn-ghost">📈 نتائجي</a>
+              <a href="index.html" class="btn btn-ghost">🏠 الرئيسية</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== Sidebar ===== -->
+      <div class="reg-sidebar">
+        <!-- صندوق السعر -->
+        <div class="price-box">
+          <div style="font-size:0.8rem;color:var(--text3);margin-bottom:6px">سعر الدورة المكثفة</div>
+          <div class="old-price">299 ر.</div>
+          <div class="new-price">199 ر.</div>
+          <span class="save-badge">وفّر 100 ريال! 🔥</span>
+
+          <ul class="benefit-list">
+            <li>✅ وصول كامل سنة كاملة</li>
+            <li>✅ النماذج 49، 50، 51، 52 بالترتيب</li>
+            <li>✅ محاضرات مسجلة + PDF</li>
+            <li>✅ أكثر من 200 سؤال STEP</li>
+            <li>✅ خطة دراسية مخصصة</li>
+            <li>✅ مجموعة تيليجرام VIP</li>
+            <li>✅ دعم أسبوعي مع الدكتور عايد</li>
+            <li>✅ تطبيق يعمل أوفلاين</li>
+          </ul>
+
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.1)">
+            <div style="font-size:0.78rem;color:var(--text3);margin-bottom:8px">المقاعد المتبقية:</div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="seats-counter" id="seatsLeftSidebar">7</div>
+              <span style="font-size:0.78rem;color:var(--text2)">مقعد فقط!</span>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <div style="font-size:0.78rem;color:var(--text3);margin-bottom:6px">ينتهي الخصم خلال:</div>
+            <div class="countdown-block" id="countdownSidebar" style="font-size:0.95rem">
+              <span>00</span>:<span>00</span>:<span>00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ضمانات -->
+        <div class="card" style="margin-top:16px">
+          <div style="font-weight:800;margin-bottom:12px;font-size:0.95rem">🛡️ ضماناتنا</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:8px;font-size:0.82rem">
+              <span>💰</span>
+              <span>استرداد كامل خلال 7 أيام</span>
+            </div>
+            <div style="display:flex;gap:8px;font-size:0.82rem">
+              <span>🔒</span>
+              <span>دفع آمن عبر التحويل البنكي</span>
+            </div>
+            <div style="display:flex;gap:8px;font-size:0.82rem">
+              <span>📱</span>
+              <span>تواصل مباشر عبر تيليجرام</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- شهادات مختصرة -->
+        <div class="card" style="margin-top:16px">
+          <div style="font-size:0.82rem;font-style:italic;color:var(--text2);line-height:1.6">"سجلت مساء واتواصلت معي صباح اليوم التالي!"</div>
+          <div style="font-size:0.75rem;font-weight:700;margin-top:8px;color:var(--text)">— منيرة الشمري ⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ===== Modal الشروط ===== -->
+<div class="modal-overlay" id="termsModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>الشروط والأحكام</h3>
+      <button class="modal-close" onclick="closeModal('termsModal')">✕</button>
+    </div>
+    <div class="modal-body" style="font-size:0.88rem;color:var(--text2);line-height:1.8">
+      <p>1. الدورة للاستخدام الشخصي فقط - يُمنع المشاركة.</p>
+      <p>2. وصول كامل لمدة سنة كاملة تشمل تحديثات 2026.</p>
+      <p>3. تشمل الدورة النماذج 49، 50، 51، 52 بالترتيب.</p>
+      <p>4. الدعم عبر مجموعة تيليجرام الحصرية.</p>
+      <p>5. محتوى محمي بحقوق الملكية الفكرية.</p>
+    </div>
+    <div style="padding:16px 24px;border-top:1px solid var(--card-border)">
+      <button class="btn btn-primary" onclick="closeModal('termsModal')">حسناً</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Modal الاسترداد ===== -->
+<div class="modal-overlay" id="refundModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>سياسة الاسترداد</h3>
+      <button class="modal-close" onclick="closeModal('refundModal')">✕</button>
+    </div>
+    <div class="modal-body" style="font-size:0.88rem;color:var(--text2);line-height:1.8">
+      <div style="background:rgba(16,185,129,0.1);border-radius:10px;padding:14px;margin-bottom:14px">
+        <strong style="color:#6ee7b7">✅ يحق لك الاسترداد إذا:</strong>
+        <ul style="margin-top:8px;padding-right:16px">
+          <li>طلبت خلال 7 أيام من التسجيل</li>
+          <li>لم تشاهد أي محاضرة أو محتوى</li>
+        </ul>
+      </div>
+      <div style="background:rgba(239,68,68,0.1);border-radius:10px;padding:14px">
+        <strong style="color:#fca5a5">❌ لا يحق الاسترداد إذا:</strong>
+        <ul style="margin-top:8px;padding-right:16px">
+          <li>مشاهدة أكثر من 20% من المحتوى</li>
+          <li>مرور أكثر من 7 أيام</li>
+          <li>مشاركة المحتوى مع الغير</li>
+        </ul>
+      </div>
+      <p style="margin-top:14px">للاسترداد: تواصل عبر تيليجرام وأرسل طلبك خلال المدة المحددة.</p>
+    </div>
+    <div style="padding:16px 24px;border-top:1px solid var(--card-border)">
+      <button class="btn btn-primary" onclick="closeModal('refundModal')">فهمت</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script>
+let currentStep = 1;
+let receiptFile = null;
+let regData = {};
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!auth.checkAll()) return;
+
+  // استعادة بيانات المستخدم
+  const user = auth.getUser();
+  if (user) {
+    document.querySelectorAll('.user-name').forEach(el => el.textContent = user.name || 'طالب');
+    document.querySelectorAll('.user-avatar-initial').forEach(el => el.textContent = (user.name||'ط').charAt(0));
+    if (user.name) document.getElementById('f-name').value = user.name;
+    if (user.phone) document.getElementById('f-phone').value = user.phone;
+    if (user.major) document.getElementById('f-major').value = user.major;
+  }
+
+  // عدادات
+  seats.init('seatsLeft');
+  seats.init('seatsLeftSidebar');
+  const discountEnd = countdown.getOrCreateEnd();
+  countdown.init('headerCountdown', discountEnd);
+  countdown.init('countdownSidebar', discountEnd);
+
+  // رقم الفاتورة
+  document.getElementById('invoiceNum').textContent = 'INV-' + Date.now().toString().slice(-6);
+  document.getElementById('invoiceDate').textContent = new Date().toLocaleDateString('ar-SA');
+});
+
+function goToStep(step) {
+  if (step > currentStep) {
+    if (!validateStep(currentStep)) return;
+  }
+
+  // تحديث مؤشرات الخطوات
+  for (let i = 1; i <= 4; i++) {
+    const ind = document.getElementById('step-ind-' + i);
+    if (ind) {
+      ind.classList.remove('active', 'completed');
+      if (i < step) ind.classList.add('completed');
+      if (i === step) ind.classList.add('active');
+    }
+  }
+
+  // إخفاء الخطوة الحالية وإظهار الجديدة
+  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('formStep' + step).classList.add('active');
+  currentStep = step;
+  window.scrollTo({ top: 80, behavior: 'smooth' });
+
+  // ملء بيانات الفاتورة
+  if (step === 2) {
+    const name = document.getElementById('f-name').value;
+    const phone = document.getElementById('f-phone').value;
+    document.getElementById('inv-name').textContent = name || '-';
+    document.getElementById('inv-phone').textContent = phone || '-';
+    regData = { name, phone };
+  }
+}
+
+function validateStep(step) {
+  if (step === 1) {
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const university = document.getElementById('f-university').value;
+    const examDate = document.getElementById('f-examDate').value;
+    const terms = document.getElementById('agreeTerms').checked;
+    const refund = document.getElementById('agreeRefund').checked;
+
+    if (!validate.name(name)) { toast.error('أدخل اسمك الكامل (3 أحرف على الأقل)'); return false; }
+    if (!validate.phone(phone)) { toast.error('أدخل رقم جوال سعودي صحيح يبدأ بـ 05'); return false; }
+    if (!university) { toast.error('اختر جامعتك'); return false; }
+    if (!examDate) { toast.error('حدد موعد اختبارك التقريبي'); return false; }
+    if (!terms) { toast.warning('لازم توافق على الشروط'); return false; }
+    if (!refund) { toast.warning('لازم تقرأ وتوافق على سياسة الاسترداد'); return false; }
+  }
+  if (step === 3) {
+    if (!receiptFile) { toast.warning('ارفع إيصال الدفع أولاً'); return false; }
+  }
+  return true;
+}
+
+async function submitRegistration() {
+  if (!validateStep(3)) return;
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin">⏳</span> جارٍ المعالجة...';
+
+  const user = auth.getUser() || {};
+  const fullData = {
+    name: document.getElementById('f-name').value,
+    phone: document.getElementById('f-phone').value,
+    email: document.getElementById('f-email').value,
+    university: document.getElementById('f-university').value,
+    major: document.getElementById('f-major').value,
+    examDate: document.getElementById('f-examDate').value,
+    txRef: document.getElementById('f-txRef').value,
+    score: store.get('quizScore') || 0,
+    level: store.get('quizLevel') || 'غير محدد',
+    plan: store.get('selectedPlan') || '7 أيام',
+  };
+
+  // تحديث بيانات المستخدم
+  auth.login({ ...user, ...fullData, isRegistered: true });
+  store.set('isRegistered', true);
+
+  // إرسال للجوجل شيت
+  await submitToGoogleScript({ type: 'registration', ...fullData });
+
+  // الانتقال لخطوة التأكيد
+  goToStep(4);
+  prepareTelegramMessage(fullData);
+}
+
+function prepareTelegramMessage(data) {
+  const score = store.get('quizScore') || 0;
+  const level = store.get('quizLevel') || 'غير محدد';
+  const plan = store.get('selectedPlan') || '7 أيام';
+  const levelNames = { A1: 'مبتدئ', A2: 'متوسط منخفض', B1: 'متوسط', B2: 'متقدم' };
+
+  const msg = `🎓 طلب تسجيل جديد - أكاديمية عايد STEP 2026
+
+━━━━━━━━━━━━━━━━━━━━
+👤 الاسم: ${data.name}
+📱 الجوال: ${data.phone}
+📧 البريد: ${data.email || 'غير محدد'}
+🏫 الجامعة: ${data.university === 'seu' ? 'الجامعة السعودية الإلكترونية' : data.university}
+📚 التخصص: ${data.major || 'غير محدد'}
+📅 موعد الاختبار: ${data.examDate}
+━━━━━━━━━━━━━━━━━━━━
+📊 نتيجة اختبار تحديد المستوى: ${score}%
+🎯 المستوى: ${level} (${levelNames[level]||level})
+📋 الخطة الدراسية: ${plan}
+━━━━━━━━━━━━━━━━━━━━
+💳 تم الدفع: 199 ريال
+🏦 البنك: مصرف الإنماء
+📎 مرجع التحويل: ${data.txRef || 'سيُرفق الإيصال'}
+━━━━━━━━━━━━━━━━━━━━
+⏰ وقت التسجيل: ${new Date().toLocaleString('ar-SA')}
+
+✅ أرجو:
+1️⃣ تأكيد التسجيل
+2️⃣ إرسال رابط تحميل الجدول الدراسي
+3️⃣ إضافتي لمجموعة التيليجرام VIP
+
+📎 الإيصال: مرفق في الرسالة التالية
+
+#STEP2026 #أكاديمية_عايد`;
+
+  store.set('telegramMsg', msg);
+  document.getElementById('tgMsgPreview').textContent = msg;
+}
+
+function openTelegramMsg() {
+  const msg = store.get('telegramMsg') || '';
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://t.me/stepp2024?text=${encoded}`, '_blank');
+  toast.info('📱 تم فتح تيليجرام - أرسل الرسالة ثم ارفع الإيصال في نفس المحادثة');
+}
+
+function copyTelegramMsg() {
+  const msg = store.get('telegramMsg') || '';
+  copyToClipboard(msg, 'تم نسخ الرسالة! الصق في تيليجرام @stepp2024 📋');
+}
+
+// ===== رفع الإيصال =====
+function handleFileUpload(file) {
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { toast.error('حجم الملف أكبر من 5MB'); return; }
+  receiptFile = file;
+
+  const zone = document.getElementById('receiptZone');
+  const preview = document.getElementById('filePreview');
+  const fileInfo = document.getElementById('fileInfo');
+
+  zone.innerHTML = `<div class="upload-icon">✅</div><p style="font-weight:700;color:var(--success)">تم رفع الإيصال بنجاح!</p><p style="font-size:0.78rem;color:var(--text2)">${file.name}</p>`;
+  preview.style.display = 'block';
+  fileInfo.textContent = `${file.name} (${(file.size/1024).toFixed(0)} KB)`;
+
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = document.getElementById('previewImg');
+      img.src = e.target.result;
+      img.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  toast.success('تم رفع الإيصال ✅');
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  document.getElementById('receiptZone').classList.add('dragover');
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('receiptZone').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) handleFileUpload(file);
+}
+
+function copyAllBankDetails() {
+  const text = `بيانات التحويل البنكي - أكاديمية عايد STEP 2026
+البنك: مصرف الإنماء
+المستفيد: مؤسسة كريتيفا جلوبال لتقنية المعلومات
+رقم الحساب: 68206067557000
+IBAN: SA4905000068206067557000
+المبلغ: 199 ريال سعودي`;
+  copyToClipboard(text, 'تم نسخ جميع بيانات التحويل! 📋');
+}
+
+function printInvoice() {
+  const content = document.getElementById('invoiceBox').innerHTML;
+  const w = window.open('', '_blank');
+  w.document.write(`<html dir="rtl"><head><title>فاتورة</title><style>body{font-family:Arial;direction:rtl;padding:24px;} .invoice-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;} .invoice-total{font-weight:900;font-size:1.1rem;color:#1a6b52;border-top:2px solid #1a6b52;}</style></head><body>${content}</body></html>`);
+  w.print();
+}
+
+function copyInvoiceText() {
+  const data = regData;
+  const text = `فاتورة أكاديمية عايد STEP 2026\nالعميل: ${data.name || '-'}\nالجوال: ${data.phone || '-'}\nالدورة: STEP المكثفة 2026\nالإجمالي: 199 ريال (بعد خصم 100 ريال من 299 ريال)`;
+  copyToClipboard(text, 'تم نسخ الفاتورة 📋');
+}
+
+function showModal(id) {
+  document.getElementById(id).classList.add('open');
+  return false;
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول - أكاديمية عايد STEP 2026</title>
+<meta name="description" content="سجّل دخولك وابدأ رحلتك نحو النجاح في اختبار STEP مع أكاديمية عايد">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo-192.png">
+<style>
+.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: radial-gradient(ellipse at 20% 50%, rgba(26,107,82,0.15) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(250,204,21,0.06) 0%, transparent 50%), var(--bg); }
+.login-wrapper { width: 100%; max-width: 900px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.login-aside { display: flex; flex-direction: column; gap: 20px; }
+.login-aside .hero-section { margin-bottom: 8px; }
+.login-form-section { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 36px 32px; }
+.welcome-steps { display: flex; flex-direction: column; gap: 14px; }
+.welcome-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; background: rgba(255,255,255,0.04); border-radius: 12px; }
+.step-num { width: 28px; height: 28px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 900; flex-shrink: 0; }
+.step-desc strong { display: block; font-size: 0.88rem; margin-bottom: 2px; }
+.step-desc span { font-size: 0.78rem; color: var(--text2); }
+.student-count { display: flex; align-items: center; gap: 10px; background: rgba(26,107,82,0.1); border: 1px solid rgba(26,107,82,0.25); border-radius: 12px; padding: 12px 16px; margin-top: 8px; }
+.faces { display: flex; }
+.face { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: 2px solid var(--bg); margin-left: -8px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; color: white; }
+.face:nth-child(2) { background: linear-gradient(135deg, #7c3aed, #4c1d95); }
+.face:nth-child(3) { background: linear-gradient(135deg, #dc2626, #991b1b); }
+.form-tabs { display: flex; background: rgba(0,0,0,0.3); border-radius: 10px; padding: 4px; gap: 4px; margin-bottom: 24px; }
+.form-tab-btn { flex: 1; padding: 8px; border: none; border-radius: 8px; background: transparent; color: var(--text2); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all var(--transition); font-family: var(--font); }
+.form-tab-btn.active { background: var(--primary); color: white; }
+.form-tab-content { display: none; animation: fadeIn 0.3s ease; }
+.form-tab-content.active { display: block; }
+.divider { display: flex; align-items: center; gap: 12px; margin: 16px 0; }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+.divider span { font-size: 0.78rem; color: var(--text3); }
+.security-note { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--text3); margin-top: 12px; justify-content: center; }
+@media (max-width: 750px) { .login-wrapper { grid-template-columns: 1fr; } .login-aside { display: none; } }
+</style>
+</head>
+<body>
+<div id="toastContainer"></div>
+
+<div class="login-page">
+  <div class="login-wrapper">
+    <!-- ===== الجانب الأيسر: معلومات ===== -->
+    <div class="login-aside">
+      <div class="hero-section">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+          <div class="academy-logo">ع</div>
+          <div>
+            <div style="font-size:1.3rem;font-weight:900;color:var(--accent)">أكاديمية عايد</div>
+            <div style="font-size:0.8rem;color:var(--text2)">منصة STEP 2026 المتكاملة</div>
+          </div>
+        </div>
+        <h1 style="font-size:clamp(1.5rem,3vw,2.2rem);color:var(--text);margin-bottom:10px">
+          ابدأ رحلتك نحو<br><span style="color:var(--accent)">النجاح في STEP 🎯</span>
+        </h1>
+        <p style="color:var(--text2);font-size:0.92rem;line-height:1.7">سجّل الحين وخذ اختبار تحديد المستوى المجاني، واحصل على خطة دراسية مخصصة حسب وضعك!</p>
+      </div>
+
+      <div class="welcome-steps">
+        <div class="welcome-step">
+          <div class="step-num">1</div>
+          <div class="step-desc">
+            <strong>سجّل بياناتك الدراسية</strong>
+            <span>حتى نخصص تجربتك ونفهم احتياجاتك</span>
+          </div>
+        </div>
+        <div class="welcome-step">
+          <div class="step-num">2</div>
+          <div class="step-desc">
+            <strong>خذ اختبار تحديد المستوى المجاني</strong>
+            <span>24 سؤال واقعي من نماذج STEP 49-52</span>
+          </div>
+        </div>
+        <div class="welcome-step">
+          <div class="step-num">3</div>
+          <div class="step-desc">
+            <strong>احصل على خطتك الدراسية</strong>
+            <span>جدول مخصص + رسالة تيليجرام جاهزة</span>
+          </div>
+        </div>
+        <div class="welcome-step">
+          <div class="step-num">4</div>
+          <div class="step-desc">
+            <strong>سجّل في الدورة بـ 199 ر. فقط</strong>
+            <span>وصول سنة كاملة مع النماذج 49،50،51،52</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="student-count">
+        <div class="faces">
+          <div class="face">ع</div>
+          <div class="face">س</div>
+          <div class="face">م</div>
+        </div>
+        <div>
+          <div style="font-size:0.88rem;font-weight:700">انضم لأكثر من <span style="color:var(--accent)">500 طالب</span></div>
+          <div style="font-size:0.75rem;color:var(--text2)">يذاكرون معنا هذا الفصل</div>
+        </div>
+      </div>
+
+      <!-- تقييمات مختصرة -->
+      <div style="background:rgba(255,255,255,0.04);border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,0.08)">
+        <div style="font-size:0.82rem;color:var(--text2);font-style:italic;line-height:1.6">"حصلت على 85% في STEP بعد الكورس وكنت قبله ما أعرف شو افعل!"</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+          <div class="face" style="width:26px;height:26px;font-size:0.65rem">ن</div>
+          <div>
+            <div style="font-size:0.82rem;font-weight:700">نورة العتيبي</div>
+            <div style="font-size:0.7rem;color:var(--accent)">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== نموذج تسجيل الدخول ===== -->
+    <div class="login-form-section">
+      <div style="text-align:center;margin-bottom:24px">
+        <h2 style="font-size:1.3rem;color:var(--text);margin-bottom:6px">أهلاً بك في أكاديمية عايد! 👋</h2>
+        <p style="font-size:0.82rem;color:var(--text2)">أكمل بياناتك الدراسية لنخصص تجربتك</p>
+      </div>
+
+      <!-- تبويبات -->
+      <div class="form-tabs">
+        <button class="form-tab-btn active" onclick="switchTab('register')">طالب جديد</button>
+        <button class="form-tab-btn" onclick="switchTab('returning')">لديّ حساب</button>
+      </div>
+
+      <!-- ===== نموذج التسجيل ===== -->
+      <div class="form-tab-content active" id="tab-register">
+        <form id="registerForm" onsubmit="handleRegister(event)" novalidate>
+          <!-- الاسم -->
+          <div class="form-group">
+            <label class="form-label">الاسم الكامل <span style="color:var(--danger)">*</span></label>
+            <input type="text" name="name" class="form-control" id="reg-name" placeholder="مثال: محمد عبدالله الغامدي" autocomplete="name" required>
+            <span class="form-error" id="err-name">الاسم يجب أن يكون 3 أحرف على الأقل</span>
+          </div>
+
+          <!-- الجوال -->
+          <div class="form-group">
+            <label class="form-label">رقم الجوال <span style="color:var(--danger)">*</span></label>
+            <input type="tel" name="phone" class="form-control" id="reg-phone" placeholder="05XXXXXXXX" dir="ltr" autocomplete="tel" required>
+            <span class="form-error" id="err-phone">أدخل رقم جوال سعودي صحيح يبدأ بـ 05</span>
+          </div>
+
+          <!-- الجامعة -->
+          <div class="form-group">
+            <label class="form-label">الجامعة <span style="color:var(--danger)">*</span></label>
+            <select name="university" class="form-control" id="reg-university" required>
+              <option value="">-- اختر جامعتك --</option>
+              <option value="seu" selected>الجامعة السعودية الإلكترونية</option>
+              <option value="ksu">جامعة الملك سعود</option>
+              <option value="kau">جامعة الملك عبدالعزيز</option>
+              <option value="ku">جامعة الملك خالد</option>
+              <option value="taibah">جامعة طيبة</option>
+              <option value="qu">جامعة القصيم</option>
+              <option value="iu">الجامعة الإسلامية</option>
+              <option value="pnu">جامعة الأميرة نورة</option>
+              <option value="other">أخرى</option>
+            </select>
+          </div>
+
+          <!-- التخصص (للجامعة الإلكترونية) -->
+          <div class="form-group" id="major-group">
+            <label class="form-label">التخصص <span style="color:var(--danger)">*</span></label>
+            <select name="major" class="form-control" id="reg-major" required>
+              <option value="">-- اختر تخصصك --</option>
+              <optgroup label="كليات الجامعة الإلكترونية">
+                <option value="cs">علوم الحاسب وتقنية المعلومات</option>
+                <option value="ba">إدارة الأعمال</option>
+                <option value="accounting">المحاسبة</option>
+                <option value="mis">نظم المعلومات الإدارية</option>
+                <option value="hrm">إدارة الموارد البشرية</option>
+                <option value="finance">التمويل والاستثمار</option>
+                <option value="marketing">التسويق</option>
+                <option value="logistics">إدارة سلاسل التوريد</option>
+                <option value="law">نظام</option>
+                <option value="nursing">التمريض</option>
+                <option value="eng">الهندسة</option>
+                <option value="other_major">أخرى</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- رقم الطالب الجامعي -->
+          <div class="form-group">
+            <label class="form-label">رقم الطالب الجامعي (اختياري)</label>
+            <input type="text" name="studentId" class="form-control" id="reg-studentId" placeholder="مثال: 123456789" dir="ltr">
+          </div>
+
+          <!-- موعد الاختبار المتوقع -->
+          <div class="form-group">
+            <label class="form-label">متى موعد اختبار STEP المتوقع؟ <span style="color:var(--danger)">*</span></label>
+            <select name="examDate" class="form-control" id="reg-examDate" required>
+              <option value="">-- اختر الفترة التقريبية --</option>
+              <option value="less1month">أقل من شهر</option>
+              <option value="1to2months">شهر إلى شهرين</option>
+              <option value="3months">3 أشهر</option>
+              <option value="more3months">أكثر من 3 أشهر</option>
+              <option value="notset">لم أحدد بعد</option>
+            </select>
+          </div>
+
+          <!-- اشتراك سابق -->
+          <div class="form-group">
+            <label class="form-label">هل سبق وحاولت الاشتراك أو أخذت دورة STEP؟</label>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px" id="prev-sub-opts">
+              <button type="button" class="survey-opt" data-val="no" onclick="selectSurveyOpt(this,'prevSub')">لا، أول مرة</button>
+              <button type="button" class="survey-opt" data-val="yes_other" onclick="selectSurveyOpt(this,'prevSub')">نعم، مع أكاديمية أخرى</button>
+              <button type="button" class="survey-opt" data-val="yes_ayed" onclick="selectSurveyOpt(this,'prevSub')">نعم، مع عايد سابقاً</button>
+              <button type="button" class="survey-opt" data-val="self" onclick="selectSurveyOpt(this,'prevSub')">ذاكرت بنفسي</button>
+            </div>
+            <input type="hidden" name="prevSub" id="inp-prevSub">
+          </div>
+
+          <!-- مصدر المعرفة -->
+          <div class="form-group">
+            <label class="form-label">كيف عرفت عن الأكاديمية؟</label>
+            <select name="source" class="form-control" id="reg-source">
+              <option value="">-- اختر --</option>
+              <option value="twitter">تويتر / X</option>
+              <option value="snapchat">سناب شات</option>
+              <option value="instagram">انستقرام</option>
+              <option value="telegram">تيليجرام</option>
+              <option value="friend">صديق أو زميل</option>
+              <option value="google">بحث جوجل</option>
+              <option value="other">أخرى</option>
+            </select>
+          </div>
+
+          <!-- اتفاقية -->
+          <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;padding:12px;background:rgba(255,255,255,0.04);border-radius:10px">
+            <input type="checkbox" id="agree-terms" name="terms" style="margin-top:4px;accent-color:var(--primary);width:18px;height:18px;flex-shrink:0" required>
+            <label for="agree-terms" style="font-size:0.8rem;color:var(--text2);cursor:pointer">
+              أوافق على <a href="#" onclick="showTerms()" style="color:var(--primary-light)">الشروط والأحكام</a> وسياسة الخصوصية وأعلم أن بياناتي ستُستخدم لتخصيص التجربة التعليمية
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg" id="registerBtn">
+            <span>ابدأ رحلتي الآن 🚀</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- ===== نموذج العودة ===== -->
+      <div class="form-tab-content" id="tab-returning">
+        <div style="text-align:center;padding:20px 0">
+          <div style="font-size:3rem;margin-bottom:12px">👋</div>
+          <h3 style="font-size:1.1rem;margin-bottom:8px">أهلاً بعودتك!</h3>
+          <p style="font-size:0.85rem;color:var(--text2);margin-bottom:20px">أدخل رقم جوالك للوصول إلى حسابك</p>
+        </div>
+
+        <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
+          <div class="form-group">
+            <label class="form-label">رقم الجوال</label>
+            <input type="tel" name="phone" class="form-control" id="login-phone" placeholder="05XXXXXXXX" dir="ltr" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label">الاسم (للتحقق)</label>
+            <input type="text" name="name" class="form-control" id="login-name" placeholder="الاسم الذي سجلت به">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full btn-lg">دخول حسابي</button>
+        </form>
+
+        <div class="divider"><span>أو</span></div>
+
+        <button class="btn btn-ghost btn-full" onclick="switchTab('register')">
+          إنشاء حساب جديد
+        </button>
+      </div>
+
+      <!-- مؤشرات الثقة -->
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08)">
+        <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap">
+          <div style="text-align:center">
+            <div style="font-size:1.4rem;font-weight:900;color:var(--success)">500+</div>
+            <div style="font-size:0.68rem;color:var(--text3)">طالب مسجل</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:1.4rem;font-weight:900;color:var(--info)">92%</div>
+            <div style="font-size:0.68rem;color:var(--text3)">معدل النجاح</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:1.4rem;font-weight:900;color:var(--accent)">3+</div>
+            <div style="font-size:0.68rem;color:var(--text3)">سنوات خبرة</div>
+          </div>
+        </div>
+        <div class="security-note">
+          <span>🔒</span>
+          <span>بياناتك محفوظة وآمنة - لن نشاركها مع أي طرف ثالث</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal الشروط -->
+<div class="modal-overlay" id="termsModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 style="font-size:1.05rem">الشروط والأحكام وسياسة الاسترداد</h3>
+      <button class="modal-close" onclick="closeTerms()">✕</button>
+    </div>
+    <div class="modal-body" style="font-size:0.88rem;color:var(--text2);line-height:1.8">
+      <h4 style="color:var(--accent);margin-bottom:10px">1. الشروط العامة</h4>
+      <p>بتسجيلك في الدورة، أنت توافق على الاستخدام الشخصي فقط. يُمنع مشاركة المحتوى مع الغير.</p>
+      <h4 style="color:var(--accent);margin:16px 0 10px">2. سياسة الاسترداد</h4>
+      <p>✅ يحق لك طلب الاسترداد الكامل خلال <strong>7 أيام</strong> من تاريخ التسجيل إذا لم تدخل المنصة أو تشاهد أي محتوى.</p>
+      <p>⚠️ بعد مشاهدة أكثر من 20% من المحتوى، لا يحق الاسترداد.</p>
+      <h4 style="color:var(--accent);margin:16px 0 10px">3. مدة الوصول</h4>
+      <p>✅ وصول كامل لمدة <strong>سنة كاملة</strong> تشمل التحديثات والنماذج الجديدة (49، 50، 51، 52 بالترتيب).</p>
+      <h4 style="color:var(--accent);margin:16px 0 10px">4. الخصوصية</h4>
+      <p>لن تُشارَك بياناتك مع أي طرف ثالث. تُستخدم فقط لتخصيص تجربتك التعليمية وإرسال تحديثات الدورة.</p>
+    </div>
+    <div style="padding:16px 24px;border-top:1px solid var(--card-border);display:flex;gap:10px">
+      <button class="btn btn-primary" onclick="acceptTerms()">أوافق على الشروط ✅</button>
+      <button class="btn btn-ghost" onclick="closeTerms()">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script>
+const surveyData = {};
+
+function switchTab(tab) {
+  document.querySelectorAll('.form-tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', (tab === 'register' && i === 0) || (tab === 'returning' && i === 1));
+  });
+  document.querySelectorAll('.form-tab-content').forEach((c, i) => {
+    c.classList.toggle('active', (tab === 'register' && i === 0) || (tab === 'returning' && i === 1));
+  });
+}
+
+function selectSurveyOpt(btn, field) {
+  const group = btn.parentElement;
+  group.querySelectorAll('.survey-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const inp = document.getElementById('inp-' + field);
+  if (inp) inp.value = btn.dataset.val;
+  surveyData[field] = btn.dataset.val;
+  // إذا كان لديه تجربة سابقة
+  if (field === 'prevSub' && btn.dataset.val !== 'no') {
+    showBarrierQuestion();
+  }
+}
+
+function showBarrierQuestion() {
+  if (document.getElementById('barrier-group')) return;
+  const group = document.createElement('div');
+  group.id = 'barrier-group';
+  group.className = 'form-group';
+  group.innerHTML = `
+    <label class="form-label">ما العائق الرئيسي اللي واجهته سابقاً؟</label>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+      <button type="button" class="survey-opt" data-val="time" onclick="selectSurveyOpt(this,'barrier')">⏰ ضيق الوقت</button>
+      <button type="button" class="survey-opt" data-val="method" onclick="selectSurveyOpt(this,'barrier')">❓ صعوبة الأسلوب</button>
+      <button type="button" class="survey-opt" data-val="cost" onclick="selectSurveyOpt(this,'barrier')">💰 التكلفة</button>
+      <button type="button" class="survey-opt" data-val="motivation" onclick="selectSurveyOpt(this,'barrier')">😔 قلة الدافعية</button>
+      <button type="button" class="survey-opt" data-val="content" onclick="selectSurveyOpt(this,'barrier')">📚 المحتوى غير كافٍ</button>
+    </div>
+    <input type="hidden" name="barrier" id="inp-barrier">
+  `;
+  document.getElementById('prev-sub-opts').parentElement.after(group);
+}
+
+function handleRegister(e) {
+  e.preventDefault();
+  let valid = true;
+
+  const name = document.getElementById('reg-name').value.trim();
+  if (!validate.name(name)) {
+    document.getElementById('err-name').classList.add('show');
+    document.getElementById('reg-name').classList.add('error');
+    valid = false;
+  } else {
+    document.getElementById('err-name').classList.remove('show');
+    document.getElementById('reg-name').classList.remove('error');
+  }
+
+  const phone = document.getElementById('reg-phone').value.trim();
+  if (!validate.phone(phone)) {
+    document.getElementById('err-phone').classList.add('show');
+    document.getElementById('reg-phone').classList.add('error');
+    valid = false;
+  } else {
+    document.getElementById('err-phone').classList.remove('show');
+    document.getElementById('reg-phone').classList.remove('error');
+  }
+
+  if (!document.getElementById('reg-university').value) {
+    toast.error('اختر جامعتك أولاً');
+    valid = false;
+  }
+  if (!document.getElementById('reg-examDate').value) {
+    toast.error('حدد موعد اختبارك التقريبي');
+    valid = false;
+  }
+  if (!document.getElementById('agree-terms').checked) {
+    toast.warning('لازم توافق على الشروط للمتابعة');
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  const userData = {
+    name,
+    phone,
+    university: document.getElementById('reg-university').value,
+    major: document.getElementById('reg-major').value,
+    studentId: document.getElementById('reg-studentId').value,
+    examDate: document.getElementById('reg-examDate').value,
+    source: document.getElementById('reg-source').value,
+    prevSub: surveyData.prevSub || 'no',
+    barrier: surveyData.barrier || '',
+    registeredAt: new Date().toISOString(),
+  };
+
+  const btn = document.getElementById('registerBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin">⏳</span> جارٍ التسجيل...';
+
+  // حفظ البيانات
+  auth.login(userData);
+  store.set('captchaPassed', false);
+
+  // إرسال للجوجل شيت (اختياري)
+  submitToGoogleScript({ type: 'new_user', ...userData });
+
+  setTimeout(() => {
+    toast.success(`أهلاً ${name}! يلا نبدأ 🎉`);
+    setTimeout(() => window.location.href = 'captcha.html', 1200);
+  }, 800);
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const phone = document.getElementById('login-phone').value.trim();
+  const name = document.getElementById('login-name').value.trim();
+
+  if (!validate.phone(phone)) {
+    toast.error('أدخل رقم جوال صحيح');
+    return;
+  }
+
+  // التحقق من البيانات المحفوظة
+  const saved = auth.getUser();
+  if (saved && (saved.phone === phone || saved.name?.includes(name.split(' ')[0]))) {
+    auth.login(saved);
+    toast.success(`أهلاً ${saved.name}! 👋`);
+    setTimeout(() => window.location.href = 'captcha.html', 1000);
+  } else {
+    // تسجيل حساب جديد بالبيانات المدخلة
+    const userData = { name: name || 'طالب', phone, registeredAt: new Date().toISOString() };
+    auth.login(userData);
+    toast.info('تم التعرف عليك! أكمل إلى التحقق 🔐');
+    setTimeout(() => window.location.href = 'captcha.html', 1000);
+  }
+}
+
+function showTerms() {
+  document.getElementById('termsModal').classList.add('open');
+}
+
+function closeTerms() {
+  document.getElementById('termsModal').classList.remove('open');
+}
+
+function acceptTerms() {
+  document.getElementById('agree-terms').checked = true;
+  closeTerms();
+  toast.success('تم قبول الشروط ✅');
+}
+
+// إذا مسجل الدخول مسبقاً
+document.addEventListener('DOMContentLoaded', () => {
+  if (auth.isLoggedIn() && store.get('captchaPassed')) {
+    window.location.href = 'index.html';
+  }
+});
+</script>
+</body>
+</html>

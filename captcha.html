@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تحقق إنسان - أكاديمية عايد STEP 2026</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo-192.png">
+<style>
+.captcha-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: radial-gradient(ellipse at 50% 50%, rgba(26,107,82,0.1) 0%, transparent 70%), var(--bg); }
+.captcha-container { max-width: 420px; width: 100%; text-align: center; }
+.captcha-logo { margin-bottom: 24px; }
+.captcha-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 40px 32px; }
+.captcha-question { font-size: clamp(2rem,6vw,3rem); font-weight: 900; color: var(--accent); letter-spacing: 6px; background: rgba(0,0,0,0.3); padding: 24px; border-radius: 16px; margin: 20px 0; font-family: monospace; user-select: none; border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+.captcha-question::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px); }
+.captcha-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+.captcha-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: all 0.3s; }
+.captcha-dot.error { background: var(--danger); transform: scale(1.2); }
+.captcha-dot.success { background: var(--success); }
+.captcha-answer { font-size: 1.8rem; text-align: center; font-family: monospace; font-weight: 700; letter-spacing: 6px; }
+.auto-check-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin-top: 12px; }
+.auto-check-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.1s linear; }
+.success-anim { animation: successPop 0.5s ease; }
+@keyframes successPop { 0% { transform: scale(0.8); } 60% { transform: scale(1.1); } 100% { transform: scale(1); } }
+</style>
+</head>
+<body>
+<div id="toastContainer"></div>
+
+<div class="captcha-page">
+  <div class="captcha-container">
+    <div class="captcha-logo">
+      <div class="academy-logo" style="margin:0 auto 14px">ع</div>
+      <div style="font-size:1.2rem;font-weight:900;color:var(--accent)">أكاديمية عايد STEP 2026</div>
+    </div>
+
+    <div class="captcha-card" id="captchaCard">
+      <!-- مرحلة التحقق -->
+      <div id="verifyStage">
+        <div style="font-size:0.9rem;color:var(--text2);margin-bottom:8px">🛡️ تحقق إنسان</div>
+        <h2 style="font-size:1.2rem;margin-bottom:6px">لحمايتك من الروبوتات</h2>
+        <p style="font-size:0.82rem;color:var(--text3);margin-bottom:20px">أجب على السؤال التالي للتحقق من أنك إنسان 😊</p>
+
+        <!-- السؤال -->
+        <div class="captcha-question" id="captchaQuestion">
+          <span id="q-num1">?</span> + <span id="q-num2">?</span> = ?
+        </div>
+
+        <!-- نقاط المحاولات -->
+        <div class="captcha-dots">
+          <div class="captcha-dot" id="dot0"></div>
+          <div class="captcha-dot" id="dot1"></div>
+          <div class="captcha-dot" id="dot2"></div>
+        </div>
+
+        <!-- إدخال الإجابة -->
+        <div style="margin-bottom:16px">
+          <input
+            type="number"
+            id="captchaInput"
+            class="form-control captcha-answer"
+            placeholder="?"
+            autofocus
+            inputmode="numeric"
+            oninput="onAnswerInput(this.value)"
+            onkeypress="if(event.key==='Enter') verifyCaptcha()"
+          >
+          <!-- شريط التحقق التلقائي -->
+          <div class="auto-check-bar" id="autoCheckBar" style="display:none">
+            <div class="auto-check-fill" id="autoCheckFill"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-full btn-lg" onclick="verifyCaptcha()" id="verifyBtn">
+          🔐 تحقق
+        </button>
+
+        <button class="btn btn-ghost btn-sm" style="margin-top:10px;width:100%" onclick="refreshCaptcha()">
+          🔄 سؤال جديد
+        </button>
+      </div>
+
+      <!-- مرحلة النجاح -->
+      <div id="successStage" style="display:none" class="success-anim">
+        <div style="font-size:5rem;margin-bottom:16px">✅</div>
+        <h2 style="font-size:1.4rem;color:var(--success);margin-bottom:8px">تم التحقق بنجاح!</h2>
+        <p style="color:var(--text2);font-size:0.9rem;margin-bottom:20px">أهلاً وسهلاً! يتم توجيهك الآن...</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;color:var(--text3);font-size:0.85rem">
+          <div style="width:24px;height:24px;border:3px solid var(--primary);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+          <span>جارٍ التوجيه...</span>
+        </div>
+      </div>
+
+      <!-- مرحلة الحجب المؤقت -->
+      <div id="blockedStage" style="display:none">
+        <div style="font-size:4rem;margin-bottom:16px">⏳</div>
+        <h2 style="font-size:1.2rem;color:var(--danger);margin-bottom:8px">محاولات كثيرة!</h2>
+        <p style="color:var(--text2);margin-bottom:20px">انتظر <strong id="blockTimer" style="color:var(--accent)">30</strong> ثانية قبل المحاولة مجدداً</p>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="blockBar" style="width:0%;background:var(--danger)"></div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:0.72rem;color:var(--text3);margin-top:16px">
+      🔒 هذا التحقق يحمي الموقع من الروبوتات ويضمن تجربة آمنة
+    </p>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script>
+let attempts = 0;
+let autoCheckTimer = null;
+let captchaAnswer = 0;
+let captchaQ = { num1: 0, num2: 0, op: '+' };
+
+function generateCaptcha() {
+  // عشوائية في العمليات
+  const ops = ['+', '-', '×'];
+  const op = ops[Math.floor(Math.random() * ops.length)];
+  let n1 = Math.floor(Math.random() * 15) + 1;
+  let n2 = Math.floor(Math.random() * 12) + 1;
+
+  if (op === '-' && n1 < n2) [n1, n2] = [n2, n1];
+
+  captchaQ = { num1: n1, num2: n2, op };
+  captchaAnswer = op === '+' ? n1 + n2 : op === '-' ? n1 - n2 : n1 * n2;
+
+  document.getElementById('q-num1').textContent = n1;
+  document.getElementById('q-num2').textContent = n2;
+  document.getElementById('captchaQuestion').innerHTML =
+    `<span style="font-size:2.5rem">${n1}</span> <span style="font-size:1.8rem;color:var(--primary-light)">${op === '*' ? '×' : op}</span> <span style="font-size:2.5rem">${n2}</span> <span style="font-size:1.8rem;color:var(--text3)">=</span> <span style="font-size:2rem;color:var(--text2)">?</span>`;
+}
+
+function refreshCaptcha() {
+  document.getElementById('captchaInput').value = '';
+  clearTimeout(autoCheckTimer);
+  document.getElementById('autoCheckBar').style.display = 'none';
+  document.getElementById('autoCheckFill').style.width = '0%';
+  generateCaptcha();
+}
+
+function onAnswerInput(val) {
+  clearTimeout(autoCheckTimer);
+  const autoBar = document.getElementById('autoCheckBar');
+  const autoFill = document.getElementById('autoCheckFill');
+
+  if (!val.trim()) {
+    autoBar.style.display = 'none';
+    return;
+  }
+
+  // عرض شريط التحقق التلقائي
+  autoBar.style.display = 'block';
+  let progress = 0;
+  autoFill.style.width = '0%';
+
+  autoCheckTimer = setInterval(() => {
+    progress += 5;
+    autoFill.style.width = progress + '%';
+    if (progress >= 100) {
+      clearInterval(autoCheckTimer);
+      autoCheckTimer = null;
+      verifyCaptcha();
+    }
+  }, 80);
+}
+
+function verifyCaptcha() {
+  clearInterval(autoCheckTimer);
+  document.getElementById('autoCheckBar').style.display = 'none';
+
+  const input = document.getElementById('captchaInput').value.trim();
+  const userAnswer = parseInt(input);
+
+  if (isNaN(userAnswer)) {
+    toast.warning('أدخل رقماً صحيحاً!');
+    return;
+  }
+
+  if (userAnswer === captchaAnswer) {
+    // نجاح!
+    store.set('captchaPassed', true);
+    document.getElementById('verifyStage').style.display = 'none';
+    document.getElementById('successStage').style.display = 'block';
+    document.getElementById('captchaCard').classList.add('success-anim');
+
+    // تحديث نقاط النجاح
+    for (let i = 0; i < 3; i++) {
+      document.getElementById('dot' + i).classList.add('success');
+    }
+
+    toast.success('تم التحقق! ✅');
+    setTimeout(() => {
+      // التوجيه للصفحة المناسبة
+      const redirect = new URLSearchParams(location.search).get('redirect') || 'index.html';
+      window.location.href = redirect;
+    }, 1500);
+  } else {
+    // خطأ
+    attempts++;
+    document.getElementById('captchaInput').value = '';
+    document.getElementById('captchaInput').classList.add('error');
+    setTimeout(() => document.getElementById('captchaInput').classList.remove('error'), 800);
+
+    if (attempts <= 3) {
+      document.getElementById('dot' + (attempts - 1)).classList.add('error');
+      toast.error(`إجابة غلط! المتبقي: ${3 - attempts} محاولات`);
+
+      // اهتزاز السؤال
+      const q = document.getElementById('captchaQuestion');
+      q.style.animation = 'none';
+      q.style.transform = 'translateX(-10px)';
+      setTimeout(() => { q.style.transform = 'translateX(0)'; q.style.animation = ''; }, 300);
+    }
+
+    if (attempts >= 3) {
+      showBlock();
+    } else {
+      refreshCaptcha();
+    }
+  }
+}
+
+function showBlock() {
+  document.getElementById('verifyStage').style.display = 'none';
+  document.getElementById('blockedStage').style.display = 'block';
+
+  let remaining = 30;
+  const timer = setInterval(() => {
+    remaining--;
+    document.getElementById('blockTimer').textContent = remaining;
+    document.getElementById('blockBar').style.width = ((30 - remaining) / 30 * 100) + '%';
+    if (remaining <= 0) {
+      clearInterval(timer);
+      attempts = 0;
+      // إعادة التعيين
+      document.querySelectorAll('.captcha-dot').forEach(d => d.className = 'captcha-dot');
+      document.getElementById('blockedStage').style.display = 'none';
+      document.getElementById('verifyStage').style.display = 'block';
+      refreshCaptcha();
+    }
+  }, 1000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // إذا تجاوز captcha من قبل
+  if (store.get('captchaPassed')) {
+    window.location.href = auth.isLoggedIn() ? 'index.html' : 'login.html';
+    return;
+  }
+
+  generateCaptcha();
+
+  // مستمع مفاتيح
+  document.getElementById('captchaInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') verifyCaptcha();
+  });
+});
+</script>
+</body>
+</html>

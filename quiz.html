@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار تحديد المستوى - أكاديمية عايد STEP 2026</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo-192.png">
+<style>
+.quiz-page { min-height: 100vh; padding: 20px 16px 60px; }
+.quiz-top-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+.quiz-section-info { display: flex; align-items: center; gap: 10px; }
+.section-color-dot { width: 12px; height: 12px; border-radius: 50%; }
+.quiz-stats { display: flex; gap: 16px; align-items: center; }
+.quiz-stat-item { text-align: center; }
+.quiz-stat-item .val { font-size: 1.1rem; font-weight: 900; }
+.quiz-stat-item .lbl { font-size: 0.65rem; color: var(--text3); }
+.timer-warning { color: var(--danger) !important; animation: blink 0.8s ease-in-out infinite; }
+.question-meta { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+.meta-badge { padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; }
+.meta-model { background: rgba(59,130,246,0.15); color: #93c5fd; }
+.meta-freq { background: rgba(250,204,21,0.15); color: var(--accent); }
+.meta-level { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+.meta-level.advanced { background: rgba(239,68,68,0.15); color: #fca5a5; }
+.meta-level.beginner { background: rgba(34,197,94,0.15); color: #86efac; }
+.quiz-done-screen { text-align: center; padding: 60px 20px; display: none; }
+.quiz-done-screen.show { display: block; animation: fadeIn 0.5s ease; }
+.intro-screen { max-width: 680px; margin: 0 auto; text-align: center; }
+.intro-rules { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin: 24px 0; text-align: right; }
+.rule-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px; }
+.rule-icon { font-size: 1.4rem; flex-shrink: 0; }
+.rule-text strong { display: block; font-size: 0.88rem; margin-bottom: 2px; }
+.rule-text span { font-size: 0.75rem; color: var(--text2); }
+@media (max-width: 480px) { .intro-rules { grid-template-columns: 1fr; } }
+.cooldown-msg { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 14px; padding: 24px; text-align: center; }
+</style>
+</head>
+<body>
+<div id="toastContainer"></div>
+
+<!-- Header -->
+<header class="site-header" id="mainHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="academy-logo-sm">ع</div>
+      <div class="logo-text">
+        <span class="logo-name">أكاديمية عايد</span>
+        <span class="logo-sub">STEP 2026</span>
+      </div>
+    </a>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span id="quizProgressText" style="font-size:0.82rem;color:var(--text2)"></span>
+      <div id="userPill" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.07);border-radius:30px;padding:5px 12px 5px 6px;cursor:pointer" onclick="auth.logout()">
+        <div class="user-avatar"><span class="user-avatar-initial">ط</span></div>
+        <span class="user-name" style="font-size:0.82rem">طالب</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="quiz-page">
+  <div class="container">
+
+    <!-- ===== شاشة الانتظار (Cooldown) ===== -->
+    <div id="cooldownScreen" style="display:none;max-width:500px;margin:60px auto">
+      <div class="cooldown-msg">
+        <div style="font-size:3rem;margin-bottom:12px">⏰</div>
+        <h2 style="font-size:1.3rem;color:var(--accent);margin-bottom:10px">محتاج تنتظر شوية!</h2>
+        <p style="color:var(--text2);font-size:0.9rem;margin-bottom:16px">اختبار تحديد المستوى مرة واحدة كل 24 ساعة - هذا لضمان دقة النتيجة.</p>
+        <div style="font-size:2rem;font-weight:900;color:var(--danger);margin:12px 0" id="cooldownTimer"></div>
+        <p style="font-size:0.8rem;color:var(--text3)">المتبقي حتى يمكنك إعادة الاختبار</p>
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap">
+          <a href="results.html" class="btn btn-primary">عرض نتائجي الأخيرة</a>
+          <a href="dashboard.html" class="btn btn-ghost">لوحة المتابعة</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== شاشة التعريف ===== -->
+    <div id="introScreen" class="intro-screen">
+      <div class="academy-logo" style="margin:0 auto 20px">ع</div>
+      <h1 style="font-size:clamp(1.5rem,4vw,2.2rem);color:var(--accent);margin-bottom:8px">اختبار تحديد المستوى</h1>
+      <p style="color:var(--text2);font-size:0.95rem;margin-bottom:4px">مجاني • 24 سؤال • 4 أقسام</p>
+      <p style="color:var(--text3);font-size:0.82rem">من نماذج STEP الرسمية 49، 50، 51، 52</p>
+
+      <div class="intro-rules">
+        <div class="rule-item">
+          <div class="rule-icon">⏱️</div>
+          <div class="rule-text"><strong>وقت لكل سؤال</strong><span>قواعد: 60 ث | مفردات: 50 ث | قراءة: 90 ث | استماع: 80 ث</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🎯</div>
+          <div class="rule-text"><strong>24 سؤال متنوع</strong><span>6 أسئلة من كل قسم من أصعب النماذج</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">✅</div>
+          <div class="rule-text"><strong>تغذية راجعة فورية</strong><span>شرح لكل سؤال بعد الإجابة مباشرة</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">📊</div>
+          <div class="rule-text"><strong>تقرير مفصل</strong><span>تحديد المستوى وخطة دراسية مخصصة</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🔄</div>
+          <div class="rule-text"><strong>مرة واحدة كل 24 ساعة</strong><span>للحفاظ على دقة النتيجة</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">📱</div>
+          <div class="rule-text"><strong>يعمل أوفلاين</strong><span>بعد تثبيت التطبيق على جهازك</span></div>
+        </div>
+      </div>
+
+      <div style="background:rgba(250,204,21,0.08);border:1px solid rgba(250,204,21,0.2);border-radius:14px;padding:16px;margin-bottom:24px">
+        <p style="font-size:0.88rem;color:var(--accent);font-weight:700">💡 تلميح عايد</p>
+        <p style="font-size:0.82rem;color:var(--text2);margin-top:4px">اقرأ كل سؤال بتمعن وراجع الخيارات. الأسئلة من التسريبات الحقيقية لنماذج STEP!</p>
+      </div>
+
+      <button class="btn btn-primary btn-lg" onclick="startQuiz()" id="startBtn" style="min-width:220px">
+        🚀 ابدأ الاختبار الآن
+      </button>
+      <p style="font-size:0.75rem;color:var(--text3);margin-top:12px">بالضغط على "ابدأ"، أنت تؤكد أنك ستكمل الاختبار في جلسة واحدة</p>
+    </div>
+
+    <!-- ===== منطقة الاختبار ===== -->
+    <div id="quizArea" style="display:none">
+
+      <!-- شريط المعلومات العلوي -->
+      <div class="quiz-top-bar">
+        <div class="quiz-section-info">
+          <div class="section-color-dot" id="sectionDot"></div>
+          <span id="sectionName" style="font-weight:700;font-size:0.95rem"></span>
+          <span class="badge badge-info" id="questionCounter">1/24</span>
+        </div>
+        <div class="quiz-stats">
+          <div class="quiz-stat-item">
+            <div class="val" id="correctCount" style="color:var(--success)">0</div>
+            <div class="lbl">صح</div>
+          </div>
+          <div class="quiz-stat-item">
+            <div class="val" id="wrongCount" style="color:var(--danger)">0</div>
+            <div class="lbl">غلط</div>
+          </div>
+          <div class="quiz-timer-circle">
+            <svg width="70" height="70" viewBox="0 0 70 70">
+              <circle class="timer-bg" cx="35" cy="35" r="30"/>
+              <circle class="timer-prog" id="timerCircle" cx="35" cy="35" r="30"/>
+            </svg>
+            <div class="timer-text" id="timerText" style="color:var(--success)">60</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- شريط تقدم الاختبار -->
+      <div class="progress-bar-wrap" style="margin-bottom:24px">
+        <div class="progress-bar-fill" id="quizProgressBar" style="width:0%"></div>
+      </div>
+
+      <!-- نص المقطع (للقراءة) -->
+      <div id="passageBox" class="quiz-passage" style="display:none"></div>
+
+      <!-- بطاقة السؤال -->
+      <div class="card" style="padding:28px" id="questionCard">
+        <div class="question-meta" id="questionMeta"></div>
+        <div class="quiz-question-text" id="questionText"></div>
+        <div class="quiz-options" id="optionsContainer"></div>
+        <div class="quiz-explanation" id="explanation"></div>
+      </div>
+
+      <!-- أزرار التنقل -->
+      <div class="quiz-nav" style="margin-top:20px">
+        <div class="quiz-dots" id="quizDots"></div>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display:none">
+          التالي ← <span id="nextBtnCounter"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== شاشة الإنهاء ===== -->
+    <div class="quiz-done-screen" id="doneScreen">
+      <div style="font-size:4rem;margin-bottom:16px">🎉</div>
+      <h2 style="font-size:1.8rem;color:var(--accent);margin-bottom:8px">أنهيت الاختبار!</h2>
+      <p style="color:var(--text2);margin-bottom:24px">جارٍ تحليل نتائجك...</p>
+      <div style="width:60px;height:60px;border:4px solid var(--primary);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto"></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script>
+// ===== متغيرات الاختبار =====
+let questions = [];
+let currentIdx = 0;
+let answers = {};
+let correctCount = 0;
+let wrongCount = 0;
+let timer = null;
+let timeLeft = 60;
+let quizStartTime = null;
+const TOTAL_QUESTIONS = 24;
+const QUESTIONS_PER_SECTION = 6;
+
+// ===== تحميل الأسئلة =====
+async function loadQuestions() {
+  const data = await dataLoader.load('questions');
+  if (!data) return [];
+
+  const sections = data.sections;
+  const timePerType = data.timePerType;
+  const allSections = ['grammar', 'vocabulary', 'reading', 'listening'];
+  const result = [];
+
+  allSections.forEach(secKey => {
+    const sec = sections[secKey];
+    let qs = [];
+
+    if (sec.questions) {
+      qs = sec.questions;
+    } else if (sec.passages) {
+      // أسئلة القراءة: مع المقطع
+      sec.passages.forEach(p => {
+        if (p.questions) {
+          p.questions.forEach(q => {
+            qs.push({ ...q, passageText: p.text, passageTitle: p.title });
+          });
+        }
+      });
+    }
+
+    // اختيار 6 أسئلة عشوائية من كل قسم
+    const shuffled = quiz.shuffle(qs);
+    const selected = shuffled.slice(0, QUESTIONS_PER_SECTION);
+    selected.forEach(q => result.push({
+      ...q,
+      sectionKey: secKey,
+      sectionName: sec.name,
+      sectionColor: sec.color,
+      timeLimit: timePerType[secKey] || 60
+    }));
+  });
+
+  return result;
+}
+
+// ===== بدء الاختبار =====
+async function startQuiz() {
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('startBtn').innerHTML = '<span class="spin">⏳</span> جارٍ التحميل...';
+
+  questions = await loadQuestions();
+  if (!questions.length) {
+    toast.error('خطأ في تحميل الأسئلة - حاول مرة أخرى');
+    document.getElementById('startBtn').disabled = false;
+    document.getElementById('startBtn').innerHTML = '🚀 ابدأ الاختبار الآن';
+    return;
+  }
+
+  quizStartTime = Date.now();
+  currentIdx = 0;
+  answers = {};
+  correctCount = 0;
+  wrongCount = 0;
+
+  document.getElementById('introScreen').style.display = 'none';
+  document.getElementById('quizArea').style.display = 'block';
+
+  // إنشاء نقاط التنقل
+  buildDots();
+  showQuestion(0);
+}
+
+// ===== بناء نقاط التنقل =====
+function buildDots() {
+  const container = document.getElementById('quizDots');
+  container.innerHTML = '';
+  questions.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'quiz-dot' + (i === 0 ? ' current' : '');
+    dot.id = 'dot' + i;
+    dot.title = `سؤال ${i+1}`;
+    container.appendChild(dot);
+  });
+}
+
+// ===== عرض السؤال =====
+function showQuestion(idx) {
+  if (idx >= questions.length) {
+    finishQuiz();
+    return;
+  }
+
+  const q = questions[idx];
+  currentIdx = idx;
+
+  // تحديث المعلومات العلوية
+  document.getElementById('sectionDot').style.background = q.sectionColor;
+  document.getElementById('sectionName').textContent = q.sectionName;
+  document.getElementById('questionCounter').textContent = `${idx + 1}/${questions.length}`;
+  document.getElementById('quizProgressText').textContent = `${idx + 1} / ${questions.length}`;
+
+  // تحديث شريط التقدم
+  const pct = ((idx) / questions.length) * 100;
+  document.getElementById('quizProgressBar').style.width = pct + '%';
+
+  // تحديث نقاط التنقل
+  document.querySelectorAll('.quiz-dot').forEach((dot, i) => {
+    dot.classList.remove('current', 'answered', 'correct', 'wrong');
+    if (i < idx) {
+      dot.classList.add('answered');
+      if (answers[questions[i].id] === questions[i].correct) dot.classList.add('correct');
+      else dot.classList.add('wrong');
+    }
+    if (i === idx) dot.classList.add('current');
+  });
+
+  // عرض المقطع إن وجد
+  const passageBox = document.getElementById('passageBox');
+  if (q.passageText) {
+    passageBox.style.display = 'block';
+    passageBox.innerHTML = `<strong style="color:var(--accent);font-size:0.9rem">📖 ${q.passageTitle || 'اقرأ الفقرة التالية'}</strong><br><br>${q.passageText}`;
+  } else {
+    passageBox.style.display = 'none';
+  }
+
+  // البيانات الوصفية للسؤال
+  const meta = document.getElementById('questionMeta');
+  meta.innerHTML = `
+    <span class="meta-badge meta-model">نموذج ${q.model || '50'}</span>
+    ${q.freq >= 5 ? `<span class="meta-badge meta-freq">🔥 متكرر (${q.freq}x)</span>` : ''}
+    <span class="meta-badge meta-level ${q.level}">${q.level === 'advanced' ? '🔴 متقدم' : q.level === 'intermediate' ? '🟡 متوسط' : '🟢 أساسي'}</span>
+  `;
+
+  // نص السؤال
+  document.getElementById('questionText').textContent = q.text;
+
+  // الخيارات
+  const container = document.getElementById('optionsContainer');
+  container.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
+    btn.onclick = () => selectOption(i, btn);
+    container.appendChild(btn);
+  });
+
+  // إخفاء الشرح والزر التالي
+  document.getElementById('explanation').classList.remove('show');
+  document.getElementById('nextBtn').style.display = 'none';
+
+  // بدء المؤقت
+  startTimer(q.timeLimit);
+}
+
+// ===== مؤقت السؤال =====
+function startTimer(seconds) {
+  clearInterval(timer);
+  timeLeft = seconds;
+  const circumference = 2 * Math.PI * 30; // 188.5
+
+  function update() {
+    const circle = document.getElementById('timerCircle');
+    const text = document.getElementById('timerText');
+    const fraction = timeLeft / seconds;
+    const offset = circumference * (1 - fraction);
+    circle.style.strokeDashoffset = offset;
+    text.textContent = timeLeft;
+
+    if (fraction > 0.5) {
+      circle.style.stroke = 'var(--success)';
+      text.style.color = 'var(--success)';
+    } else if (fraction > 0.25) {
+      circle.style.stroke = 'var(--warning)';
+      text.style.color = 'var(--warning)';
+    } else {
+      circle.style.stroke = 'var(--danger)';
+      text.style.color = 'var(--danger)';
+    }
+  }
+
+  update();
+  timer = setInterval(() => {
+    timeLeft--;
+    update();
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      timeExpired();
+    }
+  }, 1000);
+}
+
+// ===== انتهاء وقت السؤال =====
+function timeExpired() {
+  const q = questions[currentIdx];
+  toast.warning('⏱️ انتهى الوقت! انتقال تلقائي...');
+
+  // تحديد الإجابة "غلط" لو لم يجب
+  if (answers[q.id] === undefined) {
+    answers[q.id] = -1; // خاطئ
+    wrongCount++;
+    document.getElementById('wrongCount').textContent = wrongCount;
+    // إظهار الإجابة الصحيحة
+    const opts = document.querySelectorAll('.quiz-option');
+    opts.forEach((opt, i) => {
+      opt.classList.add('disabled');
+      if (i === q.correct) opt.classList.add('correct');
+    });
+    showExplanation(q);
+  }
+
+  document.getElementById('nextBtn').style.display = 'flex';
+  document.getElementById('nextBtnCounter').textContent = currentIdx + 1 < questions.length ? '' : ' (إنهاء)';
+  setTimeout(() => nextQuestion(), 2500);
+}
+
+// ===== اختيار إجابة =====
+function selectOption(selectedIdx, btn) {
+  clearInterval(timer);
+  const q = questions[currentIdx];
+  if (answers[q.id] !== undefined) return; // تم الإجابة
+
+  answers[q.id] = selectedIdx;
+  const opts = document.querySelectorAll('.quiz-option');
+  opts.forEach(o => o.classList.add('disabled'));
+
+  if (selectedIdx === q.correct) {
+    btn.classList.add('correct');
+    correctCount++;
+    document.getElementById('correctCount').textContent = correctCount;
+    // تحدي: 10 أسئلة متتالية صح
+    const streak = store.get('correctStreak') || 0;
+    store.set('correctStreak', streak + 1);
+    if (streak + 1 >= 10) challenges.complete('c1');
+  } else {
+    btn.classList.add('wrong');
+    opts[q.correct].classList.add('correct');
+    wrongCount++;
+    document.getElementById('wrongCount').textContent = wrongCount;
+    store.set('correctStreak', 0);
+  }
+
+  // تحدي السرعة
+  if (timeLeft >= q.timeLimit - 10) challenges.complete('c2');
+
+  showExplanation(q);
+  document.getElementById('nextBtn').style.display = 'flex';
+  document.getElementById('nextBtnCounter').textContent = currentIdx + 1 < questions.length ? '' : ' (إنهاء)';
+}
+
+// ===== عرض الشرح =====
+function showExplanation(q) {
+  const box = document.getElementById('explanation');
+  box.innerHTML = `📖 <strong>الشرح:</strong> ${q.explanation}`;
+  box.classList.add('show');
+}
+
+// ===== السؤال التالي =====
+function nextQuestion() {
+  clearInterval(timer);
+  const next = currentIdx + 1;
+  if (next >= questions.length) {
+    finishQuiz();
+  } else {
+    showQuestion(next);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// ===== إنهاء الاختبار =====
+function finishQuiz() {
+  clearInterval(timer);
+  document.getElementById('quizArea').style.display = 'none';
+  document.getElementById('doneScreen').classList.add('show');
+
+  const totalTime = Math.round((Date.now() - quizStartTime) / 1000);
+  const score = Math.round((correctCount / questions.length) * 100);
+  const levelInfo = scorer.getLevel(score);
+  const sectionAnalysis = scorer.getSectionAnalysis(answers, questions);
+
+  // حفظ النتائج
+  store.set('quizScore', score);
+  store.set('quizLevel', levelInfo.level);
+  store.set('quizAnswers', answers);
+  store.set('quizTime', totalTime);
+  store.set('lastQuizTime', Date.now());
+  store.set('sectionAnalysis', sectionAnalysis);
+  store.set('quizQuestions', questions.map(q => ({ id: q.id, correct: q.correct, sectionKey: q.sectionKey })));
+
+  // إرسال للجوجل شيت
+  const user = auth.getUser();
+  submitToGoogleScript({
+    type: 'quiz_result',
+    userId: user?.phone,
+    userName: user?.name,
+    score,
+    level: levelInfo.level,
+    correctCount,
+    totalTime,
+    sections: sectionAnalysis
+  });
+
+  toast.success(`أنهيت الاختبار! نتيجتك ${score}% 🎯`);
+  setTimeout(() => window.location.href = 'results.html', 2000);
+}
+
+// ===== تهيئة الصفحة =====
+document.addEventListener('DOMContentLoaded', () => {
+  if (!auth.checkAll()) return;
+
+  const user = auth.getUser();
+  if (user) {
+    document.querySelectorAll('.user-name').forEach(el => el.textContent = user.name || 'طالب');
+    document.querySelectorAll('.user-avatar-initial').forEach(el => el.textContent = (user.name||'ط').charAt(0));
+  }
+
+  // التحقق من Cooldown
+  if (!quiz.canTakeQuiz()) {
+    const ms = quiz.getTimeUntilNextQuiz();
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('cooldownScreen').style.display = 'block';
+
+    // عداد للانتظار
+    const updateCooldown = () => {
+      const remaining = quiz.getTimeUntilNextQuiz();
+      if (remaining <= 0) {
+        document.getElementById('cooldownScreen').style.display = 'none';
+        document.getElementById('introScreen').style.display = 'block';
+        return;
+      }
+      const h = Math.floor(remaining / 3600000).toString().padStart(2,'0');
+      const m = Math.floor((remaining % 3600000) / 60000).toString().padStart(2,'0');
+      const s = Math.floor((remaining % 60000) / 1000).toString().padStart(2,'0');
+      const el = document.getElementById('cooldownTimer');
+      if (el) el.textContent = `${h}:${m}:${s}`;
+    };
+    updateCooldown();
+    setInterval(updateCooldown, 1000);
+    return;
+  }
+});
+</script>
+</body>
+</html>
